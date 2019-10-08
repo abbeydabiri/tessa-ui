@@ -1,0 +1,91 @@
+
+
+- Dashboard
+    (Search / View) Transaction History
+        All Transactions
+        Payments Received
+        Payments Sent
+    {
+        folder: transactions
+        files : [
+            transactions-search
+            transactions-details
+        ] 
+    }
+        
+    
+- Send
+    (Form) Send Payment
+        enter mobile/wallet address or scan qr code
+        enter amount (in Crypto and Fiat representative)
+    {
+        folder: wallets
+        files : [
+            wallets-send
+        ] 
+    }
+
+
+- Request
+    (Form) Request Payment
+    {
+        folder: wallets
+        files : [
+            wallets-request
+        ] 
+    }
+
+- Wallet
+    (Form) Wallet
+    {
+        folder: wallets
+        files : [
+            wallets-search
+            wallets-details
+            wallets-request
+            wallets-send
+        ] 
+    }
+
+
+
+- Contacts
+    (Search / New / View / Edit) Name Mobile Email 
+    {
+        folder: contacts
+        files: [
+            contacts-search
+            contacts-new
+            contacts-view
+            contacts-edit
+        ]
+    }
+
+- Marketplace
+    (Search / New / View ) 
+    {
+        folder: marketplace
+        files: [
+            marketplace-search
+            marketplace-new-token
+            marketplace-add-token
+        ]
+    }
+
+- My Account
+    -- Profile (Fullname, email, mobile, timezone, fiat currency)
+    -- Account Settings (Wallets)
+    -- ERC20 Tokens
+    -- Import Seed Phrase
+    -- Export Seed Phrase
+
+    {
+        folder: settings
+        files: [
+            settings-all
+            settings-profile
+            settings-tokens
+        ]
+    }
+
+- Logout

@@ -1,0 +1,49 @@
+Sign up Process: (completed)
+    - Enter Name and Mobile 
+    - OTP is sent to Mobile if new mobile
+    - Enter OTP to verify ownership
+    - If OTP is successfull then present PIN pad for entry
+    - After PIN pad entry redirect to login
+
+Forgot PIN process: (completed - pending test)
+    - Enter Mobile
+    - OTP is sent to Mobile
+    - Enter OTP to verify ownership
+    - If OTP is successfull then present PIN pad for entry
+    - After PIN pad entry redirect to dashboard
+
+
+Login to Dashboard process: (completed)
+    - Enter Mobile and Pincode
+    - Get Profile linked to User
+    - Store Profile info in localcache
+    - Get Wallets linked to User
+    - Display mobile and name retrieved form localcache on menu 
+    - Use default currency in (Naira)
+
+
+Token Management
+    - Create an ERC
+
+Contacts Menu:
+    - Show Address book of contact name and mobile
+    - Add / View / Edit / Delete contact name and mobile
+    
+My Account
+    - Show editable profile information as well as few other functionalities
+    - Add ERC20 compatible tokens to wallet
+
+Activity 
+    - Show list of all Transactions (Sent and Received)
+
+Send 
+    - show form to enable sending of tokens on Rinkeby Platform
+
+Request
+    - show form for requesting tokens to be sent on Rinkeby Platform
+
+Pending 
+    - show list of pending Transactions that have not been confirmed
+
+Marketplace
+    - exchange tokens for tokens

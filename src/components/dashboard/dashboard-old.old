@@ -1,0 +1,153 @@
+<template>
+  <section class="vh-100 white w-100 center bg-black-10 mw8 " >
+    <app-header >
+      <template>
+        <h1 class="f4">Dashboard</h1>
+      </template>
+    </app-header>
+
+    <div class="center w6 tc tracked f4 ph3 pv2">
+        <div class="cf w-100">
+            <p class="f4 fl w-100 tl">
+                Wallet Balances
+                <i class="fas fa-plus-circle fr f3 pointer white grow"></i>
+            </p>
+        </div>
+
+        <div class="cf w-100 bt b--white-10 br--top br2 mb3">
+            <div class="fl br--left br2 w-50 tc dim pointer" :class="{'bg-black-10': !viewTokens, 'bg-light-gray black' : viewTokens}" @click="setView('tokens')">
+            <h1 class="f5">Tokens</h1>
+            </div>
+            <div class="fl br--right br2 w-50 tc dim pointer" :class="{'bg-black-10': viewTokens, 'bg-light-gray black' : !viewTokens}" @click="setView('assets')">
+            <h1 class="f5">Assets</h1>
+            </div>
+        </div>
+
+        <tokensearch class="" :tokens="tokens" v-if="viewTokens"/>
+        <assetsearch class="" :assets="assets" v-if="!viewTokens"/>
+    </div>
+
+    <app-footer/>
+  </section>
+</template>
+
+<script type="text/javascript">
+    import {HTTP} from "@/common"
+    import {checkRedirect} from "@/common"
+
+    import screen from "@/assets/screen.png";
+    import cryptobg from "@/assets/crypto-card.png";
+    import cryptoShadow from "@/assets/crypto-shadow.png";
+    import cryptoGraph from "@/assets/crypto-graph.png";
+    import headerComponent from "@/components/dashboard/header"
+    import footerComponent from "@/components/dashboard/footer"
+    import tokensearch from "@/components/dashboard/tokens/tokens-search"
+    import assetsearch from "@/components/dashboard/assets/assets-search"
+    
+
+    export default {
+        data() {return{
+            screen, cryptobg, cryptoShadow, cryptoGraph,
+            tokens: [], assets: [],
+            viewTokens: true, changeNetwork: false,
+            ethNetworks: [], ethNetwork: '', userId: '',
+            url: {
+                networkSearch: '/api/networks/search',
+                dashboard: '/api/dashboard',
+                wallet: '/api/wallets',
+                search: {text: "", field: "Name", limit: 20, skip: 0},
+            }
+        }},
+        components: {
+            "app-header": headerComponent,
+            "app-footer": footerComponent,
+            tokensearch, assetsearch
+        },
+        computed: {
+            defaultNetwork () {
+                if (this.ethNetwork == undefined) {
+                return 'Network'.substring(0,4)
+                }
+                return this.ethNetwork.substring(0,4)
+            }
+        },
+        created () {
+            // this.getNetworks()
+            this.getDashboard()
+            this.tokens = [
+                {
+                    icon: "http://mrmrs.github.io/photos/p/2.jpg",
+                    name: "Koined",
+                    value: "0.0001",
+                    nairaVal: "2"
+                },
+                {
+                    icon: "http://mrmrs.github.io/photos/p/2.jpg",
+                    name: "ETH",
+                    value: "0.02331",
+                    nairaVal: "5"
+                }
+            ]
+        },
+        methods: {
+            setView (view) {
+                if (view == 'tokens') {
+                    this.viewTokens = true
+                    return
+                }
+                this.viewTokens = false
+            },
+            getDashboard() {
+                const app = this
+                HTTP.get(app.url.dashboard,{withCredentials: true}).then((response) => {
+                    checkRedirect(response.data)
+                    window.localStorage.setItem('profile', JSON.stringify(response.data.Body));
+                    // app.getWalletList()
+                    // this.getAddress()
+                }).catch((e) => { console.log(e) })
+            },
+            getNetworks () {
+                const app = this
+                HTTP.post(this.url.networkSearch, app.url.search,{withCredentials: true}).then((response) => {
+                    checkRedirect(response.data)
+                    app.ethNetworks = response.data.Body
+
+                    // const selectedNetwork =  app.ethNetworks.filter( function(network) {
+                    //     return network.Priority == 1
+                    // })
+
+                    function sortPriority( a, b ) {
+                        if ( a.Priority < b.Priority ){
+                            return -1;
+                        }
+                        if ( a.Priority > b.Priority ){
+                            return 1;
+                        }
+                        return 0;
+                    }
+                    app.ethNetworks.sort(sortPriority)
+                    app.ethNetwork = app.ethNetworks[0].Name
+
+
+                }).catch((e) => { console.log(e) })
+            },
+            selectNetwork (index) {
+                this.ethNetwork = this.ethNetworks[index].Name
+            },
+            getAddress () {
+                const app = this
+                HTTP.get(app.url.dashboard,{withCredentials: true}).then((response) => {
+                    // console.log(response.data)
+                    checkRedirect(response.data)
+                }).catch((e) => { console.log(e) })
+            },
+            getWalletList() {
+                const app = this
+                HTTP.post(app.url.wallet+'/search', {text: "", field: "Title", limit:100}, {withCredentials: true}).then((response) => {
+                    console.log('wallet', response.data)
+                    // checkRedirect(response.data)
+                }).catch((e) => { console.log(e) })
+            }
+        }
+    }
+</script>

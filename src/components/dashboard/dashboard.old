@@ -1,0 +1,97 @@
+<template>
+    <section class="vh-100 white w-100 center bg-black-10 mw8 " >
+        <appheader :title="headertitle"/>
+        <router-view></router-view>
+        <appfooter/>
+    </section>
+</template>
+
+<script type="text/javascript">
+    import {HTTP} from "@/common"
+    import {checkRedirect} from "@/common"
+
+    import appheader from "@/components/dashboard/header"
+    import appfooter from "@/components/dashboard/footer"
+    import tokensearch from "@/components/dashboard/tokens/tokens-search"
+    import assetsearch from "@/components/dashboard/assets/assets-search"
+    
+
+    export default {
+        data() {return{
+            changeNetwork: false,
+            headertitle:"Dashboard",
+            ethNetworks: [], ethNetwork: '', userId: '',
+            url: {
+                networkSearch: '/api/networks/search',
+                dashboard: '/api/dashboard',
+                wallet: '/api/wallets',
+                search: {text: "", field: "Title", limit: 20, skip: 0},
+            }
+        }},
+        components: {
+            "appheader": appheader,
+            "appfooter": appfooter,
+        },
+        computed: {
+            defaultNetwork () {
+                if (this.ethNetwork == undefined) {
+                return 'Network'.substring(0,4)
+                }
+                return this.ethNetwork.substring(0,4)
+            }
+        },
+        created () {
+            // this.getNetworks()
+            this.getDashboard()
+        },
+        methods: {
+            getDashboard() {
+                const app = this
+                HTTP.get(app.url.dashboard,{withCredentials: true}).then((response) => {
+                    checkRedirect(response.data)
+                    window.localStorage.setItem('profile', JSON.stringify(response.data.Body));
+                    // app.getWalletList()
+                    // this.getAddress()
+                }).catch((e) => { console.log(e) })
+            },
+            getNetworks () {
+                const app = this
+                HTTP.post(this.url.networkSearch, app.url.search,{withCredentials: true}).then((response) => {
+                    checkRedirect(response.data)
+                    app.ethNetworks = response.data.Body
+
+                    function sortPriority( a, b ) {
+                        if ( a.Priority < b.Priority ){
+                            return -1;
+                        }
+                        if ( a.Priority > b.Priority ){
+                            return 1;
+                        }
+                        return 0;
+                    }
+                    app.ethNetworks.sort(sortPriority)
+                    app.ethNetwork = app.ethNetworks[0].Name
+
+
+                }).catch((e) => { console.log(e) })
+            },
+            selectNetwork (index) {
+                this.ethNetwork = this.ethNetworks[index].Name
+            },
+            getAddress () {
+                const app = this
+                HTTP.get(app.url.dashboard,{withCredentials: true}).then((response) => {
+                    // console.log(response.data)
+                    checkRedirect(response.data)
+                }).catch((e) => { console.log(e) })
+            },
+            getWalletList() {
+                const app = this
+                HTTP.post(app.url.wallet+'/search', {text: "", field: "Title", limit:100}, {withCredentials: true}).then((response) => {
+                    console.log('wallet', response.data)
+                    // checkRedirect(response.data)
+                }).catch((e) => { console.log(e) })
+            }
+        }
+    }
+</script>
