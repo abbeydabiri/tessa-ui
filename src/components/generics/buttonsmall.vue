@@ -1,12 +1,15 @@
 <template>
     <div class="bg-light-gray pa1 dib br-button-small">
-        <div class="bg-black pv1 ph2 center f8 br-button-small fw6 tracked white"> {{title}} </div>
+        <div class="bg-black pv1 ph2 center f7 br-button-small fw6 tracked white"> 
+            <i class="pr1 fas white fl " :class="icon"></i> 
+            <small>{{title}}</small>
+        </div>
     </div>
 </template>
 
 <script type="text/javascript">
     export default {
-        props: ['title'],
+        props: ['title','icon'],
         methods: {},
     }
 </script>

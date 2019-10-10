@@ -1,14 +1,17 @@
 <template>
-    <div class="fl w-100 inline-flex items-center bw1 center ba b--black">
-        <input ref="a" class="pin inline-flex items-center bg-white bn tc fw3 f4 pa3 dib fl w-25 near-black hover-bg-near-white" type="password" maxlength="1" v-model="a" @click="nextBox" @keyup="nextBox" />
-        <input ref="b" class="pin inline-flex items-center bg-white bn tc fw3 f4 pa3 dib fl w-25 near-black hover-bg-near-white" type="password" maxlength="1" v-model="b" @click="nextBox" @keyup="nextBox" />
-        <input ref="c" class="pin inline-flex items-center bg-white bn tc fw3 f4 pa3 dib fl w-25 near-black hover-bg-near-white" type="password" maxlength="1" v-model="c" @click="nextBox" @keyup="nextBox" />
-        <input ref="d" class="pin inline-flex items-center bg-white bn tc fw3 f4 pa3 dib fl w-25 near-black hover-bg-near-white" type="password" maxlength="1" v-model="d" @click="nextBox" @keyup="nextBox" />
+    <div class="fl w-100 bw1 center b--black ba relative">
+        <div class="fl w-100 tc absolute left-0 right-0" style="top:-10px">
+            <label class="bg-white ph3 f6"> {{title}} </label>
+        </div>
+        <input ref="a" class="pin inline-flex items-center bg-white bn tc fw3 f4 pa3 dib fl w-25 near-black " placeholder="-" type="password" maxlength="1" v-model="a" @click="nextBox" @keyup="nextBox" />
+        <input ref="b" class="pin inline-flex items-center bg-white bn tc fw3 f4 pa3 dib fl w-25 near-black " placeholder="-" type="password" maxlength="1" v-model="b" @click="nextBox" @keyup="nextBox" />
+        <input ref="c" class="pin inline-flex items-center bg-white bn tc fw3 f4 pa3 dib fl w-25 near-black " placeholder="-" type="password" maxlength="1" v-model="c" @click="nextBox" @keyup="nextBox" />
+        <input ref="d" class="pin inline-flex items-center bg-white bn tc fw3 f4 pa3 dib fl w-25 near-black " placeholder="-" type="password" maxlength="1" v-model="d" @click="nextBox" @keyup="nextBox" />
     </div>
 </template>
 <script type="text/javascript">
     export default {
-        props: ['pin'],
+        props: ['pin','title'],
         data() {return{
             localPin:this.pin, a:" ", b:" ", c:" ", d:" ",
         }},
@@ -49,6 +52,10 @@
             nextBox(event){
                 
                 var app = this;
+                if(app.a==" "){ app.a = "" } 
+                if (app.b==" ") { app.b = "" }
+                if (app.c==" ") { app.c = "" }
+                if (app.d==" ") { app.d = "" }
                 if (event.code == undefined){ return }
 
                 if(event.code == "ArrowLeft" ) { app.prevFocus() }
@@ -70,6 +77,8 @@
                 }
 
                 app.localPin = "";
+                
+
                 // if(app.a==""){
                 //     app.$refs.a.focus();
                 // } else if (app.b=="") {

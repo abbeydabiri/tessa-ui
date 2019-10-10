@@ -1,6 +1,14 @@
 <template>
     <div class="fl w-100">
-        <input class="auth tc f2 fw6 bn pa1 dib h3 w-90 white hover-bg-black-40" type="number" pattern="\d*" minlength="11" maxlength="11" placeholder="X X X X X X X" v-model="localMobile" @keyup="keyUP" />
+        <div class=" inline-flex items-center bw1 center ba b--black">
+            <div class="fl w-10 pl2">
+                <i class="pr1 fas fa-phone black fl " style="transform: rotateY(180deg);"></i> 
+            </div>
+            <input placeholder="ENTER YOUR MOBILE NUMBER" class="mobile bg-white tc fw3 f4 tracked bn fl black pv3 ph1 w-80" type="number" pattern="\d*" minlength="11" maxlength="11" v-model="localMobile" @keyup="keyUP">
+            <div class="fl w-10" @click="$parent.submitMobile">
+                <i class="pr1 fas fa-arrow-right black fl "></i> 
+            </div>
+        </div>
     </div>
 </template>
 <script type="text/javascript">
@@ -16,9 +24,6 @@
         },
         methods: {
             keyUP(event){
-                console.log(event.code)
-
-
 
                 if(event.code.includes("Arrow")) { return }
 

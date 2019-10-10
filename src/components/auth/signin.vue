@@ -3,7 +3,7 @@
         <div class=" w-100 fl">
             <img src="@/assets/img/logo.png" class="db center h2" />
             <div class="fl w-100">
-                <img src="@/assets/img/icon-signin-wallet.png" class="db center w-90 w-40-l" />
+                <img src="@/assets/img/icon-signin.png" class="db center w-90 w-40-l" />
             </div>
         </div>
         <div class=" w-100  fl dt">
@@ -17,33 +17,26 @@
                 </div>
 
                 <div class="w-40-l w-100 center  pv2 ">
-                    <span class="db" :class="{'dn':mobileHide}">
-                        <div class=" inline-flex items-center bw1 center ba b--black">
-                            <div class="fl w-10 pl2">
-                                <i class="pr1 fas fa-phone black fl " style="transform: rotateY(180deg);"></i> 
-                            </div>
-                            <input placeholder="ENTER YOUR MOBILE NUMBER" class="mobile bg-white tc fw3 f4 tracked bn fl black pa3 w-80" type="number" pattern="\d*" minlength="11" maxlength="11" v-model="mobile" @keyup="keyUPMobile">
-                            <div class="fl w-10" @click="submitMobile">
-                                <i class="pr1 fas fa-arrow-right black fl "></i> 
-                            </div>
+                    <span class="dn" :class="{'db':!mobileHide}">
+                        <mobilebox :mobile="mobile" @update="updateMobile"/>
+
+                        <div class="fr w-100 pt3">
+                            <router-link to="/signup" class="cf no-underline items-center inline-flex">
+                                <p class="near-black f7 fl tl">Don't have a wallet yet? </p>
+                                <buttonsmall class="fr ml3" title="Setup Wallet"/>
+                            </router-link>
                         </div>
                     </span>
 
-                    <span class="dn" :class="{'db':!mobileHide}">
+                    <span class="dn" :class="{'db':mobileHide}">
                         <div class="fl w-100 ph2 ">
-                            <p class="fl near-black f6 tl mb1 w-100 tc"> Enter your Pin:</p>
-                            <pinbox class="fl w-100" :pin="pin" @update="updatePin" />
+                            <pinbox class="fl w-100" :pin="pin" title="Enter your Pin" @update="updatePin" />
                         </div>
+
+                        <div class="fl w-50 pt3 ph2" @click="mobileToggle">  <buttonsmall class="fl" icon="fa-repeat" title="Retry" />  </div>
+                        <div class="fl w-50 pt3 ph2" @click="signin">  <buttonsmall class="fr" icon="fa-check" title="Verify"/>  </div>
                     </span>
                 </div>
-
-                
-
-                
-                <router-link to="/signup" class="cf no-underline items-center inline-flex">
-                    <p class="near-black f7 fl tl">Don't have a wallet yet? </p>
-                    <buttonsmall class="fr ml3" title="Setup Wallet"/>
-                </router-link>
 
             </div>
         </div>
@@ -83,17 +76,9 @@
     },
     methods: {
         mobileToggle(){
-            this.record.Username = this.mobile;
             this.mobileHide = !this.mobileHide   
-            if(this.record.Username.length !== 11) {
-                this.mobileHide = false;
-            }else {
+            if(this.record.Username.length == 11) {
                 this.setUsername()
-            }
-            if(this.mobileHide) {
-                this.mobileState = "Change"
-            } else {
-                this.mobileState = "Hide"
             }
         },
         getUsername(){
@@ -116,6 +101,10 @@
         },
         updateMobile(mobile) {
             this.mobile = mobile
+
+            // if (this.mobile.length == 11) {
+            //     this.mobileToggle()
+            // }
         },
         submitMobile(){
             if (this.mobile.length == 11) {
