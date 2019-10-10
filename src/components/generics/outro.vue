@@ -1,18 +1,14 @@
 <template>
-  <section class="w-100 center bgBlank" >
-    <div class="center mw6" >
-      <article class="dt center vh-100 w-100">
-        <div class="dtc v-mid f6 tc white overflow-hidden">
-
-          <img src="@/assets/img/logo-icon.png" class="h4" />
-          <p>You have been logged out. </p>
-          <p class="white f7 i">Built in Lagos, Nigeria</p>
-
-        
+    <section class="w-100 center bgBlank" >
+        <div class="center mw6"  :style="{'background': 'url('+splashscreen+')','background-repeat': 'no-repeat', 'background-size': 'cover',}">
+        <article class="dt center vh-100 w-100">
+            <div class="dtc v-mid f6 tc white overflow-hidden">
+                <img src="@/assets/img/logo-white.png" class="h3" />
+                <p>You have been logged out. </p>
+            </div>
+        </article>
         </div>
-      </article>
-    </div>
-  </section>
+    </section>
 </template>
 
 <script type="text/javascript">

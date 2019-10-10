@@ -4,6 +4,7 @@ import Router from "vue-router"
 //splash-screen
 import introComponent from "@/components/generics/intro"
 import outroComponent from "@/components/generics/outro"
+import onboardingComponent from "@/components/generics/onboarding"
 
 //sign-up&in
 import signinComponent from "@/components/auth/signin"
@@ -18,6 +19,7 @@ const router =  new Router({
     mode: "hash",
     routes: [
         { path: '*', component: introComponent },
+        { path: '/onboarding', component: onboardingComponent },
         { path: '/logout', component: outroComponent },
         { path: '/signup', name: 'signup', component: signupComponent },
         { path: '/signin', name: 'signin', component: signinComponent },

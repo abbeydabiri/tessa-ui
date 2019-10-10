@@ -310,7 +310,7 @@
                             this.notifications = [{Code: 500, Message: "Mnemonic confirmation failed!"}]
                         }
                         
-                        console.log(app.seedphrases)
+                        console.log(this.seedphrases)
                     break;
 
                     case "otpin":

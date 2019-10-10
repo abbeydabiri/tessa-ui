@@ -1,16 +1,16 @@
 <template>
-    <div class="fl w-100">
-        <input ref="a" class="auth tc f2 fw6 bn pa2 dib w3 h3 white br1 hover-bg-black-40" type="password" maxlength="1" placeholder="X" v-model="a" @click="nextBox" @keyup="nextBox" />
-        <input ref="b" class="auth tc f2 fw6 bn pa2 dib w3 h3 white br1 hover-bg-black-40" type="password" maxlength="1" placeholder="X" v-model="b" @click="nextBox" @keyup="nextBox" />
-        <input ref="c" class="auth tc f2 fw6 bn pa2 dib w3 h3 white br1 hover-bg-black-40" type="password" maxlength="1" placeholder="X" v-model="c" @click="nextBox" @keyup="nextBox" />
-        <input ref="d" class="auth tc f2 fw6 bn pa2 dib w3 h3 white br1 hover-bg-black-40" type="password" maxlength="1" placeholder="X" v-model="d" @click="nextBox" @keyup="nextBox" />
+    <div class="fl w-100 inline-flex items-center bw1 center ba b--black">
+        <input ref="a" class="pin inline-flex items-center bg-white bn tc fw3 f4 pa3 dib fl w-25 near-black hover-bg-near-white" type="password" maxlength="1" v-model="a" @click="nextBox" @keyup="nextBox" />
+        <input ref="b" class="pin inline-flex items-center bg-white bn tc fw3 f4 pa3 dib fl w-25 near-black hover-bg-near-white" type="password" maxlength="1" v-model="b" @click="nextBox" @keyup="nextBox" />
+        <input ref="c" class="pin inline-flex items-center bg-white bn tc fw3 f4 pa3 dib fl w-25 near-black hover-bg-near-white" type="password" maxlength="1" v-model="c" @click="nextBox" @keyup="nextBox" />
+        <input ref="d" class="pin inline-flex items-center bg-white bn tc fw3 f4 pa3 dib fl w-25 near-black hover-bg-near-white" type="password" maxlength="1" v-model="d" @click="nextBox" @keyup="nextBox" />
     </div>
 </template>
 <script type="text/javascript">
     export default {
         props: ['pin'],
         data() {return{
-            localPin:this.pin, a:"", b:"", c:"", d:"",
+            localPin:this.pin, a:" ", b:" ", c:" ", d:" ",
         }},
         watch: {
             localPin(pin) {

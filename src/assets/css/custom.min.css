@@ -8,12 +8,12 @@ div::-webkit-scrollbar {
 }
 
 div::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px #ffffff;
+    /* -webkit-box-shadow: inset 0 0 6px #ffffff; */
 }
 
 div::-webkit-scrollbar-thumb {
-    background-color: #7d9cdd;
-    outline: 1px solid #4b5e84;
+    /* background-color: #7d9cdd;
+    outline: 1px solid #4b5e84; */
 }
 
 #fa-sign-out {
@@ -564,21 +564,39 @@ input[type=number] {
 
 input, textarea { color:white; background-color: rgba(0,0,0,0.1) ; }
 
-.auth::placeholder {
+.pin::placeholder {
+    font-size: 20px;
     /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #8aaff6;
+    opacity: 1;
+    color:black;
+    /* Firefox */
+}
+
+.pin:-ms-input-placeholder {
+    font-size: 20px;
+    /* Internet Explorer 10-11 */
+}
+
+.pin::-ms-input-placeholder {
+    font-size: 20px;
+    /* Microsoft Edge */
+}
+
+.mobile::placeholder {
+    font-size: 10px;
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
     opacity: 1;
     /* Firefox */
 }
 
-.auth:-ms-input-placeholder {
+.mobile:-ms-input-placeholder {
+    font-size: 10px;
     /* Internet Explorer 10-11 */
-    color: #8aaff6;
 }
 
-.auth::-ms-input-placeholder {
+.mobile::-ms-input-placeholder {
+    font-size: 10px;
     /* Microsoft Edge */
-    color: #8aaff6;
 }
 
 .button {
