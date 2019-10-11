@@ -51,7 +51,29 @@
             
             <div class="fl w-100 dn" :class="{'db':curView=='seedphrase'}">
 
-                <seedphrase :position="seedAnimation.position" :icon="seedAnimation.icon" :seed="seedAnimation.seed" :details="seedAnimation.details" :text="seedAnimation.text"/>
+                <span class="dn" :class="{'db':curPage=='animate'}">
+                    <seedphrase class="relative" :class="{'dn':curPage!=='animate'}" :position="seedAnimation.position" :icon="seedAnimation.icon" :seed="seedAnimation.seed" :details="seedAnimation.details" :text="seedAnimation.text"/>
+                </span>
+
+                <span class="dn" :class="{'db':curPage=='backup'}">
+
+                    <div class="fl w-100 fw6 f4 pv3">These are your 12 seed phrases</div>
+
+                    <div class="w-third fl tc pv2 " v-for="(phrase, index) in seedphrases" :key="index">
+                        <div class="br-pill w3 h3 tc inline-flex items-center bg-black white ba"  :class="{'':((index)%3==1)}">
+                            <div class="w-100 tc f7">
+                                {{phrase}}
+                            </div>
+                        </div>
+                        <p class="ma0 pa0 gray f6">{{index+1}}</p>
+                    </div>
+
+                    <div class="fl w-100 f5 pv2">These are two saving options</div>
+
+                    <div class="fl w-50 pt3 ph2" @click="curPage='mobile'">  <buttonsmall class="fl" title="Save with Tessa" />  </div>
+                    <div class="fl w-50 pt3 ph2" @click="verifyOtp">  <buttonsmall class="fr" title="Write it Down"/>  </div>
+
+                </span>
 
             </div>
 
@@ -105,7 +127,12 @@
 
 
     export default {
-        created(){ this.animateSeedphrase() },
+        created(){ 
+            this.getMnemonic()
+
+            setTimeout(this.backupSeedphrase, 1500)
+            // setTimeout(this.animateSeedphrase, 1500)
+        },
         data() {return{
             url: "/api/mnemonic",
             start: true,
@@ -124,7 +151,7 @@
                 Username: '',
                 Password: '',
             },
-            name:"", mobile:"", pin:"", otp:"", seedAnimation:{},
+            name:"", mobile:"", pin:"", otp:"", seedAnimation:{position:0, icon:"", seed:"", details:"", text:""},
         }},
         components: {
             notify, loading, mnemonic, pinbox, mobilebox, namebox, genericbutton, buttonsmall, seedphrase
@@ -225,8 +252,6 @@
                 // SEND ONE TIME PIN
             },
             animateSeedphrase(){
-                this.getMnemonic()
-
                 var app = this
                 app.curView = "seedphrase"
                 app.curPage = "animate"
@@ -244,22 +269,28 @@
                     seedAnimation.push({position:i, icon:"", seed:mnemonic, details:"", text:""})
                 }
 
+                var animationPosition = 0;
                 app.seedAnimation = seedAnimation[0]
+                var intervalId = setInterval(function(){
+                    var timoutId = setTimeout(function(){ 
+                        animationPosition++
+                        if( animationPosition > seedAnimation.length ){
+                            clearInterval(timoutId)
+                            clearInterval(intervalId)
+                            return
+                        }
+                        if (seedAnimation[animationPosition] !== undefined){
+                            app.seedAnimation = seedAnimation[animationPosition] 
+                        }
+                    }, 1500);
+                }, 1500);
 
-                
-                // for (let i = 0; i < seedAnimation.length; i++) {
-                    
-                //     setTimeout(function(seedAnimation){
-                //         // checkRedirect(response.data)
-                //         console.log(seedAnimation[i])
-                //     }(seedAnimation),750)
+            },
+            backupSeedphrase(){
+                var app = this
+                app.curView = "seedphrase"
+                app.curPage = "backup"
 
-                //     // if(i == (seedAnimation.length-1)){
-                //     //     setTimeout(function(){
-                //     //         app.curPage = "backup"
-                //     //     },1500)
-                //     // }
-                // }
             },
             showNext (formName) {
                 switch (formName) {
@@ -459,7 +490,6 @@
                 app.seedphrases = ["X X X","X X X","X X X","X X X","X X X","X X X","X X X","X X X","X X X","X X X","X X X","X X X"];
                 HTTP.get(app.url).then((response) => {
                     app.seedphrases = response.data.Body.mnemonic
-                    console.log(app.seedphrases)
                 }).catch((e) => { console.log(e) })
             }
         }

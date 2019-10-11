@@ -2,22 +2,21 @@
 	<section class="w-100 absolute top-1 left-0 ">
         
 	    <article class="dt w-100 vh-100">
-			<div class="dtc v-mid tc black">
+			<div class="dtc v-mid tc black ph4">
 
-                <div v-if="text==''">
-                    <div class="br-pill w4 h4 tc inline-flex items-center ba" :class="{'bg-near-white b--orange black':((position+1)%2)==0,'bg-black white':((position+1)%2!==0)}">
-                        
-                        
-                        <div class="w-100 tc" v-if="icon!==''"> 
-                            <i class="fas f2 tr white center" :class="icon"></i>
+                <div class="h-25">
+                    <div v-if="text==''">
+                        <div class="br-pill w4 h4 tc inline-flex items-center ba" :class="{'bg-near-white b--orange black':((position+1)%2)==0,'bg-black white':((position+1)%2!==0)}">
+                            <div class="w-100 tc" v-if="icon!==''"> 
+                                <i class="fas f2 tr white center" :class="icon"></i>
+                            </div>
+                            <div class="w-100 tc" v-else>{{seed}}</div>
                         </div>
-                        <div v-else>{{seed}}</div>
-
-
+                        
+                        <div class="cf black f2 fw6 tc">{{details}}</div>
                     </div>
-                    <div class="black f2 fw8 pt3 tc">{{details}}</div>
+                    <p class="pt4" v-else>{{text}}</p>
                 </div>
-                <p v-else>{{text}}</p>
 			</div>
 		</article>
 	</section>
