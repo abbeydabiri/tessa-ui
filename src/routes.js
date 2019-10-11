@@ -19,6 +19,8 @@ import restoreComponent from "@/components/auth/restore"
 import questionComponent from "@/components/question"
 import answerComponent from "@/components/answer"
 import confirmQuestionAnswerComponent from "@/components/confirmqa"
+import saveKeywordComponent from "@/components/savekeyword"
+import writeKeywordComponent from "@/components/writekeyword"
 
 //dashboard
 import dashboardComponent from "@/components/dashboard/routes.vue"
@@ -41,6 +43,8 @@ const router =  new Router({
         { path: '/question', name: 'question', component: questionComponent },
         { path: '/answer', name: 'answer', component: answerComponent },
         { path: '/confirmqa', name: 'confirmqa', component: confirmQuestionAnswerComponent },
+        { path: '/savekeyword', name: 'savekeyword', component: saveKeywordComponent },
+        { path: '/writekeyword', name: 'writekeyword', component: writeKeywordComponent },
 
         { 
             path: '/dashboard', component: dashboardComponent, 
