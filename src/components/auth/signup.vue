@@ -40,7 +40,7 @@
 
                     <span class="dn" :class="{'db':curPage=='otp'}">
                         <div class="fl w-100 ph2 ">
-                            <pinbox class="fl w-100" :pin="pin" title="Enter the OTP sent to your Mobile" @update="setOtp" />
+                            <pinbox class="fl w-100" :pin="otp" title="Enter the OTP sent to your Mobile" @update="setOtp" />
                         </div>
 
                         <div class="fl w-50 pt3 ph2" @click="curPage='mobile'">  <buttonsmall class="fl" icon="fa-repeat" title="Retry" />  </div>
@@ -68,10 +68,10 @@
                         <p class="ma0 pa0 gray f6">{{index+1}}</p>
                     </div>
 
-                    <div class="fl w-100 f5 pv2">These are two saving options</div>
+                    <div class="fl w-100 f5 pv2">There are two saving options</div>
 
-                    <div class="fl w-50 pt3 ph2" @click="curPage='mobile'">  <buttonsmall class="fl" title="Save with Tessa" />  </div>
-                    <div class="fl w-50 pt3 ph2" @click="verifyOtp">  <buttonsmall class="fr" title="Write it Down"/>  </div>
+                    <div class="fl w-50 pt3 ph2" @click="curView='security',curPage='pin'">  <buttonsmall class="fl" title="Save with Tessa" />  </div>
+                    <div class="fl w-50 pt3 ph2" @click="curView='security',curPage='pin'">  <buttonsmall class="fr" title="Write it Down"/>  </div>
 
                 </span>
 
@@ -79,25 +79,102 @@
 
             <div class="fl w-100 dn bg-white" :class="{'db':curView=='security'}">
 
-                <span class="dn" :class="{'db':curPage=='pin'}">
-                    <div class=" w-100 min-h-75 fl dt">
+                <span class="dn fl w-100" :class="{'db':curPage=='pin'}">
+                    <div class=" w-100 vh-50 fl dt">
                         <div class="dtc v-mid tc">
                         
                             <p class="fw6 f5 black">Create Unique 4 Digit Pin</p>
                             
-                            <div class="fl w-100 ph2 ">
-                                <pinbox class="fl w-100" :pin="pin" title="CREATE PIN" @update="createPin" />
-                            </div>
+                            <div class="fl w-100 mv2"></div>
 
                             <div class="fl w-100 ph2 ">
-                                <pinbox class="fl w-100" :pin="pin" title="CONFIRM PIN" @update="confirmPin" />
+                                <pinbox class="fl w-100" :pin="pinCreate" title="CREATE PIN" @update="createPin" />
+                            </div>
+                            
+                            <div class="fl w-100 mv2"></div>
+
+                            <div class="fl w-100 ph2 ">
+                                <pinbox class="fl w-100" :pin="pinConfirm" title="CONFIRM PIN" @update="confirmPin" />
                             </div>
 
                         </div>
                     </div>
                     <div class=" w-100 min-h-25 fl dt">
+                        <div class="dtc v-mid tc" @click="gotoQuestions">
+                            <genericbutton title="Create Pin" />
+                        </div>
+                    </div>
+                </span>
+                
+                <span class="dn" :class="{'db':curPage=='questions'}">
+                    <div class=" w-100 h-100 fl dt">
+                        <div class="dtc v-mid tc ph2">
+                        
+                            <p>Create Three Security Questions</p>
+                            <div class="mt3">
+                                <label class="db fw4 f7 lh-copy f6 tl pb3">QUESTION ONE</label>
+                                <input type="text" class="pa3 input-reset ba b--black bg-transparent w-100 black bw1" v-model="questionOne">
+                            </div>
+                            <div class="mt3">
+                                <label class="db fw4 f7 lh-copy f6 tl pb3">QUESTION TWO</label>
+                                <input type="text" class="pa3 input-reset ba b--black bg-transparent w-100 black bw1" v-model="questionTwo">
+                            </div>
+                            <div class="mt3">
+                                <label class="db fw4 f7 lh-copy f6 tl pb3">QUESTION THREE</label>
+                                <input type="text" class="pa3 input-reset ba b--black bg-transparent w-100 black bw1" v-model="questionThree">
+                            </div>
+                            <div class="bg-light-gray pa1 dib br-button mt4 w-100" @click="createQuestions">
+                                <div class="bg-black pa2 pv3 center br-button fw6 tracked white"> CREATE QUESTIONS </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </span>
+
+                <span class="dn" :class="{'db':curPage=='answers'}">
+                    <div class=" w-100 h-100 fl dt">
+                        <div class="dtc v-mid tc ph2">
+                        
+                            <p>Create Three Security Answers</p>
+                            <div class="mt3">
+                                <label class="db fw4 f7 lh-copy f6 tl pb3">ANSWER TO QUESTION ONE</label>
+                                <input type="text" class="pa3 input-reset ba b--black bg-transparent w-100 black bw1" v-model="answerOne">
+                            </div>
+                            <div class="mt3">
+                                <label class="db fw4 f7 lh-copy f6 tl pb3">ANSWER TO QUESTION TWO</label>
+                                <input type="text" class="pa3 input-reset ba b--black bg-transparent w-100 black bw1" v-model="answerTwo">
+                            </div>
+                            <div class="mt3">
+                                <label class="db fw4 f7 lh-copy f6 tl pb3">ANSWER TO QUESTION THREE</label>
+                                <input type="text" class="pa3 input-reset ba b--black bg-transparent w-100 black bw1" v-model="answerThree">
+                            </div>
+                            <div class="bg-light-gray pa1 dib br-button mt4 w-100" @click="createAnswers">
+                                <div class="bg-black pa2 pv3 center br-button fw6 tracked white"> CREATE ANSWERS </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </span>
+
+
+                <span class="dn" :class="{'db':curPage=='confirm'}">
+                    <div class=" w-100 h-100 fl dt">
                         <div class="dtc v-mid tc">
-                            <genericbutton title="Create Pin"/>
+                        
+                            <p>Confirm Question And Answers</p>
+                            <h3 class="fw9">Q. {{questionOne}}? </h3>
+                            <div>A. {{answerOne}} </div>
+
+                            <h3 class="fw9">Q. {{questionTwo}}? </h3>
+                            <div>A. {{answerTwo}}</div>
+
+                            <h3 class="fw9">Q. {{questionThree}}? </h3>
+                            <div>A. {{answerThree}}</div>
+
+                            <div class="bg-light-gray pa1 dib br-button mt4 w-100" @click="signUp">
+                                <div class="bg-black pa2 pv3 center br-button fw6 tracked white"> CONFIRM </div>
+                            </div>
+
                         </div>
                     </div>
                 </span>
@@ -129,20 +206,21 @@
     export default {
         created(){ 
             this.getMnemonic()
-
-            setTimeout(this.backupSeedphrase, 1500)
+            // setTimeout(this.backupSeedphrase, 1500)
             // setTimeout(this.animateSeedphrase, 1500)
         },
         data() {return{
             url: "/api/mnemonic",
             start: true,
-            
+            isSave: true,
+
             curPage:"name",
             curView:"identity",
             // curPage:["name","mobile","otp"],
             // curView:["identity","seedphrase","security"],
 
-
+            answersList:[],
+            questionsList:[],
             mnemonicConfirm:[],
             seedphrases: [],
             notifications: [],
@@ -152,6 +230,8 @@
                 Password: '',
             },
             name:"", mobile:"", pin:"", otp:"", seedAnimation:{position:0, icon:"", seed:"", details:"", text:""},
+            questionOne:"", questionTwo:"", questionThree:"", answerOne:"", answerTwo:"", answerThree:"",
+            pinConfirm:"", pinCreate:""
         }},
         components: {
             notify, loading, mnemonic, pinbox, mobilebox, namebox, genericbutton, buttonsmall, seedphrase
@@ -170,10 +250,11 @@
                 this.name = name
             },
             createPin(pin){
-                this.createPin = pin;
+                this.pinCreate = pin;
+                this.notifications = []
             },
             confirmPin(pin){
-                this.confirmPin = pin;
+                this.pinConfirm = pin;
             },
             submitName(){
                 var app = this
@@ -217,11 +298,8 @@
                 // SEND ONE TIME PIN
             },
             verifyOtp(){
+                
                 var app = this
-
-                app.pin = ""
-                app.otp = ""
-    
                 app.record.Username = app.mobile;
                 if (app.mobile.length != 11) {
                     app.notifications.push({Message:"OTP must be 4 digits",Code:500})
@@ -233,16 +311,15 @@
                 app.notifications = []
                 app.url = "/api/otpverify"
                 HTTP.post(app.url, {
-                    Code: app.record.Code,
+                    Code: this.otp,
                     Username: app.record.Username,
                 }).then((response) => {
+                    app.notifications.push(response.data)
                     if (response.data.Code === 200) {
-                        app.viewPage = "security"
-                        app.curPage = "pin"
+                        this.animateSeedphrase()
                     } else {
                         app.curPage = "otp"
                     }
-                    app.notifications.push(response.data)
                     setTimeout(function(){console.log(response.data.Body)},1500)
 
                 }).catch((e) => { 
@@ -255,7 +332,7 @@
                 var app = this
                 app.curView = "seedphrase"
                 app.curPage = "animate"
-                
+                app.notifications = []
                 var seedAnimation = [
                     {position:0, icon:"", seed:"", details:"", text:""},
                     {position:0, icon:"fa-check", seed:"", details:"", text:""},
@@ -275,6 +352,7 @@
                     var timoutId = setTimeout(function(){ 
                         animationPosition++
                         if( animationPosition > seedAnimation.length ){
+                            app.backupSeedphrase()
                             clearInterval(timoutId)
                             clearInterval(intervalId)
                             return
@@ -292,198 +370,131 @@
                 app.curPage = "backup"
 
             },
-            showNext (formName) {
-                switch (formName) {
-                    case "mobile":
-                        this.mobile = true
+            signUp(){
+                var app = this
+                app.url = "/api/signup"
+                app.record.Username = app.mobile;
+                if (app.record.Username.length != 11 ) {
+                    app.notifications.push({
+                        Code: 500,
+                        Message: "Mobile is not complete"
+                    })
+                    console.log(app.record)
+                    return
+                } 
 
-                        // if (this.beginner) {
-                        //     this.getMnemonic()
-                        //     this.start = false
-                        //     this.warning = false
-                        //     this.seedphrase = false
-                        //     this.confirm = false
-                            
-                        //     this.mobileEnter = true
-                        //     this.otpVerify = false
-                        //     this.pinSet = false
+                
 
-                        // } else {
-                        //     var lSuccess = true;
-                            
-                        //     if (this.mnemonicConfirm.length == 0) {
-                        //         lSuccess = false
-                        //     }
-
-                        //     for (var i = 0; i < this.mnemonicConfirm.length; i++) {
-                        //         var mnemonic = this.mnemonicConfirm[i];
-                        //         if(mnemonic.phrase !== mnemonic.value) {
-                        //             lSuccess = false
-                        //         }
-                        //     }
-
-                        //     if(lSuccess) {
-                        //         this.start = false
-                        //         this.warning = false
-                        //         this.seedphrase = false
-                        //         this.confirm = false
-                            
-                        //         this.mobileEnter = true
-                        //         this.otpVerify = false
-                        //         this.pinSet = false
-
-                        //         this.notifications = [{Code: 200, Message: "Mnemonic verfied!"}]
-                        //         return
-                        //     }
-
-                        //     this.notifications = [{Code: 500, Message: "Mnemonic confirmation failed!"}]
-                        // }
-                        
-                        // console.log(this.seedphrases)
-                    break;
-
-                    case "seedphrase":
-                        this.getMnemonic()
-                        this.warning = false
-                        this.seedphrase = true
-                        this.confirm = false
-                        
-                        this.create = false
-                        this.mobileEnter = false
-                        this.otpVerify = false
-                        this.pinSet = false
-                        break;
-                    case "confirm":
-                        this.mnemonicConfirm = [];
-                        
-                        var randList = []
-                        while(randList.length < 2){
-                            var randomnumber = Math.floor(Math.random()*10) + 1;
-                            if(randList.indexOf(randomnumber) > -1) continue;
-                            randList[randList.length] = randomnumber;
-                        }
-
-                        for (var i = 0; i < randList.length; i++) {
-                            if (this.seedphrases[randList[i]] !== undefined) {
-                                this.mnemonicConfirm.push({position:randList[i]+1, 
-                                phrase:this.seedphrases[randList[i]]})
-                            }
-                        }
-
-                        console.log(this.mnemonicConfirm[0].phrase)
-                        console.log(this.mnemonicConfirm[1].phrase)
-
-                        this.start = false
-                        this.warning = false
-                        this.seedphrase = false
-                        this.confirm = true
-                        this.create = false
-                        break;
-
-                    
-
-                    case "otpin":
-                        this.pin = ""
-                        this.otp = ""
-
-                        this.record.Username = this.mobile;
-
-                        // SEND ONE TIME PIN
-                        var app = this
-                        app.notifications = []
-                        app.url = "/api/otpsend"                
-                        HTTP.post(app.url, {
-                        Username: app.record.Username,
-                        }).then((response) => {
-                            if (response.data.Code === 200) {
-                                this.start = false
-                                this.warning = false
-                                this.seedphrase = false
-                                this.confirm = false
-                                this.mobileEnter = false
-                                this.otpVerify = true
-                                this.pinSet = false
-                            }
-                            app.notifications.push(response.data)
-                            setTimeout(function(){console.log(response.data.Body)},1500)
-
-                        }).catch((e) => { console.log(e) })
-                        // SEND ONE TIME PIN
-                        break;
-
-                    case "pinset":
-                        this.record.Code = this.otp;
-                        this.record.Username = this.mobile;
-
-                        //VERIFY ONE TIME PIN
-                        var app = this
-                        app.url = "/api/otpverify"
-                        HTTP.post(app.url, {
-                            Code: app.record.Code,
-                            Username: app.record.Username,
-                        }).then((response) => {
-                            if (response.data.Code === 200) {
-                                app.start = false
-                                app.warning = false
-                                app.seedphrase = false
-                                app.confirm = false
-                                app.mobileEnter = false
-                                app.otpVerify = false
-                                app.pinSet = true
-                            } 
-                            app.notifications.push(response.data)
-                            setTimeout(function(){console.log(response.data.Body)},1500)
-                        }).catch((e) => { console.log(e) })
-                        //VERIFY ONE TIME PIN
-                        break;
-
-
-                    case "finish":
-                        this.url = "/api/signup"
-
-                        this.record.Username = this.mobile;
-                        if (this.record.Username.length != 11 ) {
-                            this.notifications.push({
-                                Code: 500,
-                                Message: "Mobile is not complete"
-                            })
-                            console.log(this.record)
-                            return
-                        } 
-
-                        
-
-                        this.record.Password = this.pin;
-                        if (this.record.Password.length != 4) {
-                            this.notifications.push({
-                                Code: 500,
-                                Message: "Pin is not complete"
-                            })
-                        }
-
-                        var app = this
-                        if (!app.isSave){
-                            return
-                        }
-                        app.isSave = false;
-                        HTTP.post(app.url, {
-                            Firstname: app.record.Firstname,
-                            Username: app.record.Username,
-                            Password: app.record.Password,
-                            Confirm: app.record.Password,
-                            Mobile:  app.record.Username,
-                            Mnemonic: app.seedphrases.join(" "),
-                        }).then((response) => {
-                            app.notifications.push(response.data)
-                            if (response.data.Code === 200) {
-                                window.localStorage.setItem('username', app.record.Username);
-                            }
-                            // setTimeout(function(){  },500)
-                            checkRedirect(response.data)
-                            app.isSave = true;
-                        }).catch((e) => { app.isSave = true; })
-                    break
+                app.record.Password = app.pinCreate;
+                if (app.record.Password.length != 4) {
+                    app.notifications.push({
+                        Code: 500,
+                        Message: "Pin is not complete"
+                    })
                 }
+
+                if (app.pinCreate !== app.pinConfirm) {
+                    app.notifications.push({
+                        Code: 500,
+                        Message: "Create and Confirm Pin does not match"
+                    })
+                }
+
+
+                if (!app.isSave){
+                    return
+                }
+                app.isSave = false;
+                HTTP.post(app.url, {
+                    Firstname: app.record.Firstname,
+                    Username: app.record.Username,
+                    Password: app.record.Password,
+                    Confirm: app.record.Password,
+                    Mobile:  app.record.Username,
+                    Mnemonic: app.seedphrases.join(" "),
+                }).then((response) => {
+                    app.notifications.push(response.data)
+                    if (response.data.Code === 200) {
+                        window.localStorage.setItem('username', app.record.Username);
+                    }
+                    // setTimeout(function(){  },500)
+                    checkRedirect(response.data)
+                    app.isSave = true;
+                }).catch((e) => { app.isSave = true; })
+            },
+            gotoQuestions(){
+                var app = this
+
+                console.log("app.createPin")
+                console.log(app.pinCreate)
+                console.log("app.confirmPin")
+                console.log(app.pinConfirm)
+                if (app.pinCreate.length !== 4) {
+                    app.notifications.push({
+                        Code: 500,
+                        Message: "Pin is not complete"
+                    })
+                    return
+                }
+
+                if (app.pinConfirm.length !== 4) {
+                    app.notifications.push({
+                        Code: 500,
+                        Message: "Confirm Pin is not complete"
+                    })
+                    return
+                }
+
+                if (app.pinCreate !== app.pinConfirm) {
+                    app.notifications.push({
+                        Code: 500,
+                        Message: "Pin and Confirm Pin does not match"
+                    })
+                    return
+                }
+
+                app.curPage='questions'
+            },
+            createQuestions(){
+                this.notifications = []
+                if (this.questionOne == "") {
+                    this.notifications.push({Message:"Question One is required",Code:500})
+                    return
+                }
+
+                if (this.questionTwo == "") {
+                    this.notifications.push({Message:"Question Two is required",Code:500})
+                    return
+                }
+
+                if (this.questionThree == "") {
+                    this.notifications.push({Message:"Question Three is required",Code:500})
+                    return
+                }
+
+
+                this.questionsList = [this.questionOne,this.questionTwo,this.questionThree]
+                this.curPage = "answers"
+            },
+            createAnswers(){
+                this.notifications = []
+                if (this.answerOne == "") {
+                    this.notifications.push({Message:"Answer One is required",Code:500})
+                    return
+                }
+
+                if (this.answerTwo == "") {
+                    this.notifications.push({Message:"Answer Two is required",Code:500})
+                    return
+                }
+
+                if (this.answerThree == "") {
+                    this.notifications.push({Message:"Answer Three is required",Code:500})
+                    return
+                }
+
+                this.answersList = [this.answerOne,this.answerTwo,this.answerThree]
+                this.curPage = "confirm"
             },
             getMnemonic () {
                 const app = this;
