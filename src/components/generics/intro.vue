@@ -21,7 +21,7 @@
     created(){
       const that = this  
       setTimeout(function () {
-        that.$router.push({path:"/onboarding"})
+        that.$router.push({path:"/wallet"})
         // that.$router.push({path:"/signin"})
       }, 1500);
     }

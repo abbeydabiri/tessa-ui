@@ -7,7 +7,7 @@
             </div>
         </div>
         <div class=" w-100  fl dt">
-            <div class="dtc v-top tc">
+            <div class="dtc v-top tc bg-white">
                 <div class="fl w-100"> 
                     <p class="f4 fw1 tracked black">Sign In </p>
                 </div>
@@ -101,10 +101,6 @@
         },
         updateMobile(mobile) {
             this.mobile = mobile
-
-            // if (this.mobile.length == 11) {
-            //     this.mobileToggle()
-            // }
         },
         submitMobile(){
             if (this.mobile.length == 11) {

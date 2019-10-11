@@ -1,10 +1,16 @@
 <template>
     <section>
-        <div class="bg-orange w-100 h-50 pt5 fixed mw8 top-0 right-0 center left-0 z-0"></div>
+        <div class="w-100 h-100 pt5 fixed mw8 top-0 right-0 center left-0 z-0" style="background:#DD6A01;">
+
+            <div class="fl w-30">&nbsp;</div>
+            <div class="fl w-70 tc">
+                <img src="assets/img/star.png" class="absolute top-1"/>
+            </div>
+        </div>
         <div class="bg-white w-100 h-50 pt5 fixed mw8 bottom-0 right-0 center left-0 z-0"></div>
         <div class="center mw8 w-100 ph3 relative">
             <div class="bg-white fl w-100 mt4 br5 br--top tc z-1 pv4">
-                <div class="scrollbar tessa-height overflow-y-auto">
+                <div class="scrollbar tessa-height overflow-y-auto" style="background:url(assets/img/bg-white.png)">
                     <router-view></router-view>
                 </div>
             </div>
@@ -14,9 +20,9 @@
 
 <!-- App specific objects  -->
 <script type="text/javascript">
-  module.exports = {
-    name: "app"
-  }
+    module.exports = {
+        name: "app"
+    }
 </script>
 
 <style lang="scss">

@@ -1,8 +1,8 @@
 <template>
     <section class="">
-        <nav class="w-100 mw8 center cf  top-0 left-0 right-0 inline-flex items-center w-100 h3 bg-black-20">
+        <div class="w-90 center cf top-1 ph3 left-0 right-0 inline-flex items-center w-100 h3">
             <span class="fl ph3" @click="toggleMenu" >
-                <i class="fa fa-bars f3 tr white"></i>
+                <i class="fa fa-bars f3 tr black"></i>
             </span>
 
             <span class="center b ">
@@ -10,9 +10,9 @@
             </span>
 
             <span class="fr ph3" @click="toggleNotification">
-                <i class="fa fa-bell f3 tr white"></i>
+                <i class="fa fa-bell f3 tr black"></i>
             </span>
-        </nav>
+        </div>
 
         <div class="fixed w-100 top-0 left-0 z-max">
             <div class="bg-black-90 w-100 vh-100 mw8 cf center absolute dn z-max top-0 left-0 right-0" :class="{'db':lMenu,'dn':!lMenu}">
@@ -90,7 +90,7 @@
   export default {
     props:["title", "notifications"],
     data() {return{
-      profile:{Fullname:"",Mobile:""}, lMenu:false, lNotification:false,
+      profile:{Fullname:"x",Mobile:"x"}, lMenu:false, lNotification:false,
       sidemenu: [
         //   {to:"/dashboard", title:"Dashboard", icon:"fa-home"},
         //   {to:"/send", title:"Send", icon:"fa-paper-plane"},

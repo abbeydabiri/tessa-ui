@@ -1,5 +1,5 @@
 <template>
-    <div class="w-100 fl h-100 relative" style="">
+    <div class="w-100 fl" style="">
 
         <div class="fl w-100 inline-flex items-center pv2 ph3">
             <input type="text" v-model="search.text" placeholder="Search Token Name or" class=" ba b--white-10 bg-white fw3 f6 tracked i fl white pa2 w-100 br2 br--left" @keyup="searchRecords">
@@ -9,7 +9,7 @@
             </router-link>
         </div>
 
-        <div class="fl w-100 bg-white near-black" style="height:calc(100% - 50px)">
+        <div class="fl w-100 bg-white near-black" style="">
 
             <div class="fl w-100 bg-near-white f8 ph3"> 
                 <div class="fl tl w-10 pv2"></div>

@@ -1,7 +1,7 @@
 <template>
-    <section class="vh-100 w-100 relative white w-100 cf center bg-black-10 mw8 " >
+    <section class="h-100" >
         <appheader :notifications="notifications" :title="headertitle"/>
-        <router-view style="height:calc(100% - 120px)"></router-view>
+        <router-view class="h-100"></router-view>
         <appfooter/>
     </section>
 </template>
@@ -78,7 +78,7 @@
         },
         created () {
             // this.getNetworks()
-            this.getDashboard()
+            // this.getDashboard()
         },
         methods: {
             getDashboard() {

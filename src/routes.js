@@ -4,7 +4,11 @@ import Router from "vue-router"
 //splash-screen
 import introComponent from "@/components/generics/intro"
 import outroComponent from "@/components/generics/outro"
-import onboardingComponent from "@/components/generics/onboarding"
+
+import walletComponent from "@/components/wallet"
+import tokenizeComponent from "@/components/tokenize"
+import marketplaceComponent from "@/components/marketplace"
+
 
 //sign-up&in
 import signinComponent from "@/components/auth/signin"
@@ -19,7 +23,11 @@ const router =  new Router({
     mode: "hash",
     routes: [
         { path: '*', component: introComponent },
-        { path: '/onboarding', component: onboardingComponent },
+        { path: '/wallet', name:"wallet", component: walletComponent },
+        { path: '/tokenize', name:"tokenize", component: tokenizeComponent },
+        { path: '/marketplace', name:"marketplace", component: marketplaceComponent },
+        
+
         { path: '/logout', component: outroComponent },
         { path: '/signup', name: 'signup', component: signupComponent },
         { path: '/signin', name: 'signin', component: signinComponent },

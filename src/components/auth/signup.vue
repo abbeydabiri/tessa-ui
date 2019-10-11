@@ -9,7 +9,7 @@
                 <notify :notifications="notifications" />
             </div>
 
-            <div class="fl w-100 dn" :class="{'db':start}">
+            <div class="fl w-100 dn bg-white" :class="{'db':curView=='identity'}">
                 <div class="fl w-100">
                     <img src="@/assets/img/icon-signup.png" class="db center w-90 w-40-l" />
                 </div>
@@ -19,9 +19,8 @@
                 </div>
                 
                 <div class="w-40-l w-100 center pv2 ">
-                    <span class="dn" :class="{'db':!startMobile}">
-                        <mobilebox :mobile="mobile" @update="updateMobile"/>
-
+                    <span class="dn" :class="{'db':curPage=='name'}">
+                        <namebox :name="name" @update="updateName"/>
                         <div class="fr w-100 pt3">
                             <router-link to="/signin" class="cf no-underline items-center inline-flex">
                                 <p class="near-black f7 fl tl">Do you have an account? </p>
@@ -29,18 +28,62 @@
                             </router-link>
                         </div>
                     </span>
+                    
+                    <span class="dn" :class="{'db':curPage=='mobile'}">
+                        <mobilebox :mobile="mobile" @update="updateMobile"/>
+                        <div class="fr w-100 pt3">
+                            <div @click="curPage='name'" class="cf no-underline items-center inline-flex w-100">
+                                <buttonsmall class="fl ml2" title="Go Back"/>
+                            </div>
+                        </div>
+                    </span>
 
-                    <span class="dn" :class="{'db':startMobile}">
+                    <span class="dn" :class="{'db':curPage=='otp'}">
                         <div class="fl w-100 ph2 ">
-                            <pinbox class="fl w-100" :pin="pin" title="Enter the OTP sent to your Mobile" @update="updatePin" />
+                            <pinbox class="fl w-100" :pin="pin" title="Enter the OTP sent to your Mobile" @update="setOtp" />
                         </div>
 
-                        <div class="fl w-50 pt3 ph2" @click="mobileToggle">  <buttonsmall class="fl" icon="fa-repeat" title="Retry" />  </div>
-                        <div class="fl w-50 pt3 ph2" click="signin">  <buttonsmall class="fr" icon="fa-check" title="Verify"/>  </div>
+                        <div class="fl w-50 pt3 ph2" @click="curPage='mobile'">  <buttonsmall class="fl" icon="fa-repeat" title="Retry" />  </div>
+                        <div class="fl w-50 pt3 ph2" @click="verifyOtp">  <buttonsmall class="fr" icon="fa-check" title="Verify"/>  </div>
                     </span>
                 </div>
             </div>
+            
+            <div class="fl w-100 dn bg-white" :class="{'db':curView=='seedphrase'}">
 
+                ICON: {{seedAnimation.icon}} <br/>
+                SEED: {{seedAnimation.seed}} <br/>
+                DETAILS: {{seedAnimation.details}} <br/>
+                TEXT: {{seedAnimation.text}} <br/>
+
+            </div>
+
+            <div class="fl w-100 dn bg-white" :class="{'db':curView=='security'}">
+
+                <span class="dn" :class="{'db':curPage=='pin'}">
+                    <div class=" w-100 min-h-75 fl dt">
+                        <div class="dtc v-mid tc">
+                        
+                            <p class="fw6 f5 black">Create Unique 4 Digit Pin</p>
+                            
+                            <div class="fl w-100 ph2 ">
+                                <pinbox class="fl w-100" :pin="pin" title="CREATE PIN" @update="createPin" />
+                            </div>
+
+                            <div class="fl w-100 ph2 ">
+                                <pinbox class="fl w-100" :pin="pin" title="CONFIRM PIN" @update="confirmPin" />
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class=" w-100 min-h-25 fl dt">
+                        <div class="dtc v-mid tc">
+                            <genericbutton title="Create Pin"/>
+                        </div>
+                    </div>
+                </span>
+                
+            </div>
             
         </div>
     </section>
@@ -56,19 +99,23 @@
     import loading from "@/components/generics/loading";
 
     import pinbox from "@/components/generics/pinbox";
+    import namebox from "@/components/generics/namebox";
     import mobilebox from "@/components/generics/mobilebox";
 
+    import genericbutton from "@/components/generics/button";
     import buttonsmall from "@/components/generics/buttonsmall";
 
 
     export default {
-        created(){
-            this.showNext("mobile")
-        },
+        created(){ this.animateSeedphrase() },
         data() {return{
             url: "/api/mnemonic",
             start: true,
-            startMobile:false, 
+            
+            curPage:"name",
+            curView:"identity",
+            // curPage:["name","mobile","otp"],
+            // curView:["identity","seedphrase","security"],
 
             warning:false, seedphrase:false, 
             confirm:false, create:false,
@@ -82,60 +129,144 @@
             seedphrases: [],
             notifications: [],
             record: {
+                Firstname: '',
                 Username: '',
                 Password: '',
             },
-            mobile:"", pin:"", otp:"",
-             
+            name:"", mobile:"", pin:"", otp:"", seedAnimation:{icon:"", seed:"", details:"", text:""},
         }},
         components: {
-            notify, loading, mnemonic, pinbox, mobilebox, buttonsmall
+            notify, loading, mnemonic, pinbox, mobilebox, namebox, genericbutton, buttonsmall
         },
         methods: {
-            mobileToggle(){
-                this.startMobile = !this.startMobile   
-                if(this.record.Username.length == 11) {
-                    this.setUsername()
-                }
-            },
-            updateOtp(otp) {
+            setOtp(otp) {
                 this.otp = otp
-            },
-            updatePin(pin) {
-                this.pin = pin
+                if (this.otp.length == 4) {
+                    this.verifyOtp()
+                }
             },
             updateMobile(mobile) {
                 this.mobile = mobile
             },
-            verifyOTP(){
+            updateName(name) {
+                this.name = name
+            },
+            createPin(pin){
+                this.createPin = pin;
+            },
+            confirmPin(pin){
+                this.confirmPin = pin;
+            },
+            submitName(){
                 var app = this
+                app.record.Firstname = app.name;
+                if (app.record.Firstname.length < 3) {
+                    app.notifications.push({Message:"Name is required",Code:500})
+                    return
+                }
 
-                app.pin = ""
-                app.otp = ""
-
+                app.curPage = "mobile"
+                app.curView = "identity"
+            },
+            submitMobile(){
+                var app = this
                 app.record.Username = app.mobile;
+                if (app.mobile.length != 11) {
+                    app.notifications.push({Message:"Mobile is required",Code:500})
+                    return
+                }
 
                 // SEND ONE TIME PIN
-                
+                app.curPage = ""
+                app.curView = "identity"
                 app.notifications = []
                 app.url = "/api/otpsend"                
                 HTTP.post(app.url, {
                 Username: app.record.Username,
                 }).then((response) => {
                     if (response.data.Code === 200) {
-                        // app.start = false
-                        // app.warning = false
-                        // app.seedphrase = false
-                        // app.confirm = false
-                        // app.mobileEnter = false
-                        // app.otpVerify = true
-                        // app.pinSet = false
+                        app.curPage = "otp"
+                    } else {
+                        app.curPage = "mobile"
                     }
                     app.notifications.push(response.data)
                     setTimeout(function(){console.log(response.data.Body)},1500)
 
-                }).catch((e) => { console.log(e) })
+                }).catch((e) => { 
+                    console.log(e) 
+                    app.curPage = "mobile"
+                })
                 // SEND ONE TIME PIN
+            },
+            verifyOtp(){
+                var app = this
+
+                app.pin = ""
+                app.otp = ""
+    
+                app.record.Username = app.mobile;
+                if (app.mobile.length != 11) {
+                    app.notifications.push({Message:"OTP must be 4 digits",Code:500})
+                    return
+                }
+                // SEND ONE TIME PIN
+                app.curPage = ""
+                app.curView = "identity"
+                app.notifications = []
+                app.url = "/api/otpverify"
+                HTTP.post(app.url, {
+                    Code: app.record.Code,
+                    Username: app.record.Username,
+                }).then((response) => {
+                    if (response.data.Code === 200) {
+                        app.viewPage = "security"
+                        app.curPage = "pin"
+                    } else {
+                        app.curPage = "otp"
+                    }
+                    app.notifications.push(response.data)
+                    setTimeout(function(){console.log(response.data.Body)},1500)
+
+                }).catch((e) => { 
+                    console.log(e)
+                    app.curPage = "otp"
+                })
+                // SEND ONE TIME PIN
+            },
+            animateSeedphrase(){
+                this.getMnemonic()
+
+                var app = this
+                app.curView = "seedphrase"
+                app.curPage = "animate"
+                
+                var seedAnimation = [
+                    {icon:"", seed:"", details:"", text:""},
+                    {icon:"fa-check", seed:"", details:"", text:""},
+                    {icon:"fa-check", seed:"", details:"SUCCESS", text:""},
+                    {icon:"", seed:"", details:"", text:"Hold On"},
+                    {icon:"", seed:"", details:"", text:"We are creating 12 unique keywords for you"},
+                ]
+
+                for (var i = 0; i < app.seedphrases.length; i++) {
+                    var mnemonic = app.seedphrases[i];
+                    seedAnimation.push({icon:"", seed:mnemonic, details:"", text:""})
+                }
+
+                
+                for (let i = 0; i < seedAnimation.length; i++) {
+                    
+                    setTimeout(function(seedAnimation){
+                        // checkRedirect(response.data)
+                        console.log(seedAnimation[i])
+                    }(seedAnimation),750)
+
+                    // if(i == (seedAnimation.length-1)){
+                    //     setTimeout(function(){
+                    //         app.curPage = "backup"
+                    //     },1500)
+                    // }
+                }
             },
             showNext (formName) {
                 switch (formName) {

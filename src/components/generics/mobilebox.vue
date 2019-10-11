@@ -24,7 +24,13 @@
         },
         methods: {
             keyUP(event){
+                console.log(event.code)
 
+                if(event.code.includes("Enter")) { 
+                    this.$parent.submitMobile()
+                    return
+                }
+                
                 if(event.code.includes("Arrow")) { return }
 
                 this.localMobile = this.localMobile.replace(/[^0-9\.]+/g, '');

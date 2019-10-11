@@ -50,7 +50,8 @@
                 }
             },
             nextBox(event){
-                
+                console.log(event.code)
+
                 var app = this;
                 if(app.a==" "){ app.a = "" } 
                 if (app.b==" ") { app.b = "" }
@@ -59,8 +60,12 @@
                 if (event.code == undefined){ return }
 
                 if(event.code == "ArrowLeft" ) { app.prevFocus() }
-                if(event.code.includes("Right")) { app.nextFocus() }
+                if(event.code == "ArrowRight ") { app.nextFocus() }
                 if(event.code.includes("Arrow")) { return }
+
+
+                if(event.code.includes("Right")) { return }
+                if(event.code.includes("Left")) { return }
 
             
                 if(event.code == "Backspace") {
