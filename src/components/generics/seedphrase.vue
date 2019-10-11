@@ -1,27 +1,33 @@
 <template>
-	<article class="vh-50 mt4 dt w-100">
-		<div class="dtc tc v-mid white ph3 ph4-l">
-		    <img src="@/assets/img/oval.png">
-		</div>
-	    <article class="h-100 dt w-100 fixed right-0 top-1">
-			<div class="dtc v-mid tc white">
-				<div class="bg-black br-pill w4 h4 tc inline-flex items-center ">
-				{{icon}}
-				</div>
+	<section class="w-100 absolute top-1 left-0 ">
+        
+	    <article class="dt w-100 vh-100">
+			<div class="dtc v-mid tc black">
 
-				<div class="bg-gray br-pill w4 h4 tc inline-flex items-center ">
-				{{seed}}
-				</div>
+                <div v-if="text==''">
+                    <div class="br-pill w4 h4 tc inline-flex items-center ba" :class="{'bg-near-white b--orange black':((position+1)%2)==0,'bg-black white':((position+1)%2!==0)}">
+                        
+                        
+                        <div class="w-100 tc" v-if="icon!==''"> 
+                            <i class="fas f2 tr white center" :class="icon"></i>
+                        </div>
+                        <div v-else>{{seed}}</div>
 
-				<div class="black f2 fw8 pt3 tc">SUCCESS</div>
+
+                    </div>
+                    <div class="black f2 fw8 pt3 tc">{{details}}</div>
+                </div>
+                <p v-else>{{text}}</p>
 			</div>
 		</article>
-	</article>
+	</section>
 </template>
 
 <script>
 export default {
-	props: ['icon','seed','details','text'],
-	methods: {}
+	props: ['position','icon','seed','details','text'],
+	methods: {
+        
+    }
 }
 </script>

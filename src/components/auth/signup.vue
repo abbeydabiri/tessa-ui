@@ -49,12 +49,9 @@
                 </div>
             </div>
             
-            <div class="fl w-100 dn bg-white" :class="{'db':curView=='seedphrase'}">
+            <div class="fl w-100 dn" :class="{'db':curView=='seedphrase'}">
 
-                ICON: {{seedAnimation.icon}} <br/>
-                SEED: {{seedAnimation.seed}} <br/>
-                DETAILS: {{seedAnimation.details}} <br/>
-                TEXT: {{seedAnimation.text}} <br/>
+                <seedphrase :position="seedAnimation.position" :icon="seedAnimation.icon" :seed="seedAnimation.seed" :details="seedAnimation.details" :text="seedAnimation.text"/>
 
             </div>
 
@@ -104,6 +101,7 @@
 
     import genericbutton from "@/components/generics/button";
     import buttonsmall from "@/components/generics/buttonsmall";
+    import seedphrase from "@/components/generics/seedphrase";
 
 
     export default {
@@ -117,13 +115,6 @@
             // curPage:["name","mobile","otp"],
             // curView:["identity","seedphrase","security"],
 
-            warning:false, seedphrase:false, 
-            confirm:false, create:false,
-
-            mobileEnter:true,
-            otpVerify:false,
-            pinSet:false,
-            isSave:true,
 
             mnemonicConfirm:[],
             seedphrases: [],
@@ -133,10 +124,10 @@
                 Username: '',
                 Password: '',
             },
-            name:"", mobile:"", pin:"", otp:"", seedAnimation:{icon:"", seed:"", details:"", text:""},
+            name:"", mobile:"", pin:"", otp:"", seedAnimation:{},
         }},
         components: {
-            notify, loading, mnemonic, pinbox, mobilebox, namebox, genericbutton, buttonsmall
+            notify, loading, mnemonic, pinbox, mobilebox, namebox, genericbutton, buttonsmall, seedphrase
         },
         methods: {
             setOtp(otp) {
@@ -241,32 +232,34 @@
                 app.curPage = "animate"
                 
                 var seedAnimation = [
-                    {icon:"", seed:"", details:"", text:""},
-                    {icon:"fa-check", seed:"", details:"", text:""},
-                    {icon:"fa-check", seed:"", details:"SUCCESS", text:""},
-                    {icon:"", seed:"", details:"", text:"Hold On"},
-                    {icon:"", seed:"", details:"", text:"We are creating 12 unique keywords for you"},
+                    {position:0, icon:"", seed:"", details:"", text:""},
+                    {position:0, icon:"fa-check", seed:"", details:"", text:""},
+                    {position:0, icon:"fa-check", seed:"", details:"SUCCESS", text:""},
+                    {position:0, icon:"", seed:"", details:"", text:"Hold On"},
+                    {position:0, icon:"", seed:"", details:"", text:"We are creating 12 unique keywords for you"},
                 ]
 
                 for (var i = 0; i < app.seedphrases.length; i++) {
                     var mnemonic = app.seedphrases[i];
-                    seedAnimation.push({icon:"", seed:mnemonic, details:"", text:""})
+                    seedAnimation.push({position:i, icon:"", seed:mnemonic, details:"", text:""})
                 }
+
+                app.seedAnimation = seedAnimation[0]
 
                 
-                for (let i = 0; i < seedAnimation.length; i++) {
+                // for (let i = 0; i < seedAnimation.length; i++) {
                     
-                    setTimeout(function(seedAnimation){
-                        // checkRedirect(response.data)
-                        console.log(seedAnimation[i])
-                    }(seedAnimation),750)
+                //     setTimeout(function(seedAnimation){
+                //         // checkRedirect(response.data)
+                //         console.log(seedAnimation[i])
+                //     }(seedAnimation),750)
 
-                    // if(i == (seedAnimation.length-1)){
-                    //     setTimeout(function(){
-                    //         app.curPage = "backup"
-                    //     },1500)
-                    // }
-                }
+                //     // if(i == (seedAnimation.length-1)){
+                //     //     setTimeout(function(){
+                //     //         app.curPage = "backup"
+                //     //     },1500)
+                //     // }
+                // }
             },
             showNext (formName) {
                 switch (formName) {
