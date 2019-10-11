@@ -1,6 +1,6 @@
 <template>
     <section class="h-100">
-        <div class=" w-100 fl">
+        <div class=" w-100 fl" >
             <img src="@/assets/img/logo.png" class="db center h2" />
         </div>
         <div class="w-100 fl">
@@ -57,9 +57,9 @@
 
                 <span class="dn" :class="{'db':curPage=='backup'}">
 
-                    <div class="fl w-100 fw6 f4 pv3">These are your 12 seed phrases</div>
+                    <div class="fl w-100 fw6 f5 pv2 tc">These are your 12 seed phrases</div>
 
-                    <div class="w-third fl tc pv2 " v-for="(phrase, index) in seedphrases" :key="index">
+                    <div class="w-third fl tc pb1 " v-for="(phrase, index) in seedphrases" :key="index">
                         <div class="br-pill w3 h3 tc inline-flex items-center bg-black white ba"  :class="{'':((index)%3==1)}">
                             <div class="w-100 tc f7">
                                 {{phrase}}
@@ -68,11 +68,45 @@
                         <p class="ma0 pa0 gray f6">{{index+1}}</p>
                     </div>
 
-                    <div class="fl w-100 f5 pv2">There are two saving options</div>
+                    <div class="fl w-100 f7 ">There are two saving options</div>
 
-                    <div class="fl w-50 pt3 ph2" @click="curView='security',curPage='pin'">  <buttonsmall class="fl" title="Save with Tessa" />  </div>
-                    <div class="fl w-50 pt3 ph2" @click="curView='security',curPage='pin'">  <buttonsmall class="fr" title="Write it Down"/>  </div>
+                    <div class="fl w-50 pt3 ph2" >  
+                        <buttonsmall class="fl fb" title="Save with Tessa" @click="curView='security',curPage='pin'" />  
+                        <div class="w-80 fl pt3"> <i @click="curPage='savewithtessa'" class="db fal fa-info-circle"></i> </div>
+                    </div>
 
+
+
+                    <div class="fl w-50 pt3 ph2 tr">  
+                        <buttonsmall class="" title="Write it Down"  @click="curView='security',curPage='pin'"/>  
+                        <div class="w-70 fl pt3"> <i @click="curPage='writeitdown'" class="db fal fa-info-circle"></i> </div>
+                    </div>
+
+                </span>
+
+                <span class="dn h-100 w-100 ph2 fl" :class="{'db':curPage=='savewithtessa'}">
+                    <div class="fl w-100 fw6 f5 pv2 tc">
+                        <h4 class="fw9">SAVE KEYWORD WITH TESSA</h4>
+                        <article class="mb4 tl">Tessa saves your keywords to the cloud by storing the keywords assigned to you directly with your account.</article>
+                        <article class="tl mb4">This means that at any point if you forget your keyword, you can recover it by going through the security recovery process. </article>
+
+                        <p class="f7 tl">PROCESS OF SAVING THE KEYWORDS</p>
+                        <ul>
+                            <li class="tl f7 mb4">Click on the 'Save with Tessa' button</li>
+                            <li class="tl f7 mb4">Create a 4 unique digit pin.<br>This pin will always be used to sign in.</li>
+                            <li class="tl f7">Write down 3 security questions and answers. <br/>This will be used in case you forget your pin</li>
+                        </ul>
+                        
+                        <buttonsmall class="fl" title="Close"  @click="curPage='backup'"/>  
+                    </div>
+                </span>
+
+                <span class="dn h-100 w-100 ph2 fl" :class="{'db':curPage=='writeitdown'}">
+                    <h4 class="fw9">WRITING DOWN KEYWORD</h4>
+                    <article class="mb4 tl">Writing down your keywords means that you are fully responsible for protecting the words against any person who could see it.</article>
+                    <article class="tl">It is advisable that if you choose this route, you could write it in a digital note like Google Keep so that it is safe in your Google account than actually writing it on a paper.</article>
+                    
+                    <buttonsmall class="fl" title="Close"  @click="curPage='backup'"/>  
                 </span>
 
             </div>
@@ -206,7 +240,7 @@
     export default {
         created(){ 
             this.getMnemonic()
-            // setTimeout(this.backupSeedphrase, 1500)
+            setTimeout(this.backupSeedphrase, 1500)
             // setTimeout(this.animateSeedphrase, 1500)
         },
         data() {return{
