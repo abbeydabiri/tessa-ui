@@ -15,6 +15,11 @@ import signinComponent from "@/components/auth/signin"
 import signupComponent from "@/components/auth/signup"
 import restoreComponent from "@/components/auth/restore"
 
+//security question & answer
+import questionComponent from "@/components/question"
+import answerComponent from "@/components/answer"
+import confirmQuestionAnswerComponent from "@/components/confirmqa"
+
 //dashboard
 import dashboardComponent from "@/components/dashboard/routes.vue"
 
@@ -32,6 +37,11 @@ const router =  new Router({
         { path: '/signup', name: 'signup', component: signupComponent },
         { path: '/signin', name: 'signin', component: signinComponent },
         { path: '/restore', name: 'restore', component: restoreComponent },
+
+        { path: '/question', name: 'question', component: questionComponent },
+        { path: '/answer', name: 'answer', component: answerComponent },
+        { path: '/confirmqa', name: 'confirmqa', component: confirmQuestionAnswerComponent },
+
         { 
             path: '/dashboard', component: dashboardComponent, 
             children: dashboardComponent.children 
