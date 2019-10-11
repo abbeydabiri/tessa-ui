@@ -13,6 +13,7 @@ import marketplaceComponent from "@/components/marketplace"
 //sign-up&in
 import signinComponent from "@/components/auth/signin"
 import signupComponent from "@/components/auth/signup"
+import signup2Component from "@/components/auth/signup-2"
 import restoreComponent from "@/components/auth/restore"
 
 //dashboard
@@ -31,6 +32,7 @@ const router =  new Router({
         { path: '/logout', component: outroComponent },
         { path: '/signup', name: 'signup', component: signupComponent },
         { path: '/signin', name: 'signin', component: signinComponent },
+        { path: '/signup-2', name: 'signup-2', component: signup2Component },
         { path: '/restore', name: 'restore', component: restoreComponent },
         { 
             path: '/dashboard', component: dashboardComponent, 
