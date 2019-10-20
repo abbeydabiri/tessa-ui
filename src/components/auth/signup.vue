@@ -240,7 +240,7 @@
     export default {
         created(){ 
             this.getMnemonic()
-            setTimeout(this.backupSeedphrase, 1500)
+            // setTimeout(this.backupSeedphrase, 1500)
             // setTimeout(this.animateSeedphrase, 1500)
         },
         data() {return{
