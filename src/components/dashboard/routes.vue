@@ -78,7 +78,7 @@
         },
         created () {
             // this.getNetworks()
-            // this.getDashboard()
+            this.getDashboard()
         },
         methods: {
             getDashboard() {

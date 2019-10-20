@@ -13,13 +13,14 @@
 
 <script type="text/javascript">
     import {HTTP} from "@/common";
+    import splashscreen from "@/assets/img/splashscreen.png";
     export default {
         data() {return{}},
         created(){
             const that = this 
             setTimeout(function () {
                 that.$router.push({path:"/signin"})
-            }, 1500);
+            }, 2500);
             HTTP.get('/api/logout',{withCredentials: true})
         }
     }

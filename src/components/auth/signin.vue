@@ -2,7 +2,7 @@
     <section class="h-100">
         <div class=" w-100 fl">
             <img src="@/assets/img/logo.png" class="db center h2" />
-            <div class="fl w-100">
+            <div class="fl w-100" style="min-height:14em;">
                 <img src="@/assets/img/icon-signin.png" class="db center w-90 w-40-l" />
             </div>
         </div>

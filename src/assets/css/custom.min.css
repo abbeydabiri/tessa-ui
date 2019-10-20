@@ -4,7 +4,7 @@
 
 
 div::-webkit-scrollbar {
-    width: 0.5em;
+    width: 0em;
 }
 
 div::-webkit-scrollbar-track {
@@ -69,7 +69,7 @@ div::-webkit-scrollbar-thumb {
 }
 
 .bg-footer, .bg-menu-slider{
-  background-color: #474a62;
+  background-color: #dd6a01;
 }
 
 @keyframes scaleIn {

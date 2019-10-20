@@ -2,11 +2,7 @@
     <div class="w-100 fl" style="">
 
         <div class="fl w-100 inline-flex items-center pv2 ph3">
-            <input type="text" v-model="search.text" placeholder="Search Token Name or" class=" ba b--white-10 bg-white fw3 f6 tracked i fl white pa2 w-100 br2 br--left" @keyup="searchRecords">
-            <router-link class="link white bg-black-40 br2 br--right f6 inline-flex items-center pa2 pointer" :to="{name:'marketplace-new'}" style="height:34px"> 
-                <i class="pr1 fal fa-coins white fl "></i> 
-                Tokenize
-            </router-link>
+            <input type="text" v-model="search.text" placeholder="Search Token Name or" class=" ba b--white-10 bg-white fw3 f6 tracked i fl near-black pa2 w-100 br2 br--left" @keyup="searchRecords">
         </div>
 
         <div class="fl w-100 bg-white near-black" style="">
@@ -31,6 +27,11 @@
                     <div class="fl tl w-30 h3 inline-flex items-center ph1">{{humanNumber(token.totalSupply)}}</div>
                 </router-link>
             </div>
+
+            <router-link class="fixed btm-3 pa1 h3 w3 right-1 items-center  link white br-100 pointer" style="bottom:4em" :to="{name:'marketplace-new'}" > 
+                <i class=" fal fa-coins white f3 pt2"></i>
+                <div class="w-100 fl tc f7">Tokenize</div>
+            </router-link>
         </div>
 
     </div>

@@ -3,7 +3,7 @@
         <div class=" w-100 min-h-75 fl">
             <img src="@/assets/img/logo.png" class="db center h2" />
             <div class="mv2 w-100 fl"></div>
-            <div class="fl w-100">
+            <div class="fl w-100" style="min-height:8em">
                 <img :src="infoList[curSlide].icon" class="db center w-100 w-70-l" />
             </div>
 
@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class=" w-100 min-h-25 fl dt">
-            <div class="dtc v-mid tc">
+            <div class="dtc v-top tc">
                 <router-link :to="infoList[curSlide].link" class="fl w-100 bg-pink pv2 center right-0 left-0 pointer link">
                     <genericbutton :title="infoList[curSlide].button"/>
                 </router-link>

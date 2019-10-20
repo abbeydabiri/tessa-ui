@@ -3,7 +3,7 @@
         <div class=" w-100 min-h-75 fl">
             <img src="@/assets/img/logo.png" class="db center h2" />
             <div class="mv2 w-100 fl"></div>
-            <div class="fl w-100">
+            <div class="fl w-100" style="min-height:8em">
                 <img :src="infoList[curSlide].icon" class="db center w-100 w-70-l" />
             </div>
 

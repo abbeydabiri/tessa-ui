@@ -5,7 +5,7 @@
                 <i class="pr1 fas fa-user black fl "></i> 
             </div>
             <input ref="namebox" placeholder="ENTER YOUR NAME" class="mobile bg-white tc fw3 f4 tracked bn fl black pv3 ph1 w-80" type="text" v-model="localName" @keyup="keyUP">
-            <div class="fl w-10" @click="$parent.submitName">
+            <div class="fl w-10 pv3" @click="$parent.submitName">
                 <i class="pr1 fas fa-arrow-right black fl "></i> 
             </div>
         </div>
