@@ -163,7 +163,8 @@
 
             const app = this
             app.lSignin = false;
-            app.notifications = [{ Message: 'verifying credentials...'}]
+            app.notifications = [{ Code:500, Message: 'verifying credentials...'}]
+            console.log(app.notifications[0].Code)
             HTTP.post('/api/login',app.record,{withCredentials: true}).then((response) => {
                 app.notifications = [];
                 app.notifications.push(response.data)

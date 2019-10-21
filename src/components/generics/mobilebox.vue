@@ -24,8 +24,6 @@
         },
         methods: {
             keyUP(event){
-                console.log(event.code)
-
                 if(event.code.includes("Enter")) { 
                     this.$parent.submitMobile()
                     return

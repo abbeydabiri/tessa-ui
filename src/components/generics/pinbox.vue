@@ -50,8 +50,7 @@
                 }
             },
             nextBox(event){
-                console.log(event.code)
-
+                
                 var app = this;
                 if(app.a==" "){ app.a = "" } 
                 if (app.b==" ") { app.b = "" }
