@@ -1,36 +1,36 @@
 <template>
-    <div class="w-100 fl" style="">
+    <div class="w-100 fl pt2" style="">
 
         <div class="fl w-100 inline-flex items-center pv2 ph3">
-            <input type="text" v-model="search.text" placeholder="Search Token Name or" class=" ba b--white-10 bg-white fw3 f6 tracked i fl near-black pa2 w-100 br2 br--left" @keyup="searchRecords">
+            <input type="text" v-model="search.text" placeholder="Search Token Name or" class=" ba b--white-10 bg-near-white fw3 f6 tracked i fl near-black pa2 w-100 br2" @keyup="searchRecords">
         </div>
 
         <div class="fl w-100 bg-white near-black" style="">
 
-            <div class="fl w-100 bg-near-white f8 ph3"> 
+            <div class="fl w-100 f8 ph3"> 
                 <div class="fl tl w-10 pv2"></div>
-                <div class="fl tl w-40 pv2">Name</div>
-                <div class="fl tl w-20 pv2">Price (NGN)</div>
-                <div class="fl tl w-30 pv2">Market Cap (NGN)</div>
+                <div class="fl tl w-30 pv2">NAME</div>
+                <div class="fl tl w-30 pv2">PRICE (₦)</div>
+                <div class="fl tl w-30 pv2">MARKET CAP (₦)</div>
             </div>
             <div class="f7 overflow-y-scroll scrollbar w-100 fl" style="height:calc(100% - 29px)"> 
                 <router-link class="bt b--near-white fl w-100 ph3 near-black" v-for="(token, index) in recordList" :key="index" :to="{name:'marketplace-view',params:{id:token.ID}}">
                     <div class="fl tl w-10 h3 inline-flex items-center ph1"> 
                         <img class="w3" :src="token.Image"/>
                     </div>
-                    <div class="fl tl w-40 h3 inline-flex items-center ph1"> 
+                    <div class="fl tl w-30 h3 inline-flex items-center ph1"> 
                         <div class="w-100 fl">
                             {{token.Symbol}} <small class="db w-100 fl silver">{{token.Name}}</small>
                         </div>
                     </div>
-                    <div class="fl tl w-20 h3 inline-flex items-center ph1"> {{humanNumber(token.Price)}} </div>
+                    <div class="fl tl w-30 h3 inline-flex items-center ph1"> {{humanNumber(token.Price)}} </div>
                     <div class="fl tl w-30 h3 inline-flex items-center ph1">{{humanNumber(token.totalSupply)}}</div>
                 </router-link>
             </div>
 
-            <router-link class="fixed bg-orange pa1 h3 w3 right-1 items-center  link white br-100 pointer" style="bottom:4em" :to="{name:'marketplace-new'}" > 
+            <router-link class="fixed bg-black pa1 h3 w3 right-1 items-center  link white br-100 pointer" style="bottom:4em" :to="{name:'marketplace-new'}" > 
                 <i class=" fal fa-coins white f3 pt2"></i>
-                <div class="w-100 fl tc f7">Tokenize</div>
+                <div class="w-100 fl tc f7 ">Tokenize</div>
             </router-link>
         </div>
 
@@ -47,6 +47,12 @@
             url: "/api/tokens", 
             search: {text: "", field: "Fullname", limit: 50, page:1, skip: 0, filter:{}},
             recordList:[
+                { 
+                    ID: 1, Symbol:"BKPT",Name:"Tessa",Price:100,totalSupply:10000,
+                    Image:"https://storage.googleapis.com/bancor-prod-file-store/images/communities/aea83e97-13a3-4fe7-b682-b2a82299cdf2.png",
+                },
+            ],
+            recordListOLD:[
                 { 
                     ID: 1, Symbol:"BKPT",Name:"Tessa",Price:100,totalSupply:10000,
                     Image:"https://storage.googleapis.com/bancor-prod-file-store/images/communities/aea83e97-13a3-4fe7-b682-b2a82299cdf2.png",

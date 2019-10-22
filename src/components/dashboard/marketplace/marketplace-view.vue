@@ -1,20 +1,6 @@
 <template>
     <div class="w-100 fl h-100 relative" style="">
 
-        <div class="fl w-100 inline-flex items-center pv2 ph3 tc">
-            <router-link class="link white bg-black-40 br2 f6 inline-flex items-center pa2 pointer" :to="{name:'marketplace-search'}"> 
-                <i class="pr1 fal fa-caret-left white fl "></i> 
-                Back
-            </router-link>
-
-            <span class="w-100 tc">Token Details</span>
-
-            <router-link class="link white bg-black-40 br2 center f6 inline-flex items-center pa2 pointer" :to="{name:'marketplace-buy',params:{id:$route.params.id}}"> 
-                <i class="pr1 fas fa-shopping-basket white fl "></i> 
-                Buy
-            </router-link>
-        </div>
-
         <div class="fl w-100 bg-black-40" style="height:calc(100% - 48px)">
 
             <div class="fl w-100 ph3 pv3 near-black bg-white">
@@ -80,7 +66,20 @@
             </div>
 
         </div>
+        
+        <div class="fl w-100 inline-flex items-center pv2 ph3 tc">
+            <router-link class="link white bg-black-40 br2 f6 inline-flex items-center pa2 pointer" :to="{name:'marketplace-search'}"> 
+                <i class="pr1 fal fa-caret-left white fl "></i> 
+                Back
+            </router-link>
 
+            <span class="w-100 tc">Token Details</span>
+
+            <router-link class="link white bg-black-40 br2 center f6 inline-flex items-center pa2 pointer" :to="{name:'marketplace-buy',params:{id:$route.params.id}}"> 
+                <i class="pr1 fas fa-shopping-basket white fl "></i> 
+                Buy
+            </router-link>
+        </div>
     </div>
 </template>
 
