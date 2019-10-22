@@ -36,13 +36,13 @@
                         </div>
                     </span>
 
-                    <span class="dn" :class="{'db':curPage=='otp'}">
+                    <span class="dn center w-80" :class="{'db':curPage=='otp'}">
                         <div class="fl w-100 ph2 ">
                             <pinbox class="fl w-100" :pin="otp" title="Enter the OTP sent to your Mobile" @update="setOtp" />
                         </div>
 
-                        <div class="fl w-50 pt3 ph2" @click="curPage='mobile'">  <buttonsmall class="fl" icon="fa-repeat" title="Retry" />  </div>
-                        <div class="fl w-50 pt3 ph2" @click="verifyOtp">  <buttonsmall class="fr" icon="fa-check" title="Verify"/>  </div>
+                        <div class="fl w-50 pt3" @click="curPage='mobile'">  <buttonsmall class="fl" icon="fa-repeat" title="Retry" />  </div>
+                        <div class="fl w-50 pt3" @click="verifyOtp">  <buttonsmall class="fr" icon="fa-check" title="Verify"/>  </div>
                     </span>
                 </div>
             </div>
@@ -119,7 +119,7 @@
 
             <div class="fl w-100 dn bg-white" :class="{'db':curView=='security'}">
 
-                <span class="dn fl w-100" :class="{'db':curPage=='pin'}">
+                <span class="dn center w-80" :class="{'db':curPage=='pin'}">
                     <div class=" w-100 vh-50 fl dt">
                         <div class="dtc v-mid tc">
                         
@@ -127,13 +127,13 @@
                             
                             <div class="fl w-100 mv2"></div>
 
-                            <div class="fl w-100 ph2 ">
+                            <div class="fl w-100 ">
                                 <pinbox class="fl w-100" :pin="pinCreate" title="CREATE PIN" @update="createPin" />
                             </div>
                             
                             <div class="fl w-100 mv2"></div>
 
-                            <div class="fl w-100 ph2 ">
+                            <div class="fl w-100 ">
                                 <pinbox class="fl w-100" :pin="pinConfirm" title="CONFIRM PIN" @update="confirmPin" />
                             </div>
 

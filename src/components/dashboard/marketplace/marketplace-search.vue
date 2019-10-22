@@ -28,7 +28,7 @@
                 </router-link>
             </div>
 
-            <router-link class="fixed btm-3 pa1 h3 w3 right-1 items-center  link white br-100 pointer" style="bottom:4em" :to="{name:'marketplace-new'}" > 
+            <router-link class="fixed bg-orange pa1 h3 w3 right-1 items-center  link white br-100 pointer" style="bottom:4em" :to="{name:'marketplace-new'}" > 
                 <i class=" fal fa-coins white f3 pt2"></i>
                 <div class="w-100 fl tc f7">Tokenize</div>
             </router-link>

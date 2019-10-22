@@ -17,25 +17,25 @@
                 </div>
 
                 <div class="w-40-l w-100 center  pv2 ">
-                    <span class="dn" :class="{'db':!mobileHide}">
+                    <div class="dn" :class="{'db':!mobileHide}">
                         <mobilebox :mobile="mobile" @update="updateMobile"/>
 
-                        <div class="fr w-100 pt3">
-                            <router-link to="/signup" class="cf no-underline items-center inline-flex">
+                        <div class="cf center w-100">
+                            <router-link to="/signup" class="cf no-underline items-center inline-flex mt3">
                                 <p class="near-black f7 fl tl">Don't have a wallet yet? </p>
                                 <buttonsmall class="fr ml3" title="Setup Wallet"/>
                             </router-link>
                         </div>
-                    </span>
+                    </div>
 
-                    <span class="dn" :class="{'db':mobileHide}">
-                        <div class="fl w-100 ph2 ">
-                            <pinbox class="fl w-100" :pin="pin" title="Enter your Pin" @update="updatePin" />
-                        </div>
+                    <div class="dn center w-80" :class="{'db':mobileHide}">
+                        
+                        <pinbox class="" :pin="pin" title="Enter your Pin" @update="updatePin" />
+                        
 
-                        <div class="fl w-50 pt3 ph2" @click="mobileToggle">  <buttonsmall class="fl" icon="fa-repeat" title="Retry" />  </div>
-                        <div class="fl w-50 pt3 ph2" @click="signin">  <buttonsmall class="fr" icon="fa-check" title="Verify"/>  </div>
-                    </span>
+                        <div class="fl w-50 pt3" @click="mobileToggle">  <buttonsmall class="fl" icon="fa-repeat" title="Retry" />  </div>
+                        <div class="fl w-50 pt3" @click="signin">  <buttonsmall class="fr" icon="fa-check" title="Verify"/>  </div>
+                    </div>
                 </div>
 
             </div>

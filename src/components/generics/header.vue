@@ -2,15 +2,15 @@
     <section class="relative fl w-100">
         <div style="top:1.8em" class="w-100 center cf fixed ph3 left-0 right-0 inline-flex items-center w-100">
             <span class="fl ph3 pointer" >
-                <i class="fa fa-bars f4 tr black" @click="toggleMenu"></i>
+                <i class="fa fa-bars f4 tr orange" @click="toggleMenu"></i>
             </span>
 
             <span class="center b ">
-                <h1 class="f4 tracked">{{title}}</h1>
+                <h1 class="f4 tracked orange">{{title}}</h1>
             </span>
 
             <span class="fr ph3 pointer" >
-                <i class="fa fa-bell f3 tr black" @click="toggleNotification"></i>
+                <i class="fa fa-bell f3 tr orange" @click="toggleNotification"></i>
             </span>
         </div>
 
