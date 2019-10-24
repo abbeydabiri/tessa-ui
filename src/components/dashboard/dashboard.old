@@ -1,5 +1,5 @@
 <template>
-    <section class="vh-100 white w-100 center bg-black-10 mw8 " >
+    <section class="vh-100 white w-100 center bg-black-10 mw6 " >
         <appheader :title="headertitle"/>
         <router-view></router-view>
         <appfooter/>

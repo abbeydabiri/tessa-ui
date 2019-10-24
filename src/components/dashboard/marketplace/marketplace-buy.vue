@@ -1,62 +1,63 @@
 <template>
-    <div class="w-100 fl h-100 relative" style="">
+    <div class="w-100 fl h-100 relative ph3" style="">
 
-        <div class="fl w-100 inline-flex items-center ph3 tc" style="height:48px">
-            <span class="w-100 tc">Buy <b>{{record.Symbol}}</b> Tokens</span>
-        </div>
+        <div class="fl w-100 near-black " style="height:calc(100% - 48px)">
 
-        <div class="fl w-100 bg-black-40" style="height:calc(100% - 48px)">
-
-            <div class="fl w-100 ph3 pv3 near-black bg-white">
-                <div class="fl w-70 ">
-                    <div class="fl tl w-auto h3 inline-flex items-center pr1"> 
-                        <img class="w3" :src="record.Image"/>
-                    </div>
-                    <div class="fl tl w-auto h3 inline-flex items-center ph1"> 
-                        <div class="w-100 fl fw6">
-                            {{record.Symbol}} <small class="db w-100 fl silver f8">{{record.Name}}</small>
+            <div class="fl w-100 ph3 near-black bg-white ba b--silver mt3">
+                <div class="fl w-100">
+                    <div class="fl w-50 dt" style="min-height:110px">
+                        <div class="dtc v-mid w-100">
+                            <img class="h3" :src="record.Image"/>
                         </div>
                     </div>
-                    <div class="f8 fl w-100"><small>0xa133D2e34A38b7d6454B08bd3AeAB1C0e833e233</small></div>
-                </div>
-                <div class="fl w-30">
-                    <div class="fl tl w-100 db ph1 pb1">
-                        <div class="db w-100 f8 fl silver">Price <small>(NGN)</small></div> 
-                        <div class="db w-100 f5 fw6 fl near-black">{{humanNumber(record.Price)}}</div>
-                    </div>
-                    <div class="fl tl w-100 db ph1 pt1">
-                        <div class="db w-100 f8 fl silver">Market Cap <small>(NGN)</small></div>
-                        <div class="db w-100 f6 fw6 fl near-black">{{humanNumber(record.totalSupply *( record.Price))}}</div>
+
+                    <div class="pv2 fl tl w-50">
+                        <div class="ph3 pv1 fl w-100">
+                            <div class="db w-100 f8 fl silver">PRICE PER TOKEN</div> 
+                            <div class="db w-100 f7 fw5 fl">2,000.00</div>
+                        </div>
+                        <div class="ph3 pv1 fl w-100">
+                            <div class="db w-100 f8 fl silver">TOTAL NO OF TOKENS</div> 
+                            <div class="db w-100 f7 fw5 fl">5,000.00</div>
+                        </div>
+                        <div class="ph3 pv1 fl w-100">
+                            <div class="db w-100 f8 fl silver">MARKET CAP (N)</div> 
+                            <div class="db w-100 f7 fw5 fl">10,000,000.00</div>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <div class="fl w-100 tl ff b ttu mt4 mb3">
+                BUY TOKENS: {{record.Symbol}}
+            </div>
             
-            <div class="fl w-100 pv2 ph3 near-white tl" >
+            <div class="fl w-100 near-black tl" >
                 <div class=" cf w-100 center relative">
                     <notify :notifications="notifications" />
                 </div>
 
                 <div class="pv2 fl w-100 f6">
-                    <small class="tl fl w-100 pv1"> Pay with Naira: </small>
-                    <input type="text" v-model="buy.Fiat" placeholder="Enter Amount" class="pa2 ba b--white-10 bg-white-10 fw3 f6  fl white pa2 w-100 br2">
+                    <small class="tl fl w-100 pv1"> ENTER AMOUNT IN NIGERIAN NAIRA: </small>
+                    <input type="text" v-model="buy.Fiat" placeholder="" class="pa2 ba b--orange bg-white-10 fw3 f6  fl white pa2 w-100 br2">
                 </div>
                 <div class="pv2 fl w-100 f6">
-                    <small class="tl fl w-100 pv1"> Receive {{record.Symbol}} Tokens: </small>
-                    <input type="text" v-model="buy.Token" placeholder="Enter Amount" class="pa2 ba b--white-10 bg-white-10 fw3 f6  fl white pa2 w-100 br2">
+                    <small class="tl fl w-100 pv1"> TOKEN AMOUNT TO BE RECEIVED: </small>
+                    <input type="text" v-model="buy.Token" placeholder="" class="pa2 ba b--orange bg-white-10 fw3 f6  fl white pa2 w-100 br2">
                 </div>
                 <div class="pv2 fl w-100 f6">
-                    <small class="tl fl w-100 pv1"> Wallet Address: </small>
-                    <input type="text" v-model="buy.Address" readonly="readonly" placeholder="Enter Blockchain Address" class="pa2 ba b--white-10 bg-white-10 fw3 f7 fl white pa2 w-100 br2">
+                    <small class="tl fl w-100 pv1"> WALLET ADDRESS: </small>
+                    <input type="text" v-model="buy.Address" placeholder="" class="pa2 ba b--orange bg-white-10 fw3 f7 fl white pa2 w-100 br2">
                 </div>
                 
                 <div class="pv2 fl w-100 f6">
-                    <router-link class="link white bg-black-40 br2 f6 inline-flex items-center pa2 pointer" :to="{name:'marketplace-view',params:{id:$route.params.id}}"> 
-                        <i class="pr1 fal fa-times white fl "></i> 
+                    <router-link class="link near-black bg-light-gray br2 f6 inline-flex items-center pa2 pointer" :to="{name:'marketplace-view',params:{id:$route.params.id}}"> 
+                        <i class="pr1 fal fa-times fl "></i> 
                         Cancel
                     </router-link>
 
-                    <span class="fr link white bg-black-40 br2 center f6 inline-flex items-center pa2 pointer"> 
-                        <i class="pr1 fas fa-credit-card white fl "></i> Proceed
+                    <span class="fr link near-white bg-near-black br2 center f6 inline-flex items-center pa2 pointer"> 
+                        <i class="pr1 fas fa-credit-card fl "></i> Proceed
                     </span>
                 </div>
             </div>

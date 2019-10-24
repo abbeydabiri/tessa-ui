@@ -1,5 +1,5 @@
 <template>
-  <section class="vh-100 white w-100 center bg-black-10 mw8 " >
+  <section class="vh-100 white w-100 center bg-black-10 mw6 " >
     <app-header >
       <template>
         <h1 class="f4">Dashboard</h1>

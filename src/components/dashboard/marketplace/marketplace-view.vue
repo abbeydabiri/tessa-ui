@@ -1,85 +1,84 @@
 <template>
-    <div class="w-100 fl h-100 relative" style="">
+    <div class="w-100 fl h-100 relative ph3" style="">
 
-        <div class="fl w-100 bg-black-40" style="height:calc(100% - 48px)">
+        <div class="fl w-100 bg-white near-black" style="height:calc(100% - 48px)">
 
-            <div class="fl w-100 ph3 pv3 near-black bg-white">
-                <div class="fl w-70 ">
-                    <div class="fl tl w-auto h3 inline-flex items-center pr1"> 
-                        <img class="w3" :src="record.Image"/>
-                    </div>
-                    <div class="fl tl w-auto h3 inline-flex items-center ph1"> 
-                        <div class="w-100 fl fw6">
-                            {{record.Symbol}} <small class="db w-100 fl silver f8">{{record.Name}}</small>
+            <div class="fl w-100 ph3 near-black bg-white ba b--silver mt3">
+                <div class="fl w-100">
+                    <div class="fl w-50 dt" style="min-height:110px">
+                        <div class="dtc v-mid w-100">
+                            <img class="h3" :src="record.Image"/>
                         </div>
                     </div>
-                    <div class="f8 fl w-100"><small>0xa133D2e34A38b7d6454B08bd3AeAB1C0e833e233</small></div>
-                </div>
-                <div class="fl w-30">
-                    <div class="fl tl w-100 db ph1 pb1">
-                        <div class="db w-100 f8 fl silver">Price <small>(NGN)</small></div> 
-                        <div class="db w-100 f5 fw6 fl near-black">{{humanNumber(record.Price)}}</div>
+
+                    <div class="pv2 fl tl w-50">
+                        <div class="ph3 pv1 fl w-100">
+                            <div class="db w-100 f8 fl silver">PRICE PER TOKEN</div> 
+                            <div class="db w-100 f7 fw5 fl">2,000.00</div>
+                        </div>
+                        <div class="ph3 pv1 fl w-100">
+                            <div class="db w-100 f8 fl silver">TOTAL NO OF TOKENS</div> 
+                            <div class="db w-100 f7 fw5 fl">5,000.00</div>
+                        </div>
+                        <div class="ph3 pv1 fl w-100">
+                            <div class="db w-100 f8 fl silver">MARKET CAP (N)</div> 
+                            <div class="db w-100 f7 fw5 fl">10,000,000.00</div>
+                        </div>
                     </div>
-                    <div class="fl tl w-100 db ph1 pt1">
-                        <div class="db w-100 f8 fl silver">Market Cap <small>(NGN)</small></div>
-                        <div class="db w-100 f6 fw6 fl near-black">{{humanNumber(record.totalSupply *( record.Price))}}</div>
+                </div>
+
+                <div class="fl w-100">
+                    <div class="cf center w-100 bt b--silver"></div>
+                </div>
+
+                <div class="fl w-100">
+                    <div class="pv2 fl w-50">
+                        <div class="ph3 pv1 fl w-100">
+                            <div class="db w-100 f8 fl silver">Company RC</div> 
+                            <div class="db w-100 f7 fw5 fl">RC 264978</div>
+                        </div>
+                    </div>
+
+                    <div class="pv2 fl w-50">
+                        <div class="ph3 pv1 fl w-100">
+                            <div class="db w-100 f8 fl silver">Project Type</div> 
+                            <div class="db w-100 f7 fw5 fl">INFRASTRUCTURE </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="fl w-100">
-                <div class="pv2 fl w-60" >
-                    <div class="ph3 pv1 fl w-100">
-                        <div class="db w-100 f8 fl silver">Company Name</div> 
-                        <div class="db w-100 f7 fw5 fl near-white">Dangote Nigeria Limited</div>
-                    </div>
-                    <div class="ph3 pv1 fl w-100">
-                        <div class="db w-100 f8 fl silver">Token Supply / Max Supply</div> 
-                        <div class="db w-100 f7 fw5 fl near-white">{{humanNumber(record.totalSupply)}} / {{humanNumber(record.maxTotalSupply)}}</div>
-                    </div>
-                    
+            <div class="fl w-100 mv2"></div>
+
+
+            <div class="fl w-100 ph3 pt3 pb2 fw6 tc white bg-orange"> {{record.Name}} </div>
+
+            <div class="fl w-100 pa2 ba b--orange near-black bg-white overflow-y-scroll scrollbar tl" style="height:40vh">
+                In 2014, FBN Holdings Plc acquired 100% equity in Kakawa Discount House Limited, and subsequently secured approval to commence merchant banking operations as FBN Merchant Bank (now FBNQuest Merchant Bank). The acquisition served as a strategic fit into the FBN Holdings portfolio and created an institution with a stronger balance sheet and access to a wider universe of funding sources.
+
+                We are committed to finding innovative solutions for our client base of high net-worth individuals (HNIs), small and medium enterprises (SMEs), corporations, financial institutions and governments, catering to their diverse financial needs. Our distinctive heritage as an organisation allows us to leverage specialisation of the subsidiaries of our parent company to enhance delivery and provide world-class client solutions.
+
+                Our services include Coverage & Corporate Banking, Financial Advisory, Debt Capital Markets, Equity Capital Markets, Debt Solutions, Institutional Sales, Fixed Income Currency & Treasury and Wealth Management.
+
+            </div>
+
+            <div class="fl w-100 pv2 tc">
+                <div class="fl w-50 tl">
+                    <router-link class="link near-black bg-light-gray br2 f6 inline-flex items-center pa2 pointer" :to="{name:'marketplace-search'}"> 
+                        <i class="pr1 fal fa-caret-left fl "></i> 
+                        Back
+                    </router-link>
                 </div>
 
-                <div class="pv2 fl w-40" >
-                    <div class="ph3 pv1 fl w-100">
-                        <div class="db w-100 f8 fl silver">Company RC</div> 
-                        <div class="db w-100 f7 fw5 fl near-white">RC 978831</div>
-                    </div>
-                    <div class="ph3 pv1 fl w-100">
-                        <div class="db w-100 f8 fl silver">Project Type</div> 
-                        <div class="db w-100 f7 fw5 fl near-white">Infrastructure </div>
-                    </div>
+                <div class="fl w-50 tr">
+                    <router-link class="link near-white bg-near-black br2 center f6 inline-flex items-center pa2 pointer" :to="{name:'marketplace-buy',params:{id:$route.params.id}}"> 
+                        <i class="pr1 fas fa-shopping-basket near-white fr "></i> 
+                        Buy
+                    </router-link>
                 </div>
             </div>
-
-            <div class="fl w-100 ph3 pt3 pb2 fw6 tl near-black bg-white overflow-y-scroll scrollbar">
-                About {{record.Name}}
-            </div>
-
-            <div class="fl w-100 ph3 pb3 near-black bg-white overflow-y-scroll scrollbar tl" style="height:calc(100% - 227px)">
-                The  network is an open source, distributed, and community owned network used to facilitate cross-asset transfers of value. It aims to help facilitate cross-asset transfer of value at a fraction of a penny while aiming to be an open financial system that gives people of all income levels access to low-cost financial services.
-
-                The  network is an open source, distributed, and community owned network used to facilitate cross-asset transfers of value. It aims to help facilitate cross-asset transfer of value at a fraction of a penny while aiming to be an open financial system that gives people of all income levels access to low-cost financial services.
-
-                The  network is an open source, distributed, and community owned network used to facilitate cross-asset transfers of value. It aims to help facilitate cross-asset transfer of value at a fraction of a penny while aiming to be an open financial system that gives people of all income levels access to low-cost financial services.
-
-            </div>
-
         </div>
         
-        <div class="fl w-100 inline-flex items-center pv2 ph3 tc">
-            <router-link class="link white bg-black-40 br2 f6 inline-flex items-center pa2 pointer" :to="{name:'marketplace-search'}"> 
-                <i class="pr1 fal fa-caret-left white fl "></i> 
-                Back
-            </router-link>
-
-            <span class="w-100 tc">Token Details</span>
-
-            <router-link class="link white bg-black-40 br2 center f6 inline-flex items-center pa2 pointer" :to="{name:'marketplace-buy',params:{id:$route.params.id}}"> 
-                <i class="pr1 fas fa-shopping-basket white fl "></i> 
-                Buy
-            </router-link>
-        </div>
     </div>
 </template>
 

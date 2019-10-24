@@ -11,15 +11,15 @@
 
             <div class="fl w-100 dn bg-white" :class="{'db':curView=='identity'}">
                 <div class="fl w-100" style="min-height:14em;">
-                    <img src="@/assets/img/icon-signup.png" class="db center w-90 w-40-l" />
+                    <img src="@/assets/img/icon-signup.png" class="db center w-90" />
                 </div>
 
                 <div class="fl w-100"> 
                     <p class="f4 fw1 tracked black">Sign Up </p>
                 </div>
                 
-                <div class="w-40-l w-100 center pv2 ">
-                    <span class="dn" :class="{'db':curPage=='name'}">
+                <div class="w-100 center pv2 ">
+                    <span class="dn center w-80" :class="{'db':curPage=='name'}">
                         <namebox :name="name" @update="updateName"/>
                         <div class="fr w-100 pt3">
                             <router-link to="/signin" class="cf no-underline items-center inline-flex">
@@ -29,7 +29,7 @@
                         </div>
                     </span>
                     
-                    <span class="dn" :class="{'db':curPage=='mobile'}">
+                    <span class="dn center w-80" :class="{'db':curPage=='mobile'}">
                         <mobilebox :mobile="mobile" @update="updateMobile"/>
                         <div class="fr w-100 pt3" @click="curPage='name'">
                             <buttonsmall class="fl ml2" title="Go Back"/>

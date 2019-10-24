@@ -28,10 +28,12 @@
                 </router-link>
             </div>
 
-            <router-link class="fixed bg-black pa1 h3 w3 right-1 items-center  link white br-100 pointer" style="bottom:4em" :to="{name:'marketplace-new'}" > 
-                <i class=" fal fa-coins white f3 pt2"></i>
-                <div class="w-100 fl tc f7 ">Tokenize</div>
-            </router-link>
+            <div class="fixed center w-100 mw6 tr cf left-0 right-0 inline-flex items-center"  style="bottom:6em">
+                <router-link class="absolute right-1 tc bg-black pa1 h3 w3 link white br-100 pointer" :to="{name:'marketplace-new'}" > 
+                    <i class=" fal fa-coins white f3 pt2"></i>
+                    <div class="w-100 fl tc f7 ">Tokenize</div>
+                </router-link>
+            </div>
         </div>
 
     </div>

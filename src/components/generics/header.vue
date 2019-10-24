@@ -1,6 +1,6 @@
 <template>
     <section class="relative fl w-100">
-        <div style="top:1.8em" class="w-100 center cf fixed ph3 left-0 right-0 inline-flex items-center w-100">
+        <div style="top:1.8em" class="w-100 center cf mw6 fixed ph3 left-0 right-0 inline-flex items-center w-100">
             <span class="fl ph3 pointer" >
                 <i class="fa fa-bars f4 tr near-black" @click="toggleMenu"></i>
             </span>
@@ -15,7 +15,7 @@
         </div>
 
         <div class="fixed w-100 top-0 left-0 z-max">
-            <div class="w-100 vh-100 mw8 cf center absolute dn z-max top-0 left-0 right-0" :class="{'db':lMenu,'dn':!lMenu}" :style="{'background': 'url('+splashscreen+')','background-repeat': 'no-repeat', 'background-size': 'cover',}">
+            <div class="w-100 vh-100 mw6 cf center absolute dn z-max top-0 left-0 right-0" :class="{'db':lMenu,'dn':!lMenu}" :style="{'background': 'url('+splashscreen+')','background-repeat': 'no-repeat', 'background-size': 'cover',}">
                 <div class="vh-100 w-100 fl relative">
 
                     <i class="fal fa-times white absolute z-max right-1 top-1 f2 fw6" @click="toggleMenu"></i>
@@ -49,7 +49,7 @@
                                 
                             </div>
                             
-                            <div class="w-80 w-50-ns tc cf pv1 mw8 center fixed bottom-0 left-0 footer  inline-flex items-center">
+                            <div class="w-80 w-50-ns tc cf pv1 mw6 center fixed bottom-0 left-0 footer  inline-flex items-center">
                                 <router-link class="f5 f4-l link w-100 tl inline-flex items-center white pl2 tracked" to="/logout">
                                     <i class="fal fa-sign-out-alt fl ma1" id="fa-sign-out"></i>  Logout
                                 </router-link>

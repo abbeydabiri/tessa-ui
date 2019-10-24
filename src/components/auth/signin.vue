@@ -3,7 +3,7 @@
         <div class=" w-100 fl">
             <img src="@/assets/img/logo.png" class="db center h2" />
             <div class="fl w-100" style="min-height:14em;">
-                <img src="@/assets/img/icon-signin.png" class="db center w-90 w-40-l" />
+                <img src="@/assets/img/icon-signin.png" class="db center w-90" />
             </div>
         </div>
         <div class=" w-100  fl dt">
@@ -16,8 +16,8 @@
                     <notify :notifications="notifications" />
                 </div>
 
-                <div class="w-40-l w-100 center  pv2 ">
-                    <div class="dn" :class="{'db':!mobileHide}">
+                <div class="w-100 center pv2 ">
+                    <div class="dn center w-80" :class="{'db':!mobileHide}">
                         <mobilebox :mobile="mobile" @update="updateMobile"/>
 
                         <div class="cf center w-100">

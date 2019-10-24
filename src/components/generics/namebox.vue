@@ -1,6 +1,6 @@
 <template>
     <div class="fl w-100">
-        <div class=" inline-flex items-center bw1 center ba b--black">
+        <div class="w-100 inline-flex items-center bw1 center ba b--black">
             <div class="fl w-10 pl2">
                 <i class="pr1 fas fa-user black fl "></i> 
             </div>
