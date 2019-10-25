@@ -3,13 +3,13 @@
 
         <div class="fl w-100" style="height:calc(100%)">
 
-            <div class="fl w-100 near-black">
+            <div class="fl w-100 near-black ph2">
                 <div class="fl w-100 tl mt3 pt3 bt b--black">
                     <span class="near-black b" > 
                         CREATE TOKEN
                     </span>
 
-                    <router-link class="fr link near-black br2 center f6 inline-flex items-center pa2 pointer" :to="{name:'marketplace-search'}"> 
+                    <router-link class="fr link near-black br2 center f6 inline-flex items-center pv2 pointer" :to="{name:'marketplace-search'}"> 
                         <i class="pr1 fas fa-arrow-left black fl "></i>
                     </router-link>
                 </div>
@@ -22,8 +22,8 @@
 
                 <div class="fl w-60 ph2">
                     <div class="fl tl w-auto h3 inline-flex items-center pr1"> 
-                        <img :src="record.Icon" @error="record.Icon = tokenIcon" class="w3" @click="uploadImage('tokenIcon')" />
-                        <input type="file" class="dn f7" @change="uploadImageDisplay('Icon')" ref="tokenIcon" />
+                        <img :src="record.Icon" @error="record.Icon = tokenIcon" class="w3" @click="uploadImage('Icon')" />
+                        <input type="file" class="dn f7" @change="uploadImageDisplay('Icon')" ref="Icon" />
                     </div>
                     <div class="fl tl w-auto h3 inline-flex items-center ph1"> 
                         <div class="w-100 fl fw6">
@@ -119,9 +119,10 @@
             notifications:[],
             buy: {Fiat:"",Token:"", Address:""},
             record:{
-                Symbol:"-", Title:"-", ProjectCost:0, Deposit:0, Price:0, MaxTotalSupply:0, TotalSupply:0, Seed:0, Image:tokenIcon, 
+                Icon:"", Symbol:"-", Title:"-", ProjectCost:0, Deposit:0, Price:0, MaxTotalSupply:0, TotalSupply:0, Seed:0, Image:tokenIcon, 
             }, 
             isSave: true,
+            tokenIcon
         }},
         components: {
             notify
