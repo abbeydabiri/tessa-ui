@@ -3,26 +3,38 @@
 
         <div class="fl w-100 near-black " style="height:calc(100% - 48px)">
 
+            <div class="fl w-100 ph3 near-black">
+                <div class="fl w-100 tl mt3 pt3 bt b--black">
+                    <span class="near-black b" > 
+                        BUY TOKEN
+                    </span>
+
+                    <router-link class="fr link near-black br2 center f6 inline-flex items-center pa2 pointer" :to="{name:'marketplace-view', params:{id:$route.params.id}}"> 
+                        <i class="pr1 fas fa-arrow-left black fl "></i>
+                    </router-link>
+                </div>
+            </div>
+
             <div class="fl w-100 ph3 near-black bg-white ba b--silver mt3">
                 <div class="fl w-100">
                     <div class="fl w-50 dt" style="min-height:110px">
                         <div class="dtc v-mid w-100">
-                            <img class="h3" :src="record.Image"/>
+                            <img class="h3" @error="record.Icon = tokenIcon" :src="record.Icon" />
                         </div>
                     </div>
 
                     <div class="pv2 fl tl w-50">
                         <div class="ph3 pv1 fl w-100">
-                            <div class="db w-100 f8 fl silver">PRICE PER TOKEN</div> 
-                            <div class="db w-100 f7 fw5 fl">2,000.00</div>
+                            <div class="db w-100 f8 fl silver">TOKEN PRICE (₦)</div> 
+                            <div class="db w-100 f7 fw5 fl">{{humanNumber(record.Price)}}</div>
                         </div>
                         <div class="ph3 pv1 fl w-100">
-                            <div class="db w-100 f8 fl silver">TOTAL NO OF TOKENS</div> 
-                            <div class="db w-100 f7 fw5 fl">5,000.00</div>
+                            <div class="db w-100 f8 fl silver">TOKEN SUPPLY</div> 
+                            <div class="db w-100 f7 fw5 fl">{{humanNumber(record.MaxTotalSupply)}}</div>
                         </div>
                         <div class="ph3 pv1 fl w-100">
-                            <div class="db w-100 f8 fl silver">MARKET CAP (N)</div> 
-                            <div class="db w-100 f7 fw5 fl">10,000,000.00</div>
+                            <div class="db w-100 f8 fl silver">MARKET CAP (₦)</div> 
+                            <div class="db w-100 f7 fw5 fl">{{humanNumber(record.ProjectCost)}}</div>
                         </div>
                     </div>
                 </div>
@@ -51,13 +63,11 @@
                 </div>
                 
                 <div class="pv2 fl w-100 f6">
-                    <router-link class="link near-black bg-light-gray br2 f6 inline-flex items-center pa2 pointer" :to="{name:'marketplace-view',params:{id:$route.params.id}}"> 
-                        <i class="pr1 fal fa-times fl "></i> 
-                        Cancel
-                    </router-link>
-
-                    <span class="fr link near-white bg-near-black br2 center f6 inline-flex items-center pa2 pointer"> 
+                    <span v-if="isSave" class="fr link white bg-black br2 center f6 inline-flex items-center pa2 pointer" @click="save">
                         <i class="pr1 fas fa-credit-card fl "></i> Proceed
+                    </span>
+                    <span v-else class="fr link black bg-light-gray br2 center f6 inline-flex items-center pa2 pointer"> 
+                        <i class=" fas fa-spinner fa-pulse black fl "></i> &nbsp; Processing
                     </span>
                 </div>
             </div>
@@ -71,6 +81,7 @@
     import {humanNumber} from "@/common"
     import {checkRedirect} from "@/common"
     import notify from "@/components/generics/notify"
+    import tokenIcon from "@/assets/img/smartcontract.svg"
 
     export default {
         data() {return{
@@ -78,10 +89,10 @@
             record: [], notifications:[],
             buy: {Fiat:"",Token:"", Address:""},
             record:{
-                ID: 6, Symbol:"KOBO",Name:"Dangote Refinery",Price:2000, totalSupply:50000, maxTotalSupply:21000000,
-                Image:"https://files.bancor.network/0.1/images/communities?imageName=194daba0-2606-11e8-891a-85ca6815b23e.png", 
+                ID: 0, Price:0, ProjectCost:0, MaxTotalSupply:0, Icon: tokenIcon
             }, 
-            isFound: false,
+            isFound: false, isSave: true,
+            tokenIcon
         }},
         components: {
             notify
@@ -93,8 +104,27 @@
         },
         methods: {
             humanNumber,
-            calcBuy(){
-                
+            save(){
+                const app = this;
+                if (!app.isSave){
+                    return
+                }
+                app.isSave = false;
+                app.record.Seed = app.record.TotalSupply
+                HTTP.post(app.url, app.record, {withCredentials: true})
+                .then((response) => {
+                    app.notifications.push(response.data)
+                    app.$parent.$parent.notifications.push(response.data)
+
+                    setTimeout(function(){ checkRedirect(response.data) },500)
+                    if (response.data.Body !== null && response.data.Body !== undefined ) {
+                        setTimeout(app.$router.push({name:"marketplace-view",params:{id:response.data.Body}}),1500)
+                    }
+                    app.isSave = true;
+                }).catch((e) => {
+                    console.log(e);
+                    app.isSave = true;
+                })
             },
             getRecord (id) {
                 const app = this;

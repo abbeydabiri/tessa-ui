@@ -19,11 +19,11 @@
                 <div class=" cf w-100 center relative">
                     <notify :notifications="notifications" />
                 </div>
-                
-                <div class="fl w-70 ph2">
+
+                <div class="fl w-60 ph2">
                     <div class="fl tl w-auto h3 inline-flex items-center pr1"> 
-                        <img :src="record.Image" @error="record.Image = tokenIcon" class="w3" @click="uploadImage('tokenIcon')" />
-                        <input type="file" class="dn f7" @change="uploadImageDisplay('Image')" ref="tokenIcon" />
+                        <img :src="record.Icon" @error="record.Icon = tokenIcon" class="w3" @click="uploadImage('tokenIcon')" />
+                        <input type="file" class="dn f7" @change="uploadImageDisplay('Icon')" ref="tokenIcon" />
                     </div>
                     <div class="fl tl w-auto h3 inline-flex items-center ph1"> 
                         <div class="w-100 fl fw6">
@@ -32,14 +32,14 @@
                     </div>
                     <div class="db w-100 fl f8 pt1 tl i">click to upload</div>
                 </div>
-                <div class="fl w-30">
+                <div class="fl w-40">
                     <div class="fl tl w-100 db ph1 pb1">
-                        <div class="db w-100 f8 fl silver">Price <small>(NGN)</small></div> 
-                        <div class="db w-100 f5 fw6 fl near-black">{{humanNumber(record.Price)}}</div>
+                        <div class="db w-100 f8 fl silver">Token Supply</div> 
+                        <div class="db w-100 f5 fw6 fl near-black">{{humanNumber(record.MaxTotalSupply)}}</div>
                     </div>
                     <div class="fl tl w-100 db ph1 pt1">
-                        <div class="db w-100 f8 fl silver">Market Cap <small>(NGN)</small></div>
-                        <div class="db w-100 f6 fw6 fl near-black">{{humanNumber(record.Deposit * record.Price)}}</div>
+                        <div class="db w-100 f8 fl silver">Tokens Issued</div>
+                        <div class="db w-100 f6 fw6 fl near-black">{{humanNumber(record.TotalSupply)}}</div>
                     </div>
                 </div>
 
@@ -49,7 +49,7 @@
                 </div>
                 <div class="pv2 ph1 fl w-40 f6">
                     <small class="tl fl w-100 pv1"> Company RC: </small>
-                    <input type="text" v-model="record.CompanyRC" placeholder="" class="pa2 ba b--orange bg-white fw3 f6 fl near-black pa2 w-100">
+                    <input type="text" v-model="record.RC" placeholder="" class="pa2 ba b--orange bg-white fw3 f6 fl near-black pa2 w-100">
                 </div>
 
                 <div class="pv2 ph1 fl w-60 f6">
@@ -68,28 +68,32 @@
                 </div>
                 <div class="pv2 ph1 fl w-40 f6">
                     <small class="tl fl w-100 pv1"> Project Cost:  <small>(NGN)</small>: </small>
-                    <input type="text" v-model="record.Cost" placeholder="" @keyup="calcPrice" class="pa2 ba b--orange bg-white fw3 f6 fl near-black pa2 w-100">
+                    <input type="number" pattern="\d*" v-model.number="record.ProjectCost" placeholder="" @keyup="calcMaxTotalSupply" class="pa2 ba b--orange bg-white fw3 f6 fl near-black pa2 w-100">
                 </div>
 
                 <div class="pv2 ph1 fl w-60 f6">
-                    <small class="tl fl w-100 pv1"> Total Token Supply: </small>
-                    <input type="text" v-model="record.totalSupply" placeholder="" @keyup="calcPrice" class="pa2 ba b--orange bg-white fw3 f6 fl near-black pa2 w-100">
+                    <small class="tl fl w-100 pv1"> Your Deposit <small>(NGN)</small>: </small>
+                    <input type="number" pattern="\d*" v-model.number="record.Deposit" placeholder=""  class="pa2 ba b--orange bg-white fw3 f6 fl near-black pa2 w-100">
                 </div>
                 <div class="pv2 ph1 fl w-40 f6">
-                    <small class="tl fl w-100 pv1"> Your Deposit <small>(NGN)</small>: </small>
-                    <input type="text" v-model="record.Deposit" placeholder=""  class="pa2 ba b--orange bg-white fw3 f6  fl white pa2 w-100">
+                    <small class="tl fl w-100 pv1"> Cost per Token <small>(NGN)</small>: </small>
+                    <input type="number" pattern="\d*" v-model.number="record.Price" placeholder="" @keyup="calcMaxTotalSupply"  class="pa2 ba b--orange bg-white fw3 f6  fl near-black pa2 w-100">
+                </div>
+
+
+                <div class="pv2 ph1 fl w-100 f6">
+                    <small class="tl fl w-100 pv1"> Company Description: </small>
+                    <textarea rows="3" v-model="record.Description" class="pa2 ba b--orange bg-white fw3 f6  fl near-black pa2 w-100"></textarea>
                 </div>
 
                 
                 
                 <div class="pv2 fl w-100 f6 ph1">
-                    <router-link class="link white bg-black-40 br2 f6 inline-flex items-center pa2 pointer" :to="{name:'marketplace-search'}"> 
-                        <i class="pr1 fal fa-times white fl "></i> 
-                        Cancel
-                    </router-link>
-
-                    <span class="fr link white bg-black br2 center f6 inline-flex items-center pa2 pointer"> 
+                    <span v-if="isSave" class="fr link white bg-black br2 center f6 inline-flex items-center pa2 pointer" @click="save">
                         <i class="pr1 fas fa-coins white fl "></i> Create Token
+                    </span>
+                    <span v-else class="fr link black bg-light-gray br2 center f6 inline-flex items-center pa2 pointer"> 
+                        <i class=" fas fa-spinner fa-pulse black fl "></i> &nbsp; Creating
                     </span>
                 </div>
             </div>
@@ -115,9 +119,9 @@
             notifications:[],
             buy: {Fiat:"",Token:"", Address:""},
             record:{
-                Symbol:"-", Title:"-", Cost:0, Deposit:0, Price:0, totalSupply:0, Image:tokenIcon, 
+                Symbol:"-", Title:"-", ProjectCost:0, Deposit:0, Price:0, MaxTotalSupply:0, TotalSupply:0, Seed:0, Image:tokenIcon, 
             }, 
-            isFound: false,
+            isSave: true,
         }},
         components: {
             notify
@@ -128,16 +132,53 @@
         },
         methods: {
             humanNumber,
-            calcPrice(){
-                if (this.record.totalSupply > 0 && this.record.Cost > 0){
-                    this.record.Price = this.record.Cost / this.record.totalSupply
+            calcMaxTotalSupply(){
+                if (this.record.ProjectCost > 0 && this.record.Price > 0){
+                    this.record.MaxTotalSupply = parseInt((this.record.ProjectCost / this.record.Price).toFixed(0))
                 }
+
+                if (this.record.Deposit > 0 && this.record.Price > 0){
+                    this.record.TotalSupply = parseInt((this.record.Deposit / this.record.Price).toFixed(0))
+                }
+
+                if (this.record.Deposit < 1 || this.record.Price < 1){
+                    this.record.TotalSupply = 0;
+                    this.record.MaxTotalSupply = 0;
+                }
+
+                // if (this.record.MaxTotalSupply > 0 && this.record.ProjectCost > 0){
+                //     this.record.Price = this.record.ProjectCost / this.record.MaxTotalSupply
+                // }
             },
             uploadImageDisplay(field) {
                 displayImage(event, this, field)
             },
             uploadImage(imageRef) {
                 this.$refs[imageRef].click()
+            },
+            save() {
+                const app = this;
+                if (!app.isSave){
+                    return
+                }
+                app.isSave = false;
+                app.record.Seed = app.record.TotalSupply
+                HTTP.post(app.url, app.record, {withCredentials: true})
+                .then((response) => {
+                    app.notifications.push(response.data)
+                    app.$parent.$parent.notifications.push(response.data)
+
+                    setTimeout(function(){ checkRedirect(response.data) },500)
+                    if (response.data.Body !== null && response.data.Body !== undefined ) {
+                        if(response.data.Code == 200){
+                            app.record = {Symbol:"-", Title:"-", ProjectCost:0, Deposit:0, Price:0, MaxTotalSupply:0, Icon:tokenIcon,  }
+                        }
+                    }
+                    app.isSave = true;
+                }).catch((e) => {
+                    console.log(e);
+                    app.isSave = true;
+                })
             },
         },
     }

@@ -1,49 +1,62 @@
 <template>
     <div class="w-100 fl h-100 relative" style="">
 
-        <div class="fl w-100 inline-flex items-center pv2 ph3 tc">
-            <router-link class="link white bg-black-40 br2 f6 inline-flex items-center pa2 pointer" :to="{name:'contacts-search'}"> 
-                <i class="pr1 fas fa-times white fl "></i> 
-                Close
-            </router-link>
+        <div class="fl w-100 ph3 near-black">
+            <div class="fl w-100 tl mt3 pt3 bt b--black">
+                <span class="near-black b" > 
+                    VIEW CONTACT
+                </span>
 
-            <span class="w-100 tc">View Contact</span>
-
-            <router-link class="link white bg-black-40 br2 center f6 inline-flex items-center pa2 pointer" :to="{name:'contacts-edit'}"> 
-                <i class="pr1 fas fa-pen white fl "></i> 
-                Edit
-            </router-link>
+                <router-link class="fr link near-black br2 center f6 inline-flex items-center pa2 pointer" :to="{name:'contacts-search'}"> 
+                    <i class="pr1 fas fa-arrow-left black fl "></i>
+                </router-link>
+            </div>
         </div>
 
-        <div class="pa3 fl w-100 dt overflow-y-scroll bg-black-40 scrollbar" style="height:calc(100% - 48px)">
+        <div class="pa3 fl w-100 dt overflow-y-scroll scrollbar" style="height:calc(100% - 48px)">
             
-                <div class="dtc v-top tc white w-100">
+                <div class="dtc v-top tc near-black w-100">
                     
 
                     <div class="pv2 fl w-100">
-                        <input type="text" v-model="record.Firstname" disabled="disabled" placeholder="First name" class="pa2 ba b--white-10 bg-white-10 fw3 f6  fl white pa2 w-100 br2">
+                        <small class="tl fl w-100 pv1"> Contact Firstname: </small>
+                        <input type="text" v-model="record.Firstname" disabled="disabled" placeholder="First name" class="pa2 ba b--orange bg-white-10 fw3 f6  fl near-black pa2 w-100 br2">
                     </div>
 
                     <div class="pv2 fl w-100">
-                        <input type="text" v-model="record.Lastname" disabled="disabled" placeholder="Last name" class="pa2 ba b--white-10 bg-white-10 fw3 f6  fl white pa2 w-100 br2">
+                        <small class="tl fl w-100 pv1"> Contact Lastname: </small>
+                        <input type="text" v-model="record.Lastname" disabled="disabled" placeholder="Last name" class="pa2 ba b--orange bg-white-10 fw3 f6  fl near-black pa2 w-100 br2">
                     </div>
 
                     <div class="pv2 fl w-100">
-                        <input type="text" v-model="record.Mobile" disabled="disabled" placeholder="Mobile" class="pa2 ba b--white-10 bg-white-10 fw3 f6  fl white pa2 w-100 br2">
+                        <small class="tl fl w-100 pv1"> Contact Mobile: </small>
+                        <input type="text" v-model="record.Mobile" disabled="disabled" placeholder="Mobile" class="pa2 ba b--orange bg-white-10 fw3 f6  fl near-black pa2 w-100 br2">
                     </div>
 
                     <div class="pv2 fl w-100">
-                        <input type="text" v-model="record.Email" disabled="disabled" placeholder="Email" class="pa2 ba b--white-10 bg-white-10 fw3 f6  fl white pa2 w-100 br2">
+                        <small class="tl fl w-100 pv1"> Contact Email: </small>
+                        <input type="text" v-model="record.Email" disabled="disabled" placeholder="Email" class="pa2 ba b--orange bg-white-10 fw3 f6  fl near-black pa2 w-100 br2">
                     </div>
 
                     <div class="pv2 fl w-100">
-                        <input type="text" v-model="record.Address" disabled="disabled" placeholder="Account" class="pa2 ba b--white-10 bg-white-10 fw3 f6  fl white pa2 w-100 br2">
+                        <small class="tl fl w-100 pv1"> Contact Address: </small>
+                        <input type="text" v-model="record.Address" disabled="disabled" placeholder="Account" class="pa2 ba b--orange bg-white-10 fw3 f6  fl near-black pa2 w-100 br2">
                     </div>
 
                     <div class="pv2 fl w-100">
-                        <textarea v-model="record.Description" disabled="disabled" placeholder="About Contact" class="h3 pa2 ba b--white-10 bg-white-10 fw3 f6  fl white pa2 w-100 br2"></textarea>
+                        <small class="tl fl w-100 pv1"> About Contact: </small>
+                        <textarea v-model="record.Description" disabled="disabled" placeholder="About Contact" class="h3 pa2 ba b--orange bg-white-10 fw3 f6  fl near-black pa2 w-100 br2"></textarea>
                     </div>
 
+
+                    <div class="pv2 fl w-100 f6 ph1">
+                    
+                        <router-link class="link fr white bg-black br2 center f6 inline-flex items-center pa2" :to="{name:'contacts-edit'}">
+                            <i class="pr1 fas fa-pen white fl "></i> 
+                            Edit
+                        </router-link>
+                        
+                    </div>
                 </div>
                 
         </div>

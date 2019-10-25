@@ -1,6 +1,6 @@
 <template>
     <section>
-        <nav class="fixed center pv1 w-100 mw6 tc cf bottom-0 left-0 right-0 footer bg-footer inline-flex items-center">
+        <nav class="fixed center pv1 w-100 mw6_mod tc cf bottom-0 left-0 right-0 footer bg-footer inline-flex items-center">
             <router-link class="white f4 f3-l link dim dib w-third tc flex items-center tc" to="/dashboard/wallets/request">
                 <i class="fal fa-qrcode"></i>
                 <span class="f7 db">Request</span>

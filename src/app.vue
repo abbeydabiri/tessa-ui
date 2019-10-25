@@ -1,20 +1,21 @@
 <template>
     <section>
-        <div class="w-100 h-100 pt5 fixed mw6 top-0 right-0 center left-0 z-0" style="background:#DD6A01;">
-
+        
+        <div class="w-100 h-100 pt5 fixed mw6_mod top-0 right-0 center left-0 z-0" style="background:#DD6A01">
             <div class="fl w-30">&nbsp;</div>
             <div class="fl w-70 tc">
                 <img src="assets/img/star.png" class="absolute top-1"/>
             </div>
         </div>
-        <div class="bg-white w-100 h-50 pt5 fixed mw6 bottom-0 right-0 center left-0 z-0"></div>
-        <div class="center mw6 w-100 ph3 relative">
+        <div class="bg-white w-100 h-50 fixed mw6_mod bottom-0 right-0 center left-0 z-0"></div>
+        <div class="center mw6_mod w-100 ph3 relative">
             <div class="bg-white fl w-100 mt4 br5 br--top tc z-1 pt4">
                 <div class="scrollbar tessa-height overflow-y-auto" style="backgroundx:url(assets/img/bg-white.png); background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover;">
                     <router-view class="near-black"></router-view>
                 </div>
             </div>
         </div>
+
     </section>
 </template>
 
@@ -38,6 +39,8 @@
     body {
         font-family: "Quicksand", sans-serif;
     } */
+
+    .mw6_mod{max-width:24em}
 
     .br5 {
         border-radius: 2rem; 

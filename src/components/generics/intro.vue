@@ -21,9 +21,13 @@
 		created(){
 			const that = this  
 			setTimeout(function () {
-				that.$router.push({path:"/wallet"})
-				// that.$router.push({path:"/signin"})
-			}, 3000);
+                var username = window.localStorage.getItem('username');
+                if(username !== null && username.length == 11) {
+                    that.$router.push({path:"/signin"})
+                } else {
+                    that.$router.push({path:"/signup"})
+                }
+			}, 2500);
 		}
 	}
 </script>

@@ -7,22 +7,22 @@
                 <div class="fl w-100">
                     <div class="fl w-50 dt" style="min-height:110px">
                         <div class="dtc v-mid w-100">
-                            <img class="h3" :src="record.Image"/>
+                            <img class="h3" @error="record.Icon = tokenIcon" :src="record.Icon" />
                         </div>
                     </div>
 
                     <div class="pv2 fl tl w-50">
                         <div class="ph3 pv1 fl w-100">
-                            <div class="db w-100 f8 fl silver">PRICE PER TOKEN</div> 
-                            <div class="db w-100 f7 fw5 fl">2,000.00</div>
+                            <div class="db w-100 f8 fl silver">TOKEN PRICE (₦)</div> 
+                            <div class="db w-100 f7 fw5 fl">{{humanNumber(record.Price)}}</div>
                         </div>
                         <div class="ph3 pv1 fl w-100">
-                            <div class="db w-100 f8 fl silver">TOTAL NO OF TOKENS</div> 
-                            <div class="db w-100 f7 fw5 fl">5,000.00</div>
+                            <div class="db w-100 f8 fl silver">TOKEN SUPPLY</div> 
+                            <div class="db w-100 f7 fw5 fl">{{humanNumber(record.MaxTotalSupply)}}</div>
                         </div>
                         <div class="ph3 pv1 fl w-100">
-                            <div class="db w-100 f8 fl silver">MARKET CAP (N)</div> 
-                            <div class="db w-100 f7 fw5 fl">10,000,000.00</div>
+                            <div class="db w-100 f8 fl silver">MARKET CAP (₦)</div> 
+                            <div class="db w-100 f7 fw5 fl">{{humanNumber(record.ProjectCost)}}</div>
                         </div>
                     </div>
                 </div>
@@ -35,14 +35,14 @@
                     <div class="pv2 fl w-50">
                         <div class="ph3 pv1 fl w-100">
                             <div class="db w-100 f8 fl silver">Company RC</div> 
-                            <div class="db w-100 f7 fw5 fl">RC 264978</div>
+                            <div class="db w-100 f7 fw5 fl">{{record.RC}}</div>
                         </div>
                     </div>
 
                     <div class="pv2 fl w-50">
                         <div class="ph3 pv1 fl w-100">
                             <div class="db w-100 f8 fl silver">Project Type</div> 
-                            <div class="db w-100 f7 fw5 fl">INFRASTRUCTURE </div>
+                            <div class="db w-100 f7 fw5 fl">{{record.Project}}</div>
                         </div>
                     </div>
                 </div>
@@ -51,15 +51,10 @@
             <div class="fl w-100 mv2"></div>
 
 
-            <div class="fl w-100 ph3 pt3 pb2 fw6 tc white bg-orange"> {{record.Name}} </div>
+            <div class="fl w-100 ph3 pt3 pb2 fw6 tc white bg-orange"> {{record.Company}} </div>
 
-            <div class="fl w-100 pa2 ba b--orange near-black bg-white overflow-y-scroll scrollbar tl" style="height:40vh">
-                In 2014, FBN Holdings Plc acquired 100% equity in Kakawa Discount House Limited, and subsequently secured approval to commence merchant banking operations as FBN Merchant Bank (now FBNQuest Merchant Bank). The acquisition served as a strategic fit into the FBN Holdings portfolio and created an institution with a stronger balance sheet and access to a wider universe of funding sources.
-
-                We are committed to finding innovative solutions for our client base of high net-worth individuals (HNIs), small and medium enterprises (SMEs), corporations, financial institutions and governments, catering to their diverse financial needs. Our distinctive heritage as an organisation allows us to leverage specialisation of the subsidiaries of our parent company to enhance delivery and provide world-class client solutions.
-
-                Our services include Coverage & Corporate Banking, Financial Advisory, Debt Capital Markets, Equity Capital Markets, Debt Solutions, Institutional Sales, Fixed Income Currency & Treasury and Wealth Management.
-
+            <div class="fl w-100 pa2 ba b--orange near-black bg-white overflow-y-scroll scrollbar tl" style="height:calc(100vh - 400px)">
+                {{record.Description}}
             </div>
 
             <div class="fl w-100 pv2 tc">
@@ -87,16 +82,17 @@
     import {humanNumber} from "@/common"
     import {checkRedirect} from "@/common"
     import notify from "@/components/generics/notify"
+    import tokenIcon from "@/assets/img/smartcontract.svg"
 
     export default {
         data() {return{
             url: "/api/tokens", 
             notifications:[],
             record:{
-                ID: 6, Symbol:"DANS",Name:"Dangote Refinery",Price:2000, totalSupply:50000, maxTotalSupply:21000000,
-                Image:"https://files.bancor.network/0.1/images/communities?imageName=194daba0-2606-11e8-891a-85ca6815b23e.png", 
+                ID: 0, Price:0, ProjectCost:0, MaxTotalSupply:0, Icon: tokenIcon
             }, 
             isFound: false,
+            tokenIcon
         }},
         components: {
             notify
@@ -116,6 +112,9 @@
                     if (response.data.Body !== null && response.data.Body !== undefined ) {
                         if(response.data.Body.ID == id){
                             app.record = response.data.Body
+                            if (app.record.Icon == "") {
+                                app.record.Icon = app.tokenIcon
+                            }
                             app.isFound = true
                         }
                     }
