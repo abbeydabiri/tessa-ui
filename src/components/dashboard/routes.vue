@@ -45,11 +45,11 @@
 
     export default {
         children: [
-            { path: 'wallets', component: walletsComponent, children:walletsComponent.children},
             { path: 'settings', component: settingsComponent, children:settingsComponent.children},
             { path: 'transactions', component: transactionsComponent, children:transactionsComponent.children},
             { path: 'contacts', component: contactsComponent, children:contactsComponent.children},
-            { alias:'', path: 'marketplace', component: marketplaceComponent, children:marketplaceComponent.children},
+            { path: 'marketplace', component: marketplaceComponent, children:marketplaceComponent.children},
+            { alias:'', path: 'wallets', component: walletsComponent, children:walletsComponent.children},
         ],
 
         data() {return{

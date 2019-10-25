@@ -50,54 +50,7 @@
             
             url: "/api/tokens", 
             search: {text: "", field: "Title", limit: 50, page:1, skip: 0, filter:{}},
-            recordList:[
-                // { 
-                //     ID: 1, Symbol:"BKPT",Name:"Tessa",Price:100,totalSupply:10000,
-                //     Icon:"https://storage.googleapis.com/bancor-prod-file-store/Icons/communities/aea83e97-13a3-4fe7-b682-b2a82299cdf2.png",
-                // },
-            ],
-            recordListOLD:[
-                { 
-                    ID: 1, Symbol:"BKPT",Name:"Tessa",Price:100,totalSupply:10000,
-                    Icon:"https://storage.googleapis.com/bancor-prod-file-store/Icons/communities/aea83e97-13a3-4fe7-b682-b2a82299cdf2.png",
-                },
-                {
-                    ID: 2, Symbol:"LCC",Name:"Lekki Tolls",Price:120,totalSupply:10000,
-                    Icon:"https://storage.googleapis.com/bancor-prod-file-store/Icons/communities/aea83e97-13a3-4fe7-b682-b2a82299cdf2.png",
-                },
-                {
-                    ID: 3, Symbol:"EKO",Name:"Eko Atlantic",Price:301,totalSupply:10000,
-                    Icon: "https://files.bancor.network/0.1/Icons/communities?IconName=Aragon.png&IconWidth=400",
-                },
-                {
-                    ID: 4, Symbol:"DAN",Name:"Dangote Refinery",Price:100,totalSupply:10000,
-                    Icon: "https://files.bancor.network/0.1/Icons/communities?IconName=Flixxo.png&IconWidth=400", 
-                },
-                { 
-                    ID: 5, Symbol:"TOMA",Name:"Tomato Jos",Price:230,totalSupply:10000,
-                    Icon:"https://storage.googleapis.com/bancor-prod-file-store/Icons/communities/aea83e97-13a3-4fe7-b682-b2a82299cdf2.png",
-                },
-                {
-                    ID: 6, Symbol:"KOBO",Name:"Kobo360",Price:2000,totalSupply:10000,
-                    Icon:"https://files.bancor.network/0.1/Icons/communities?IconName=194daba0-2606-11e8-891a-85ca6815b23e.png", 
-                },
-                {
-                    ID: 7, Symbol:"NGN",Name:"Naira",Price:2000,totalSupply:10000,
-                    Icon:"https://files.bancor.network/0.1/Icons/communities?IconName=194daba0-2606-11e8-891a-85ca6815b23e.png", 
-                },
-                {
-                    ID: 8, Symbol:"BTC",Name:"Bitcoin",Price:20000,totalSupply:10000,
-                    Icon:"https://storage.googleapis.com/bancor-prod-file-store/Icons/communities/aea83e97-13a3-4fe7-b682-b2a82299cdf2.png",
-                },
-                {
-                    ID: 9, Symbol:"ETH",Name:"Ethereum",Price:2000,totalSupply:10000,
-                    Icon: "https://files.bancor.network/0.1/Icons/communities?IconName=Aragon.png&IconWidth=400",
-                },
-                {
-                    ID: 10, Symbol:"LTC",Name:"Lite Coin",Price:2000,totalSupply:10000,
-                    Icon: "https://files.bancor.network/0.1/Icons/communities?IconName=Flixxo.png&IconWidth=400", 
-                },
-            ],
+            recordList:[],
             tokenIcon
         }},
         components: {},

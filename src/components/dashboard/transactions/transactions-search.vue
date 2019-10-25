@@ -6,14 +6,19 @@
         </div>
 
         <div class="fl w-100 overflow-y-scroll scrollbar" style="height:calc(100% - 50px)">
-            <router-link class="f6 fl w-100 link near-black fl bt b--white-10 pa3 f5 hover-bg-light-gray pointer" v-for="(contact, index) in recordList" :key="index" :to="{name:'contacts-view',params:{id:contact.ID}}"> 
-                <span class="w-60 fl tl"> {{contact.Fullname}} </span>
-                <span class="w-40 fl tr"> {{contact.Mobile}} </span>
+            <router-link class="f6 fl w-100 link near-black fl bb b--near-white pv2 f5 pointer" v-for="(record, index) in recordList" :key="index" to="{name:'transactions-view',params:{id:record.ID}}">
+                <div class="fl w-100 ph3">
+                    <div class="fl w-10 tc">
+                        <span class="inline-flex items-center v-mid h2">
+                            <i class="fas f2" :class="record.Class"></i>
+                        </span> 
+                    </div>
 
-                <div class="w-100 fl tc"> 
-                    <small class=""> {{contact.Address}} </small>
+                    <div class="fl w-90 h2 ph2">
+                        <span class="w-100 fl tl"> <small class="fw6">₦{{record.Amount}} </small> {{record.Narration}} </span>
+                        <span class="w-100 fl tl f8"> 9/25/2019 at 10:53 </span>    
+                    </div>
                 </div>
-                
             </router-link>
         </div>
     </div>
@@ -28,7 +33,26 @@
         data() {return{
             url: "/api/transactions", 
             search: {text: "", field: "Fullname", limit: 50, page:1, skip: 0, filter:{}},
-            recordList:[],
+            recordList:[
+                {ID:0, Class:"fa-arrow-alt-square-right orange", Narration:"sent to Abbey", Symbol:"JJC", Amount:"0000"},
+                {ID:0, Class:"fa-arrow-alt-square-right orange", Narration:"sent to Fibi", Symbol:"JJC", Amount:"0000"},
+                {ID:0, Class:"fa-arrow-alt-square-left green", Narration:"received from Temi", Symbol:"JJC", Amount:"0000"},
+                {ID:0, Class:"fa-arrow-alt-square-right orange", Narration:"sent to Temi", Symbol:"JJC", Amount:"0000"},
+                {ID:0, Class:"fa-arrow-alt-square-left green", Narration:"received from Kemi", Symbol:"JJC", Amount:"0000"},
+                {ID:0, Class:"fa-arrow-alt-square-left green", Narration:"received from Ada", Symbol:"JJC", Amount:"0000"},
+                {ID:0, Class:"fa-arrow-alt-square-right orange", Narration:"sent to 08079623414", Symbol:"JJC", Amount:"0000"},
+                {ID:0, Class:"fa-arrow-alt-square-right orange", Narration:"sent to 08079723123", Symbol:"JJC", Amount:"0000"},
+                {ID:0, Class:"fa-arrow-alt-square-left green", Narration:"received from Ifeanyi", Symbol:"JJC", Amount:"0000"},
+                {ID:0, Class:"fa-arrow-alt-square-right orange", Narration:"sent to Davina", Symbol:"JJC", Amount:"0000"},
+                {ID:0, Class:"fa-arrow-alt-square-right orange", Narration:"sent to Ogo", Symbol:"JJC", Amount:"0000"},
+                {ID:0, Class:"fa-arrow-alt-square-left green", Narration:"recieved from Femi", Symbol:"JJC", Amount:"0000"},
+                {ID:0, Class:"fa-arrow-alt-square-right orange", Narration:"sent to Bayo", Symbol:"JJC", Amount:"0000"},
+                {ID:0, Class:"fa-arrow-alt-square-left green", Narration:"received from Damola", Symbol:"JJC", Amount:"0000"},
+                {ID:0, Class:"fa-arrow-alt-square-left green", Narration:"received from Nsikan", Symbol:"JJC", Amount:"0000"},
+                {ID:0, Class:"fa-arrow-alt-square-right orange", Narration:"sent to Dili", Symbol:"JJC", Amount:"0000"},
+                {ID:0, Class:"fa-arrow-alt-square-right orange", Narration:"sent to Aishat", Symbol:"JJC", Amount:"0000"},
+                {ID:0, Class:"fa-arrow-alt-square-left green", Narration:"received from Folake", Symbol:"JJC", Amount:"0000"},
+            ],
             tokenIcon
         }},
         components: {},
