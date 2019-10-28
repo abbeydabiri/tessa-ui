@@ -23,7 +23,7 @@
                         <namebox :name="name" @update="updateName"/>
                         <div class="fr w-100 pt3">
                             <router-link to="/signin" class="cf no-underline items-center inline-flex">
-                                <p class="near-black f7 fl tl">Do you have an account? </p>
+                                <p class="near-black f8 fl tl">Do you have an account? </p>
                                 <buttonsmall class="fr ml3" title="Sign In"/>
                             </router-link>
                         </div>

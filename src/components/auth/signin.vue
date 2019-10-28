@@ -22,7 +22,7 @@
 
                         <div class="cf center w-100">
                             <router-link to="/signup" class="cf no-underline items-center inline-flex mt3">
-                                <p class="near-black f7 fl tl">Don't have a wallet yet? </p>
+                                <p class="near-black f8 fl tl">Don't have a wallet yet? </p>
                                 <buttonsmall class="fr ml3" title="Setup Wallet"/>
                             </router-link>
                         </div>
