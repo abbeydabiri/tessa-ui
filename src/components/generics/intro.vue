@@ -25,7 +25,7 @@
                 if(username !== null && username.length == 11) {
                     that.$router.push({path:"/signin"})
                 } else {
-                    that.$router.push({path:"/signup"})
+                    that.$router.push({path:"/wallet"})
                 }
 			}, 2500);
 		}

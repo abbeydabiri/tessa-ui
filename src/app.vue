@@ -54,7 +54,7 @@
     .min-h-100 {  min-height:  100%; }
     
     .min-height {min-height:568px}
-    .tessa-height{height:calc(100vh - 5em);width:100%}
+    .tessa-height{height:calc(100vh - 120px);width:100%}
 
     .vh-40 {  height:  40%; }
     .vh-60 {  height:  60%; }

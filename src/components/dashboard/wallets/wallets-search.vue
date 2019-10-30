@@ -13,7 +13,7 @@
                         <img class="w3" @error="record.Icon = tokenIcon" :src="record.Icon"/>
                     </div>
                     <div class="fl tr w-80 h3  ph1">
-                        <span class="fl w-100 f2 tr">{{humanNumber(record.Seed)}} <span class="fw6 f5">{{record.Symbol}}</span></span>
+                        <span class="fl w-100 f2 tr">{{humanNumber(record.Seed)}}  <span class="fw6 f5">{{record.Symbol}}</span></span>
                         <span class="fl w-100 f8 itr"><span class="f7">₦</span> {{humanNumber(record.Seed * record.Price)}}</span>
                     </div>
                 </router-link>
