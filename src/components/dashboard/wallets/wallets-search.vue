@@ -31,7 +31,7 @@
 
     export default {
         data() {return{
-            url: "/api/tokens", 
+            url: "/api/accounttokens", 
             search: {text: "", field: "Title", limit: 50, page:1, skip: 0, filter:{}},
             recordList:[],
             tokenIcon

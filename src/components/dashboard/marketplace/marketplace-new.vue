@@ -129,7 +129,10 @@
         },
         created (){
             var profile = JSON.parse(window.localStorage.getItem('profile'));
-            this.buy.Address =  profile.Address
+            if (window.localStorage.getItem('profile') !== null) {
+                this.buy.Address =  profile.Address
+            }
+            
         },
         methods: {
             humanNumber,

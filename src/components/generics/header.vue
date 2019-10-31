@@ -106,9 +106,9 @@
     methods: {
         toggleMenu() { 
             this.lMenu = !this.lMenu
-            // if (window.localStorage.getItem('profile') === null) {
-            //     this.$router.push({path:"/signin"})
-            // }
+            if (window.localStorage.getItem('profile') === null) {
+                this.$router.push({path:"/signin"})
+            }
             this.profile = JSON.parse(window.localStorage.getItem('profile'));
         },
         toggleNotification() { this.lNotification = !this.lNotification },
