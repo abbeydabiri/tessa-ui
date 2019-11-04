@@ -51,15 +51,15 @@
 
                 <div class="pv2 fl w-100 f6">
                     <small class="tl fl w-100 pv1"> ENTER AMOUNT IN NIGERIAN NAIRA: </small>
-                    <input type="text" v-model="buy.Fiat" placeholder="" class="pa2 ba b--orange bg-white-10 fw3 f6  fl white pa2 w-100 br2">
+                    <input type="number" pattern="\d*" @keyup="calcToken" v-model="buy.Fiat" placeholder="" class="pa2 ba b--orange bg-white-10 fw3 f6  fl near-black pa2 w-100 br2">
                 </div>
                 <div class="pv2 fl w-100 f6">
                     <small class="tl fl w-100 pv1"> TOKEN AMOUNT TO BE RECEIVED: </small>
-                    <input type="text" v-model="buy.Token" placeholder="" class="pa2 ba b--orange bg-white-10 fw3 f6  fl white pa2 w-100 br2">
+                    <input type="number" pattern="\d*" @keyup="calcFiat" v-model="buy.Token" placeholder="" class="pa2 ba b--orange bg-white-10 fw3 f6  fl near-black pa2 w-100 br2">
                 </div>
                 <div class="pv2 fl w-100 f6">
                     <small class="tl fl w-100 pv1"> WALLET ADDRESS: </small>
-                    <input type="text" v-model="buy.Address" placeholder="" class="pa2 ba b--orange bg-white-10 fw3 f7 fl white pa2 w-100 br2">
+                    <input type="text" v-model="buy.Address" placeholder="" class="pa2 ba b--orange bg-white-10 fw3 f7 fl near-black pa2 w-100 br2">
                 </div>
                 
                 <div class="pv2 fl w-100 f6">
@@ -87,7 +87,7 @@
         data() {return{
             url: "/api/tokens", 
             record: [], notifications:[],
-            buy: {Fiat:"",Token:"", Address:""},
+            buy: {Fiat:0, Token:0, Address:""},
             record:{
                 ID: 0, Price:0, ProjectCost:0, MaxTotalSupply:0, Icon: tokenIcon
             }, 
@@ -104,25 +104,66 @@
         },
         methods: {
             humanNumber,
+            calcFiat(){
+                if (this.record.Price > 0){
+                    if (this.buy.Token > 0){
+                        this.buy.Fiat = (this.buy.Token * this.record.Price).toFixed(2)
+                    }
+                }
+            },
+            calcToken(){
+                if (this.record.Price > 0){
+                    if (this.buy.Fiat > 0){
+                        this.buy.Token = (this.buy.Fiat / this.record.Price).toFixed(2)
+                    }
+                }
+            },
             save(){
                 const app = this;
                 if (!app.isSave){
                     return
                 }
                 app.isSave = false;
-                app.record.Seed = app.record.TotalSupply
-                HTTP.post(app.url, app.record, {withCredentials: true})
+
+                //make a call to accounttokens
+                var accountToken = {
+                    Title: app.record.Title,
+                    TokenID: app.record.ID,
+                }
+
+                HTTP.post("/api/accounttokens", accountToken, {withCredentials: true})
                 .then((response) => {
                     app.notifications.push(response.data)
                     app.$parent.$parent.notifications.push(response.data)
 
                     setTimeout(function(){ checkRedirect(response.data) },500)
                     if (response.data.Body !== null && response.data.Body !== undefined ) {
-                        setTimeout(app.$router.push({name:"marketplace-view",params:{id:response.data.Body}}),1500)
+                        if(response.data.Code == 200){
+                            //create a transaction and save
+                            var transaction = {
+                                Title: "Token Purchase",
+                                TokenID: app.record.ID,
+                                Amount: app.buy.Token,
+                                FromAddress: app.record.Address,
+                                ToAddress: app.buy.Address,
+                            }
+                            HTTP.post("/api/transactions", transaction, {withCredentials: true})
+                            .then((response) => {
+                                app.notifications.push(response.data)
+                                app.$parent.$parent.notifications.push(response.data)
+
+                                setTimeout(function(){ checkRedirect(response.data) },500)
+                                if (response.data.Body !== null && response.data.Body !== undefined ) {
+                                    if(response.data.Code == 200){
+                                        setTimeout(app.$router.push({name:"wallet-search"}),1500)
+                                    }
+                                }
+                                app.isSave = true;
+                            }).catch((e) => { app.isSave = true; })
+                            //create a transaction and save
+                        }
                     }
-                    app.isSave = true;
                 }).catch((e) => {
-                    console.log(e);
                     app.isSave = true;
                 })
             },
@@ -139,6 +180,7 @@
                             app.isFound = true
                         }
                     }
+
                 }).catch((e) => { console.log(e) })
             },
         }

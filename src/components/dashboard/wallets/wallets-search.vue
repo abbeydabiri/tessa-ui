@@ -51,6 +51,7 @@
                 HTTP.post(app.url+'/search', app.search,{withCredentials: true}).then((response) => {
                     if (response.data.Body !== null && response.data.Body !== undefined ) {
                         app.recordList = response.data.Body
+                        console.log(app.recordList)
                     }
                     setTimeout(function(){ checkRedirect(response.data) },500)
                 }).catch((e) => { console.log(e) })
