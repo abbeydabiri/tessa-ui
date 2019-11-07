@@ -4,7 +4,7 @@
         <div class="fl w-100" style="height:calc(100%)">
 
             <div class="fl w-100 near-black ph2">
-                <div class="fl w-100 tl mt3 pt3 bt b--black">
+                <div class="fl w-100 pt3 tl bt b--black">
                     <span class="near-black b" > 
                         CREATE TOKEN
                     </span>

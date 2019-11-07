@@ -1,9 +1,8 @@
 <template>
-    <div class="center absolute top-0 right-0 left-0 mw6 w-100 ">
-        <div class="center mw8"  :style="{'background': 'url('+splashscreen+')','background-repeat': 'no-repeat', 'background-size': 'cover',}">
-            <article class="dt center  min-vh-100 w-100">
-
-                <div class="dtc v-mid f6 tc white overflow-hidden">
+    <div class="center absolute tessa-height top-0 right-0 left-0 mw6 w-100 bg-red">
+        <div class="center mw8 "  :style="{'background': 'url('+splashscreen+')','background-repeat': 'no-repeat', 'background-size': 'cover',}">
+            <article class="dt center w-100 tessa-height">
+                <div class="dtc v-mid f6 tc white" >
                     <img src="@/assets/img/logo-white.png" class="h3" />
                 </div>
                 

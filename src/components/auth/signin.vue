@@ -1,13 +1,13 @@
 <template>
-    <section class="h-100">
-        <div class=" w-100 fl">
+    <section class="h-100 tc">
+        <div class=" w-100 fl pt3">
             <img src="@/assets/img/logo.png" class="db center h2" />
             <div class="fl w-100" style="min-height:14em;">
                 <img src="@/assets/img/icon-signin.png" class="db center w-90" />
             </div>
         </div>
         <div class=" w-100  fl dt">
-            <div class="dtc v-top tc bg-white">
+            <div class="dtc v-top bg-white">
                 <div class="fl w-100"> 
                     <p class="f4 fw1 tracked black">Sign In </p>
                 </div>

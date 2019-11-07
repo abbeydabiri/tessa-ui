@@ -1,22 +1,31 @@
 <template>
-    <section>
+
         
-        <div class="w-100 h-100 pt5 fixed mw6_mod top-0 right-0 center left-0 z-0" style="background:#DD6A01">
-            <div class="fl w-30">&nbsp;</div>
-            <div class="fl w-70 tc">
-                <img src="assets/img/star.png" class="absolute top-1"/>
-            </div>
-        </div>
-        <div class="bg-white w-100 h-50 fixed mw6_mod bottom-0 right-0 center left-0 z-0"></div>
-        <div class="center mw6_mod w-100 ph3 relative">
-            <div class="bg-white fl w-100 mt4 br5 br--top tc z-1 pt4">
-                <div class="scrollbar tessa-height overflow-y-auto" style="backgroundx:url(assets/img/bg-white.png); background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover;">
-                    <router-view class="near-black"></router-view>
+        <section class="dt w-100 bg-near-black">
+            <div class="dtc v-mid w-100 vh-100  ">
+                
+                <div class="center mw6_mod w-100 relative bg-white tessa-height overflow-x-hidden">
+
+                    <div class="w-100 top-0 tessa-height absolute" >
+                        <div class="w-100 h-50 fl" style="background:#DD6A01">
+                            <div class="fl w-30">&nbsp;</div>
+                            <div class="fl w-70 tc">
+                                <img src="assets/img/star.png" class="absolute top-1"/>
+                            </div>
+                        </div>
+                        <div class="bg-white w-100 h-50 fl"></div>
+                    </div>
+
+                    <div class="z-1 tessa-height absolute top-0 w-100 ph3">
+                        <div class="bg-white h-100 w-100 tessa-inner-height br5 br--top">
+                            <router-view class="near-black"></router-view>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-        </div>
-
-    </section>
+        </section>
+    
 </template>
 
 <!-- App specific objects  -->
@@ -40,7 +49,7 @@
         font-family: "Quicksand", sans-serif;
     } */
 
-    .mw6_mod{max-width:24em}
+    .mw6_mod{max-width:26em}
 
     .br5 {
         border-radius: 2rem; 
@@ -53,9 +62,26 @@
     .min-h-75 {  min-height:  75%; }
     .min-h-100 {  min-height:  100%; }
     
-    .min-height {min-height:568px}
-    .tessa-height{height:calc(100vh - 120px);width:100%}
+    .tessa-inner-height{height:calc(100vh);width:100%;max-height:calc(51em - 30px);margin-top:30px}
+    .tessa-height{height:calc(100vh);width:100%;max-height:calc(51em)}
 
     .vh-40 {  height:  40%; }
     .vh-60 {  height:  60%; }
+    
+
+    /* Orientation Lock */
+    @media screen and (min-width: 320px) and (max-width: 830px) and (orientation: landscape) {
+        html {
+            transform: rotate(-90deg);
+            transform-origin: left top;
+            width: 100vh;
+            overflow-x: hidden;
+            position: absolute;
+            top: 100vh;
+            left: 0;
+        }
+
+        .tessa-height{height:200vh;max-height:46em}
+        .tessa-inner-height{height:200vh;max-height:46em}
+    }
 </style>

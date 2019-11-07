@@ -5,7 +5,7 @@
             <input type="text" v-model="search.text" placeholder="Search  by token name or symbol" class=" ba b--white-10 bg-near-white fw3 f6 tracked i fl near-black pa2 w-100" @keyup="searchRecords">
         </div>
 
-        <div class="fl w-100 bg-white near-black" style="">
+        <div class="fl w-100 bg-white near-black pt3 " style="">
 
             <div class="fl w-100 f8 ph3"> 
                 <div class="fl tl w-10 pv2"></div>
@@ -13,7 +13,7 @@
                 <div class="fl tl w-30 pv2">TOKEN PRICE (₦)</div>
                 <div class="fl tl w-30 pv2">MARKET CAP (₦)</div>
             </div>
-            <div class="f7 overflow-y-scroll scrollbar w-100 fl" style="height:calc(100% - 29px)"> 
+            <div class="f7 overflow-y-scroll scrollbar w-100 fl" style="height:calc(100vh - 360px)"> 
                 <router-link class="bt b--near-white fl w-100 ph3 near-black" v-for="(record, index) in recordList" :key="index" :to="{name:'marketplace-view',params:{id:record.ID}}">
                     <div class="fl tl w-10 h3 inline-flex items-center ph1"> 
                         <img class="w3" @error="record.Icon = tokenIcon" :src="record.Icon" />
@@ -28,7 +28,7 @@
                 </router-link>
             </div>
 
-            <div class="fixed center w-100 mw6_mod tr cf left-0 right-0 inline-flex items-center"  style="bottom:6em">
+            <div class="absolute center w-100 mw6_mod tr cf left-0 right-0 inline-flex items-center"  style="bottom:6em">
                 <router-link class="absolute right-1 tc bg-black pa1 h3 w3 link white br-100 pointer" :to="{name:'marketplace-new'}" > 
                     <i class=" fal fa-coins white f3 pt2"></i>
                     <div class="w-100 fl tc f7 ">Tokenize</div>

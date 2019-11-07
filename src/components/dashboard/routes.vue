@@ -1,7 +1,7 @@
 <template>
-    <section class="h-100" >
-        <appheader :notifications="notifications" :title="headertitle"/>
-        <router-view class="h-100"></router-view>
+    <section class="h-100 fl w-100" >                                
+        <appheader class="w-100 fl" :notifications="notifications" :title="headertitle"/>
+        <router-view class="h-100 scrollbar overflow-y-auto" style="margin-top:52px;height:calc(100vh);width:100%;max-height:calc(50em - 135px);"></router-view>
         <appfooter/>
     </section>
 </template>

@@ -1,7 +1,7 @@
 <template>
     <div class="w-100 fl h-100 relative ph3" style="">
 
-        <div class="fl w-100 bg-white near-black" style="height:calc(100% - 48px)">
+        <div class="fl w-100 bg-white near-black pt3 " style="height:calc(100% - 48px)">
 
             <div class="fl w-100 ph3 near-black bg-white ba b--silver mt3">
                 <div class="fl w-100">
@@ -53,7 +53,7 @@
 
             <div class="fl w-100 ph3 pt3 pb2 fw6 tc white bg-orange"> {{record.Company}} </div>
 
-            <div class="fl w-100 pa2 ba b--orange near-black bg-white overflow-y-scroll scrollbar tl" style="height:calc(100vh - 400px)">
+            <div class="fl w-100 pa2 ba b--orange near-black bg-white overflow-y-scroll scrollbar tl" style="height:calc(100% - 400px)">
                 {{record.Description}}
             </div>
 

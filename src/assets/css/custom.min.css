@@ -231,6 +231,7 @@ div::-webkit-scrollbar-thumb {
     100% {
         opacity: 0;
         -webkit-transform: translateX(-100%);
+        display:none !important;
     }
 }
 
@@ -251,6 +252,7 @@ div::-webkit-scrollbar-thumb {
     100% {
         opacity: 0;
         -moz-transform: translateX(-100%);
+        display:none !important;
     }
 }
 
@@ -271,6 +273,7 @@ div::-webkit-scrollbar-thumb {
     100% {
         opacity: 0;
         -o-transform: translateX(-100%);
+        display:none !important;
     }
 }
 
@@ -291,6 +294,7 @@ div::-webkit-scrollbar-thumb {
     100% {
         opacity: 0;
         transform: translateX(-100%);
+        display:none !important;
     }
 }
 
@@ -305,11 +309,11 @@ div::-webkit-scrollbar-thumb {
     -ms-animation-fill-mode: both;
     -o-animation-fill-mode: both;
     animation-fill-mode: both;
-    -webkit-animation-duration: 1s;
-    -moz-animation-duration: 1s;
-    -ms-animation-duration: 1s;
-    -o-animation-duration: 1s;
-    animation-duration: 1s;
+    -webkit-animation-duration: 0.3s;
+    -moz-animation-duration: 0.3s;
+    -ms-animation-duration: 0.3s;
+    -o-animation-duration: 0.3s;
+    animation-duration: 0.3s;
     display: inline-block;
 }
 
@@ -432,6 +436,7 @@ div::-webkit-scrollbar-thumb {
     100% {
         opacity: 0;
         -webkit-transform: translateX(100%);
+        display:none !important;
     }
 }
 
@@ -452,6 +457,7 @@ div::-webkit-scrollbar-thumb {
     100% {
         opacity: 0;
         -moz-transform: translateX(100%);
+        display:none !important;
     }
 }
 
@@ -472,6 +478,7 @@ div::-webkit-scrollbar-thumb {
     100% {
         opacity: 0;
         -o-transform: translateX(100%);
+        display:none !important;
     }
 }
 
@@ -492,6 +499,7 @@ div::-webkit-scrollbar-thumb {
     100% {
         opacity: 0;
         transform: translateX(100%);
+        display:none !important;
     }
 }
 

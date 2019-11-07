@@ -14,7 +14,7 @@
         </div>
         <div class=" w-100 min-h-25 fl dt">
             <div class="dtc v-top tc">
-                <router-link :to="infoList[curSlide].link" class="fl w-100 bg-pink pv2 center right-0 left-0 pointer link">
+                <router-link :to="infoList[curSlide].link" class="fl w-100 pv2 center right-0 left-0 pointer link">
                     <genericbutton :title="infoList[curSlide].button"/>
                 </router-link>
             </div>

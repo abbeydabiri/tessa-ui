@@ -1,10 +1,10 @@
 <template>
     <div class="w-100 fl h-100 relative" style="">
 
-        <div class="fl w-100 bg-white near-black" style="height:calc(100% - 48px)">
+        <div class="fl w-100 bg-white near-black pt3 " style="height:calc(100% - 48px)">
 
             <div class="fl w-100 near-black ph3">
-                <div class="fl w-100 tl mt3 pt3 bt b--black">
+                <div class="fl w-100 tl  bt b--black">
                     <img class="w2" @error="record.Icon = tokenIcon" :src="record.Icon"/>
                     
 
@@ -39,7 +39,7 @@
                 <div class="pv2 fl w-50 fw6 tr f7"> SEE ALL </div>
             </div>
 
-            <div class="fl w-100  near-black bg-white overflow-y-scroll scrollbar tl" style="height:calc(100vh - 400px)">
+            <div class="fl w-100  near-black bg-white overflow-y-scroll scrollbar tl" style="height:calc(100% - 400px)">
                 <router-link class="f6 fl w-100 link near-black fl bb b--near-white pv2 f5 pointer" v-for="(record, index) in recordList" :key="index" to="{name:'transactions-view',params:{id:record.ID}}">
                     <div class="fl w-100 ph3">
                         <div class="fl w-10 tc">

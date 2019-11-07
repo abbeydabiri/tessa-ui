@@ -1,26 +1,31 @@
 <template>
-    <section class="relative fl w-100">
-        <div style="top:1.8em" class="w-100 center cf mw6_mod fixed ph3 left-0 right-0 inline-flex items-center w-100">
-            <span class="fl ph3 pointer" >
-                <i class="fa fa-bars f4 tr near-black" @click="toggleMenu"></i>
-            </span>
+    <section class=" fl w-100 ">
+        <div style="" class="w-100 z-max center mw6_mod fixed ph4 left-0 right-0 w-100">
 
-            <span class="center b ">
-                <h1 class="f4 tracked near-black">{{title}}</h1>
-            </span>
+            <div class="w-100 inline-flex items-center">
+                
+                    <span class="fl pr3 pointer" >
+                        <i class="fa fa-bars f4 tr near-black" @click="toggleMenu"></i>
+                    </span>
 
-            <span class="fr ph3 pointer" >
-                <i class="fa fa-bell f3 tr near-black" @click="toggleNotification"></i>
-            </span>
+                    <span class="center b bg-white">
+                        <h1 class="f4 tracked near-black">{{title}}</h1>
+                    </span>
+
+                    <span class="fr pl3 pointer" >
+                        <i class="fa fa-bell f3 tr near-black" @click="toggleNotification"></i>
+                    </span>
+                
+            </div>
         </div>
 
-        <div class="fixed w-100 top-0 left-0 z-max">
-            <div class="w-100 vh-100 mw6_mod cf center absolute dn z-max top-0 left-0 right-0" :class="{'db':lMenu,'dn':!lMenu}" :style="{'background': 'url('+splashscreen+')','background-repeat': 'no-repeat', 'background-size': 'cover',}">
-                <div class="vh-100 w-100 fl relative">
+        <div class="absolute top-0 w-100 left-0 z-max">
+            <div class="w-100 tessa-height mw6_mod cf center absolute dn z-max top-0 left-0 right-0" :class="{'db':lMenu,'dn':!lMenu}" :style="{'background': 'url('+splashscreen+')','background-repeat': 'no-repeat', 'background-size': 'cover',}">
+                <div class="tessa-height w-100 fl relative">
 
                     <i class="fal fa-times white absolute z-max right-1 top-1 f2 fw6" @click="toggleMenu"></i>
-                    <div class="mw8 cf w-100 " :class="{'slideInLeft':lMenu,'slideOutLeft':!lMenu}">
-                        <nav class="vh-100 bg-main w-80 w-50-ns relative" > 
+                    <div class="mw8 cf w-80 " :class="{'slideInLeft':lMenu,'slideOutLeft':!lMenu}">
+                        <nav class="tessa-height bg-main w-80 w-50-ns relative" > 
 
                             <div class="cf tc pa3 h3  center white w-100">
                                 <div class="fl tl w-80">
@@ -60,9 +65,9 @@
                 </div>
             </div>
 
-            <div class="bg-black-80 w-100 vh-100 dn absolute z-max top-0 right-0 overflow-x-scroll pv2"  :class="{'slideInRight':lNotification,'slideOutRight':!lNotification}">
-                <nav class="w-100 center cf fixed top-0 left-0  inline-flex items-center w-100 h3 bg-black-20">
-                    <span class="fl ph3" >
+            <div class="z-max bg-black-80 w-100 tessa-height dn absolute z-max top-0 right-0 overflow-x-scroll pv2"  :class="{'slideInRight':lNotification,'slideOutRight':!lNotification}">
+                <nav class="w-100 center cf fixed top-0 left-0 inline-flex items-center w-100 h3 bg-black-20">
+                    <span class="fl ph4 pt5" >
                         <i class="fa fa-times f3 tr white" @click="notificationsClear"></i>
                     </span>
 
@@ -70,13 +75,14 @@
                         <h1 class="f4">Notifications</h1>
                     </span>
 
-                    <span class="fr ph3" >
+                    <span class="fr ph4 pt5" >
                         <i class="fa fa-arrow-alt-right f3 tr white" @click="toggleNotification"></i>
                     </span>
                 </nav>
                  <div class="h3"></div>
-
-                <notify class="mv2" :notifications="notifications"></notify>
+                <div class="w-100 fl ph2">
+                    <notify class="mv2" :notifications="notifications"></notify>
+                </div>
             </div>
         </div>
       

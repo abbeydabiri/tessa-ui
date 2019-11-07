@@ -1,6 +1,6 @@
 <template>
-    <section class="h-100">
-        <div class=" w-100 fl" >
+    <section class="h-100 tc">
+        <div class=" w-100 fl pt3" >
             <img src="@/assets/img/logo.png" class="db center h2" />
         </div>
         <div class="w-100 fl">
@@ -21,9 +21,9 @@
                 <div class="w-100 center pv2 ">
                     <span class="dn center w-80" :class="{'db':curPage=='name'}">
                         <namebox :name="name" @update="updateName"/>
-                        <div class="fr w-100 pt3">
+                        <div class="fr w-100 pt3 tr">
                             <router-link to="/signin" class="cf no-underline items-center inline-flex">
-                                <p class="near-black f8 fl tl">Do you have an account? </p>
+                                <p class="near-black f8 fl">Do you have an account? </p>
                                 <buttonsmall class="fr ml3" title="Sign In"/>
                             </router-link>
                         </div>
