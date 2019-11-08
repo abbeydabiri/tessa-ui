@@ -18,7 +18,7 @@
 
                     <div class="z-1 tessa-height absolute top-0 w-100 ph3">
                         <div class="bg-white h-100 w-100 tessa-inner-height br5 br--top">
-                            <router-view class="near-black"></router-view>
+                            <router-view class="near-black "></router-view>
                         </div>
                     </div>
 
@@ -62,6 +62,7 @@
     .min-h-75 {  min-height:  75%; }
     .min-h-100 {  min-height:  100%; }
     
+    .tessa-app-body{margin-top:52px;height:calc(100vh);width:100%;max-height:calc(51em - 135px)}
     .tessa-inner-height{height:calc(100vh);width:100%;max-height:calc(51em - 30px);margin-top:30px}
     .tessa-height{height:calc(100vh);width:100%;max-height:calc(51em)}
 
@@ -84,4 +85,20 @@
         .tessa-height{height:200vh;max-height:46em}
         .tessa-inner-height{height:200vh;max-height:46em}
     }
+
+    /* Adjust for Potrait sizes */
+    @media screen and (min-width: 320px) and (max-width: 830px) and (orientation: portrait) {
+        .tessa-app-body{max-height:calc(100vh - 135px)}
+        .tessa-height{max-height:calc(100vh)}
+        .tessa-inner-height{max-height:calc(100vh - 30px);}
+    }
+
+    @media screen and (min-height:650px) and (max-height: 860px) and (min-width: 1000px) {
+        .tessa-app-body{max-height:calc(100vh - 135px)}
+        .tessa-height{max-height:calc(100vh)}
+        .tessa-inner-height{max-height:calc(100vh - 30px);}
+    }
+
+    
+    
 </style>

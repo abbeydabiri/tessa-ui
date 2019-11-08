@@ -2,7 +2,6 @@
     <div class="w-100 fl h-100 relative" style="">
 
         <div class="fl w-100" style="height:calc(100%)">
-
             <div class="fl w-100 near-black ph2">
                 <div class="fl w-100 pt3 tl bt b--black">
                     <span class="near-black b" > 

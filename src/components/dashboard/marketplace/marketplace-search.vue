@@ -13,7 +13,7 @@
                 <div class="fl tl w-30 pv2">TOKEN PRICE (₦)</div>
                 <div class="fl tl w-30 pv2">MARKET CAP (₦)</div>
             </div>
-            <div class="f7 overflow-y-scroll scrollbar w-100 fl" style="height:calc(100vh - 360px)"> 
+            <div class="f7 overflow-y-scroll scrollbar w-100 fl h-100" style="height:calc(100vh - 20em);max-height:48em"> 
                 <router-link class="bt b--near-white fl w-100 ph3 near-black" v-for="(record, index) in recordList" :key="index" :to="{name:'marketplace-view',params:{id:record.ID}}">
                     <div class="fl tl w-10 h3 inline-flex items-center ph1"> 
                         <img class="w3" @error="record.Icon = tokenIcon" :src="record.Icon" />

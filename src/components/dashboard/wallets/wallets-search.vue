@@ -7,7 +7,7 @@
 
         <div class="fl w-100 bg-white near-black  bt b--near-white " style="">
 
-            <div class="f7 overflow-y-scroll scrollbar bg-red w-100 fl" style="height:calc(100vh - 360px)"> 
+            <div class="f7 overflow-y-scroll scrollbar w-100 fl" style="height:calc(100% - 56px)"> 
                 <router-link class="bb b--near-white fl w-100 ph3 pv1 near-black" v-for="(record, index) in recordList" :key="index" :to="{name:'wallets-view',params:{id:record.ID}}">
                     <div class="fl tl w-20 h3 inline-flex items-center ph1"> 
                         <img class="w3" @error="record.Token.Icon = tokenIcon" :src="record.Token.Icon"/>
@@ -32,13 +32,15 @@
     export default {
         data() {return{
             url: "/api/accounttokens", 
-            search: {text: "", field: "Title", limit: 50, page:1, skip: 0, filter:{WalletID:0}},
+            search: {text: "", field: "Title", limit: 50, page:1, skip: 0, filter:{WalletID:"0"}},
             recordList:[],
             tokenIcon
         }},
         components: {},
         created() {
             this.searchRecords()
+            var profile = JSON.parse(window.localStorage.getItem('profile'));
+            this.search.filter.WalletID =  profile.WalletID.toString()
         },
         methods: {
             humanNumber,

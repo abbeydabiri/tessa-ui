@@ -1,8 +1,8 @@
 <template>
     <div class="w-100 fl h-100 relative" style="">
 
-        <div class="fl w-100 near-black">
-            <div class="fl w-100 tl  bt b--black">
+        <div class="fl w-100 near-black ph3">
+            <div class="fl w-100 tl pt3 bt b--black">
                 <span class="near-black b" > 
                     VIEW CONTACT
                 </span>

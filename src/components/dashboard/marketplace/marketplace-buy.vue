@@ -51,11 +51,11 @@
 
                 <div class="pv2 fl w-100 f6">
                     <small class="tl fl w-100 pv1"> ENTER AMOUNT IN NIGERIAN NAIRA: </small>
-                    <input type="number" pattern="\d*" @keyup="calcToken" v-model="buy.Fiat" placeholder="" class="pa2 ba b--orange bg-white-10 fw3 f6  fl near-black pa2 w-100 br2">
+                    <input type="number" pattern="\d*" @keyup="calcToken" v-model.number="buy.Fiat" placeholder="" class="pa2 ba b--orange bg-white-10 fw3 f6  fl near-black pa2 w-100 br2">
                 </div>
                 <div class="pv2 fl w-100 f6">
                     <small class="tl fl w-100 pv1"> TOKEN AMOUNT TO BE RECEIVED: </small>
-                    <input type="number" pattern="\d*" @keyup="calcFiat" v-model="buy.Token" placeholder="" class="pa2 ba b--orange bg-white-10 fw3 f6  fl near-black pa2 w-100 br2">
+                    <input type="number" pattern="\d*" @keyup="calcFiat" v-model.number="buy.Token" placeholder="" class="pa2 ba b--orange bg-white-10 fw3 f6  fl near-black pa2 w-100 br2">
                 </div>
                 <div class="pv2 fl w-100 f6">
                     <small class="tl fl w-100 pv1"> WALLET ADDRESS: </small>
@@ -107,19 +107,27 @@
             calcFiat(){
                 if (this.record.Price > 0){
                     if (this.buy.Token > 0){
-                        this.buy.Fiat = (this.buy.Token * this.record.Price).toFixed(2)
+                        this.buy.Fiat = parseFloat(this.buy.Token * this.record.Price).toFixed(2)
                     }
                 }
             },
             calcToken(){
                 if (this.record.Price > 0){
                     if (this.buy.Fiat > 0){
-                        this.buy.Token = (this.buy.Fiat / this.record.Price).toFixed(2)
+                        this.buy.Token = parseFloat(this.buy.Fiat / this.record.Price).toFixed(2)
                     }
                 }
             },
             save(){
                 const app = this;
+
+                if (parseFloat(app.buy.Token) <= 0){
+                    var error = {Code:500, Message:"Amount is required"}
+                    app.notifications.push(error)
+                    app.$parent.$parent.notifications.push(error)
+                    return
+                }
+ 
                 if (!app.isSave){
                     return
                 }
@@ -143,7 +151,7 @@
                             var transaction = {
                                 Title: "Token Purchase",
                                 TokenID: app.record.ID,
-                                Amount: app.buy.Token,
+                                Amount: parseFloat(app.buy.Token),
                                 FromAddress: app.record.Address,
                                 ToAddress: app.buy.Address,
                             }
@@ -155,7 +163,7 @@
                                 setTimeout(function(){ checkRedirect(response.data) },500)
                                 if (response.data.Body !== null && response.data.Body !== undefined ) {
                                     if(response.data.Code == 200){
-                                        setTimeout(app.$router.push({name:"wallet-search"}),1500)
+                                        setTimeout(app.$router.push({name:"wallets-search"}),1500)
                                     }
                                 }
                                 app.isSave = true;
