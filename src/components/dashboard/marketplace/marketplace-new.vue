@@ -174,7 +174,8 @@
                     setTimeout(function(){ checkRedirect(response.data) },500)
                     if (response.data.Body !== null && response.data.Body !== undefined ) {
                         if(response.data.Code == 200){
-                            app.record = {Symbol:"-", Title:"-", ProjectCost:0, Deposit:0, Price:0, MaxTotalSupply:0, Icon:tokenIcon,  }
+                            app.record = { Icon:"", Symbol:"-", Title:"-", ProjectCost:0, Deposit:0, Price:0, MaxTotalSupply:0, TotalSupply:0, Seed:0, Image:tokenIcon, }
+                            
                         }
                     }
                     app.isSave = true;

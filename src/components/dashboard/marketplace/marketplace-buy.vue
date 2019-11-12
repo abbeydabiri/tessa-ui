@@ -163,7 +163,7 @@
                                 setTimeout(function(){ checkRedirect(response.data) },500)
                                 if (response.data.Body !== null && response.data.Body !== undefined ) {
                                     if(response.data.Code == 200){
-                                        setTimeout(app.$router.push({name:"wallets-search"}),1500)
+                                        setTimeout(function(){app.$router.push({name:"wallets-search"})},2500)
                                     }
                                 }
                                 app.isSave = true;

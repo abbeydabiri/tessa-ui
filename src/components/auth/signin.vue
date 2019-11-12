@@ -169,6 +169,19 @@
                 app.notifications = [];
                 app.notifications.push(response.data)
                 if (response.data.Body !== null && response.data.Body !== undefined) {
+
+                    //Get Dashboard Profile
+                    HTTP.get("/api/dashboard",{withCredentials: true}).then((subResponse) => {
+                        
+                        checkRedirect(subResponse.data)
+                        if (subResponse.data.Body === null) {
+                            this.$router.push({path:"/signin"})
+                        }
+                        window.localStorage.setItem('profile', JSON.stringify(subResponse.data.Body));
+
+                    }).catch((e) => { console.log(e) })
+                    //Get Dashboard Profile
+
                     var respBody = response.data.Body;
                     if (respBody.Wallets !== null && respBody.Wallets !== undefined && respBody.Wallets !== "") {
                         app.walletSelected = 0;
