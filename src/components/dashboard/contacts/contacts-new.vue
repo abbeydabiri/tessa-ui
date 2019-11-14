@@ -8,7 +8,7 @@
                         ADD NEW CONTACT
                     </span>
 
-                    <router-link class="fr link near-black br2 center f6 inline-flex items-center pa2 pointer" :to="{name:'contacts-search'}"> 
+                    <router-link class="fr link near-black br2 center f6 pointer" :to="{name:'contacts-search'}"> 
                         <i class="pr1 fas fa-arrow-left black fl "></i>
                     </router-link>
                 </div>
@@ -51,7 +51,6 @@
                     </div>
 
                     <div class="pv2 fl w-100 f6 ph1">
-                        
                         <span v-if="isSave" class="fr white bg-black br2 center f6 inline-flex items-center pa2" @click="save"> <i class="pr1 fal fa-save white fl "></i> Save </span>
                         <span v-else class="fr white bg-light-gray br2 center f6 inline-flex items-center pa2"> <i class=" fas fa-spinner fa-pulse white fl "></i> Wait </span>
                     </div>

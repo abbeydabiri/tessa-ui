@@ -7,55 +7,60 @@
                     VIEW CONTACT
                 </span>
 
-                <router-link class="fr link near-black br2 center f6 inline-flex items-center pa2 pointer" :to="{name:'contacts-search'}"> 
+                <router-link class="fr link near-black br2 center f6 pointer" :to="{name:'contacts-search'}"> 
                     <i class="pr1 fas fa-arrow-left black fl "></i>
                 </router-link>
             </div>
         </div>
 
-        <div class="pa3 fl w-100 dt overflow-y-scroll scrollbar" style="height:calc(100% - 48px)">
+        <div class="ph3 fl w-100 dt overflow-y-scroll scrollbar" style="height:calc(100% - 48px)">
             
-                <div class="dtc v-top tc near-black w-100">
-                    
+                <div class="dtc v-top tc near-black w-100 pt2">
 
-                    <div class="pv2 fl w-100">
-                        <small class="tl fl w-100 pv1"> Contact Firstname: </small>
-                        <input type="text" v-model="record.Firstname" disabled="disabled" placeholder="First name" class="pa2 ba b--orange bg-white-10 fw3 f6  fl near-black pa2 w-100 br2">
+                    <div class="pv2 fl w-100 relative h4 h5-l">
+                        <img src="@/assets/icon-header-profile.png" class="center h3 dn" /> 
+
+                        <div class="relative h4 h5-l inline-flex items-center tc">
+                            <i class="z-2 fas fa-times white bg-black pa1 f6 f5-l br2"></i>
+                            <img src="https://www.pwc.com/ng/en/people/photos/femi-osinubi.jpg.pwcimage.200.252.jpg" class="center br-100 w4 h4 w5-l h5-l ba b--light-gray bw2" /> 
+                            <router-link class="link pointer" :to="{name:'contacts-edit'}">
+                                <i class="z-2 fas fa-pen white bg-black pa1 f7 f6-l br2"></i>
+                            </router-link>
+                        </div>
+
+                        <div class="relative w-100 dn">
+                            <div class="cf w-100 relative" style="top:-6px">
+                                <i class="z-2 fas fa-times white bg-black pa1 f6 f5-l br2 mr4 mr5-l"></i>
+
+                                <router-link class="link pointer" :to="{name:'contacts-edit'}">
+                                    <i class="z-2 fas fa-pen white bg-black pa1 f7 f6-l br2 ml4 ml5-l"></i>
+                                </router-link>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fl w-100 mt3" style="min-height:102px">
+                        <div class="fl tc w-100 ttu fw6 f3">
+                            {{record.Firstname}} {{record.Lastname}}
+                        </div>
+
+                        <div class="pv2 fl tc w-100 ttl f6">
+                            {{record.Email}}
+                        </div>
+
+                        <div class="fl tc w-100 ttl f6">
+                            {{record.Mobile}}
+                        </div>
+
+                        <div class="pt2 fl w-100">
+                            <div class="pa1 cf f8 bg-orange br2 white">
+                                {{record.Address}}
+                            </div>
+                        </div>
                     </div>
 
                     <div class="pv2 fl w-100">
-                        <small class="tl fl w-100 pv1"> Contact Lastname: </small>
-                        <input type="text" v-model="record.Lastname" disabled="disabled" placeholder="Last name" class="pa2 ba b--orange bg-white-10 fw3 f6  fl near-black pa2 w-100 br2">
-                    </div>
-
-                    <div class="pv2 fl w-100">
-                        <small class="tl fl w-100 pv1"> Contact Mobile: </small>
-                        <input type="text" v-model="record.Mobile" disabled="disabled" placeholder="Mobile" class="pa2 ba b--orange bg-white-10 fw3 f6  fl near-black pa2 w-100 br2">
-                    </div>
-
-                    <div class="pv2 fl w-100">
-                        <small class="tl fl w-100 pv1"> Contact Email: </small>
-                        <input type="text" v-model="record.Email" disabled="disabled" placeholder="Email" class="pa2 ba b--orange bg-white-10 fw3 f6  fl near-black pa2 w-100 br2">
-                    </div>
-
-                    <div class="pv2 fl w-100">
-                        <small class="tl fl w-100 pv1"> Contact Address: </small>
-                        <input type="text" v-model="record.Address" disabled="disabled" placeholder="Account" class="pa2 ba b--orange bg-white-10 fw3 f6  fl near-black pa2 w-100 br2">
-                    </div>
-
-                    <div class="pv2 fl w-100">
-                        <small class="tl fl w-100 pv1"> About Contact: </small>
-                        <textarea v-model="record.Description" disabled="disabled" placeholder="About Contact" class="h3 pa2 ba b--orange bg-white-10 fw3 f6  fl near-black pa2 w-100 br2"></textarea>
-                    </div>
-
-
-                    <div class="pv2 fl w-100 f6 ph1">
-                    
-                        <router-link class="link fr white bg-black br2 center f6 inline-flex items-center pa2" :to="{name:'contacts-edit'}">
-                            <i class="pr1 fas fa-pen white fl "></i> 
-                            Edit
-                        </router-link>
-                        
+                        <textarea v-model="record.Description" disabled="disabled" placeholder="About Contact" class="h4 pa2 ba b--orange bg-white-10 fw3 f6  fl near-black pa2 w-100 br2"></textarea>
                     </div>
                 </div>
                 

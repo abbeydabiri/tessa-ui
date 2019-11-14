@@ -26,6 +26,7 @@
                     <div class="fl tl w-30 h3 inline-flex items-center ph1"> {{humanNumber(record.Price)}} </div>
                     <div class="fl tl w-30 h3 inline-flex items-center ph1">{{humanNumber(record.ProjectCost)}}</div>
                 </router-link>
+                <div class="w-100 fl h3"></div>
             </div>
 
             <div class="absolute center w-100 mw6_mod tr cf left-0 right-0 inline-flex items-center"  style="bottom:6em">

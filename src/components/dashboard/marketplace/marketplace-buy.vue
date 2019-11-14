@@ -6,16 +6,16 @@
             <div class="fl w-100 near-black">
                 <div class="fl w-100 tl pt3 bt b--black">
                     <span class="near-black b" > 
-                        BUY TOKEN
+                        BUY <span class="bg-orange white br2 ph1 b">{{record.Symbol}}</span> TOKENS
                     </span>
 
-                    <router-link class="fr link near-black br2 center f6 inline-flex items-center pa2 pointer" :to="{name:'marketplace-view', params:{id:$route.params.id}}"> 
+                    <router-link class="fr link near-black br2 center f6 pointer" :to="{name:'marketplace-view', params:{id:$route.params.id}}"> 
                         <i class="pr1 fas fa-arrow-left black fl "></i>
                     </router-link>
                 </div>
             </div>
 
-            <div class="fl w-100 ph3 near-black bg-white ba b--silver mt3">
+            <div class="fl w-100 ph3 near-black bg-white ba b--silver mt2">
                 <div class="fl w-100">
                     <div class="fl w-50 dt" style="min-height:110px">
                         <div class="dtc v-mid w-100">
@@ -40,26 +40,24 @@
                 </div>
             </div>
 
-            <div class="fl w-100 tl ff b ttu mt4 mb3">
-                BUY TOKENS: {{record.Symbol}}
-            </div>
-            
             <div class="fl w-100 near-black tl" >
                 <div class=" cf w-100 center relative">
                     <notify :notifications="notifications" />
                 </div>
 
                 <div class="pv2 fl w-100 f6">
+                    <small class="tc fl w-100 pv1">FUND WALLET ADDRESS </small>
+                    <div class="pa2 bg-orange fw3 tc f8 fl white pa2 w-100 br2 truncate">{{buy.Address}}</div>
+                </div>
+
+                <div class="pv2 fl w-100 f6">
                     <small class="tl fl w-100 pv1"> ENTER AMOUNT IN NIGERIAN NAIRA: </small>
                     <input type="number" pattern="\d*" @keyup="calcToken" v-model.number="buy.Fiat" placeholder="" class="pa2 ba b--orange bg-white-10 fw3 f6  fl near-black pa2 w-100 br2">
                 </div>
+                
                 <div class="pv2 fl w-100 f6">
                     <small class="tl fl w-100 pv1"> TOKEN AMOUNT TO BE RECEIVED: </small>
                     <input type="number" pattern="\d*" @keyup="calcFiat" v-model.number="buy.Token" placeholder="" class="pa2 ba b--orange bg-white-10 fw3 f6  fl near-black pa2 w-100 br2">
-                </div>
-                <div class="pv2 fl w-100 f6">
-                    <small class="tl fl w-100 pv1"> WALLET ADDRESS: </small>
-                    <input type="text" v-model="buy.Address" placeholder="" class="pa2 ba b--orange bg-white-10 fw3 f7 fl near-black pa2 w-100 br2">
                 </div>
                 
                 <div class="pv2 fl w-100 f6">
@@ -89,7 +87,7 @@
             record: [], notifications:[],
             buy: {Fiat:0, Token:0, Address:""},
             record:{
-                ID: 0, Price:0, ProjectCost:0, MaxTotalSupply:0, Icon: tokenIcon
+                ID: 0, Price:0, ProjectCost:0, MaxTotalSupply:0, Icon: tokenIcon, Symbol: "- - -"
             }, 
             isFound: false, isSave: true,
             tokenIcon

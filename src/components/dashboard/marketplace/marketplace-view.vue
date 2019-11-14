@@ -6,21 +6,21 @@
             <div class="fl w-100 ph3 near-black bg-white ba b--silver">
                 <div class="fl w-100">
                     <div class="fl w-50 dt" style="min-height:110px">
-                        <div class="dtc v-mid w-100">
+                        <div class="dtc v-mid w-100 tc">
                             <img class="h3" @error="record.Icon = tokenIcon" :src="record.Icon" />
                         </div>
                     </div>
 
-                    <div class="pv2 fl tl w-50">
-                        <div class="ph3 pv1 fl w-100">
+                    <div class="pt2 fl tl w-50">
+                        <div class="pv1 fl w-100">
                             <div class="db w-100 f8 fl silver">TOKEN PRICE (₦)</div> 
                             <div class="db w-100 f7 fw5 fl">{{humanNumber(record.Price)}}</div>
                         </div>
-                        <div class="ph3 pv1 fl w-100">
+                        <div class="pv1 fl w-100">
                             <div class="db w-100 f8 fl silver">TOKEN SUPPLY</div> 
                             <div class="db w-100 f7 fw5 fl">{{humanNumber(record.MaxTotalSupply)}}</div>
                         </div>
-                        <div class="ph3 pv1 fl w-100">
+                        <div class="pv1 fl w-100">
                             <div class="db w-100 f8 fl silver">MARKET CAP (₦)</div> 
                             <div class="db w-100 f7 fw5 fl">{{humanNumber(record.ProjectCost)}}</div>
                         </div>
@@ -32,28 +32,45 @@
                 </div>
 
                 <div class="fl w-100">
-                    <div class="pv2 fl w-50">
-                        <div class="ph3 pv1 fl w-100">
+                    <div class="pv1 fl w-50">
+                        <div class="pv1 fl w-100 tl">
                             <div class="db w-100 f8 fl silver">Company RC</div> 
                             <div class="db w-100 f7 fw5 fl">{{record.RC}}</div>
                         </div>
                     </div>
 
-                    <div class="pv2 fl w-50">
-                        <div class="ph3 pv1 fl w-100">
+                    <div class="pv1 fl w-50">
+                        <div class="pv1 fl w-100 tr">
                             <div class="db w-100 f8 fl silver">Project Type</div> 
                             <div class="db w-100 f7 fw5 fl">{{record.Project}}</div>
                         </div>
                     </div>
+                </div>
+
+                <div class="fl w-100">
+                    <div class="cf center w-100 bt b--silver"></div>
+                </div>
+
+
+                <div class="fl w-100 overflow-hidden">
+                    
+                    <div class="pv1 fl w-100">
+                        <div class="db w-100 f8 fl silver truncate">Contract Address: <a target="_blank" :href="'https://rinkeby.etherscan.io/address/'+record.Address">{{record.Address}}</a> </div> 
+                    </div>
+                
+                    <div class="pv1 fl w-100">
+                        <div class="db w-100 f8 fl silver truncate">Transaction Hash: <a target="_blank" :href="'https://rinkeby.etherscan.io/tx/'+record.Code">{{record.Code}}</a> </div> 
+                    </div>
+                    
                 </div>
             </div>
 
             <div class="fl w-100 mv2"></div>
 
 
-            <div class="fl w-100 ph3 pt3 pb2 fw6 tc white bg-orange"> {{record.Company}} </div>
+            <div class="fl w-100 ph3 pv2 fw6 tc white bg-orange"> {{record.Company}} </div>
 
-            <div class="fl w-100 pa2 ba b--orange near-black bg-white overflow-y-scroll scrollbar tl" style="height:calc(100% - 255px)">
+            <div class="fl w-100 pa2 ba b--orange near-black bg-white overflow-y-scroll scrollbar tl" style="height:calc(100% - 275px)">
                 {{record.Description}}
             </div>
 
