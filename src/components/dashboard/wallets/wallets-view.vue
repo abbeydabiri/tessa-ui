@@ -1,32 +1,30 @@
 <template>
     <div class="w-100 fl h-100 relative" style="">
 
-        <div class="fl w-100 bg-white near-black pt3 " style="height:calc(100% - 48px)">
+        <div class="fl w-100 near-black ph3">
+            <div class="w-100 tl h2 pt3 pb2 bt b--black inline-flex items-center">
+                <img class="w2" @error="record.Token.Icon = tokenIcon" :src="record.Token.Icon"/>
 
-            <div class="fl w-100 near-black ph3">
-                <div class="fl w-100 tl  bt b--black">
-                    <img class="w2" @error="record.Icon = tokenIcon" :src="record.Icon"/>
-                    
-
-                    <router-link class="fr link near-black br2 center f6 inline-flex items-center pa2 pointer" :to="{name:'wallets-search'}"> 
-                        <i class="pr1 fas fa-arrow-left black fl "></i>
-                    </router-link>
-                </div>
+                <router-link class="fr w-100 link near-black br2 tr f6 pointer" :to="{name:'wallets-search'}"> 
+                    <i class="pr1 fas fa-arrow-left black "></i>
+                </router-link>
             </div>
+        </div>
 
+        <div class="ph3 fl w-100 dt overflow-y-scroll scrollbar" style="height:calc(100% - 48px)">
 
             <div class="fl w-100 ph3 near-black bg-white">
                 <div class="fl w-100"></div>
 
                 <div class="fl w-90 ph3 relative mb3" style="height:10em">
                     <div class="v-top fr w-100 br4 h4 absolute bg-dark-gray ba b--orange left-2 orange shadow-1" :style="{'xbackground': 'url('+splashscreen+')','background-repeat': 'no-repeat', 'background-size': 'cover',}">
-                        <div class="fl w-50 pa2 f3 tl pl3"> {{humanNumber(record.Balance.toFixed(2))}}<small>{{record.Token.Symbol}}</small> </div>
+                        <div class="fl w-50 pa2 f3 tl pl3"> {{humanNumber(record.Balance.toFixed(3))}}<small>{{record.Token.Symbol}}</small> </div>
                         <div class="fl w-50 pt3 f7 tr pr3">Crypto</div>
                     </div>
 
                     <div class="fl w-100 br4 h4 v-mid absolute white ba b--gray shadow-1" :style="{'top':'2.5em', 'background': 'url('+splashscreen+')','background-repeat': 'no-repeat', 'background-size': 'cover',}">
                         <div class="fl w-50 pa2 f3">
-                            <div class="fl w-100 tl pl2"><span class="f7">₦</span>{{humanNumber(record.Balance.toFixed(2) * record.Token.Price)}} </div>
+                            <div class="fl w-100 tl pl2"><span class="f7">₦</span>{{humanNumber(record.Balance.toFixed(3) * record.Token.Price)}} </div>
                             <div class="fl w-100 f7 tl pl3">Balance</div>
                         </div>
                         <div class="fl w-50 pt3 f7 tr pr3">Cash</div>

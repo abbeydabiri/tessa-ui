@@ -8,7 +8,7 @@
                         CREATE TOKEN
                     </span>
 
-                    <router-link class="fr link near-black br2 center f6 inline-flex items-center pv2 pointer" :to="{name:'marketplace-search'}"> 
+                    <router-link class="fr link near-black br2 center f6 inline-flex items-center pointer" :to="{name:'marketplace-search'}"> 
                         <i class="pr1 fas fa-arrow-left black fl "></i>
                     </router-link>
                 </div>
@@ -137,14 +137,14 @@
             humanNumber,
             calcMaxTotalSupply(){
                 if (this.record.ProjectCost > 0 && this.record.Price > 0){
-                    this.record.MaxTotalSupply = parseInt((this.record.ProjectCost / this.record.Price).toFixed(0))
+                    this.record.MaxTotalSupply = parseFloat((this.record.ProjectCost / this.record.Price).toFixed(3))
                 }
 
                 if (this.record.Deposit > 0 && this.record.Price > 0){
-                    this.record.TotalSupply = parseInt((this.record.Deposit / this.record.Price).toFixed(0))
+                    this.record.TotalSupply = parseFloat((this.record.Deposit / this.record.Price).toFixed(3))
                 }
 
-                if (this.record.Deposit < 1 || this.record.Price < 1){
+                if (this.record.Price < 0){
                     this.record.TotalSupply = 0;
                     this.record.MaxTotalSupply = 0;
                 }

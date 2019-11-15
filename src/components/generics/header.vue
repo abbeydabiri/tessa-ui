@@ -65,13 +65,13 @@
                 </div>
             </div>
 
-            <div class="z-max bg-black-80 w-100 tessa-height dn absolute z-max top-0 right-0 overflow-x-scroll pv2"  :class="{'slideInRight':lNotification,'slideOutRight':!lNotification}">
-                <nav class="w-100 center cf fixed top-0 left-0 inline-flex items-center w-100 h3 bg-black-20">
+            <div class="z-max bg-black-80 w-100 tessa-height dn absolute top-0 right-0 overflow-x-scroll pv2"  :class="{'slideInRight':lNotification,'slideOutRight':!lNotification}">
+                <nav class="z-max w-100 center cf fixed top-0 left-0 inline-flex items-center w-100 h3 bg-black-20">
                     <span class="fl ph4 pt5" >
                         <i class="fa fa-times f3 tr white" @click="notificationsClear"></i>
                     </span>
 
-                    <span class="center b tracked ">
+                    <span class="center b tracked pt5 white">
                         <h1 class="f4">Notifications</h1>
                     </span>
 
@@ -79,10 +79,10 @@
                         <i class="fa fa-arrow-alt-right f3 tr white" @click="toggleNotification"></i>
                     </span>
                 </nav>
-                 <div class="h3"></div>
-                <div class="w-100 fl ph2">
-                    <notify class="mv2" :notifications="notifications"></notify>
-                </div>
+                <div class="h3"></div>
+
+                <notify class="mv2" :notifications="notifications"></notify>
+                
             </div>
         </div>
       

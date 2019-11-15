@@ -5,13 +5,13 @@
 
             <div class="fl w-100 ph3 near-black bg-white ba b--silver">
                 <div class="fl w-100">
-                    <div class="fl w-50 dt" style="min-height:110px">
+                    <div class="fl w-40 dt" style="min-height:110px">
                         <div class="dtc v-mid w-100 tc">
                             <img class="h3" @error="record.Icon = tokenIcon" :src="record.Icon" />
                         </div>
                     </div>
 
-                    <div class="pt2 fl tl w-50">
+                    <div class="pt2 fl tl w-60">
                         <div class="pv1 fl w-100">
                             <div class="db w-100 f8 fl silver">TOKEN PRICE (₦)</div> 
                             <div class="db w-100 f7 fw5 fl">{{humanNumber(record.Price)}}</div>
