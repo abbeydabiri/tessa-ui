@@ -88,7 +88,7 @@
                 
                 
                 <div class="pv2 fl w-100 f6 ph1">
-                    <span v-if="isSave" class="fr link white bg-black br2 center f6 inline-flex items-center pa2 pointer" @click="save">
+                    <span v-if="isSave" class="fr link white bg-black br2 center f6 inline-flex items-center pa2 pointer" @click="payWithPaystack">
                         <i class="pr1 fas fa-coins white fl "></i> Create Token
                     </span>
                     <span v-else class="fr link black bg-light-gray br2 center f6 inline-flex items-center pa2 pointer"> 
@@ -137,11 +137,11 @@
             humanNumber,
             calcMaxTotalSupply(){
                 if (this.record.ProjectCost > 0 && this.record.Price > 0){
-                    this.record.MaxTotalSupply = parseFloat((this.record.ProjectCost / this.record.Price).toFixed(3))
+                    this.record.MaxTotalSupply = parseFloat((this.record.ProjectCost / this.record.Price).toFixed(0))
                 }
 
                 if (this.record.Deposit > 0 && this.record.Price > 0){
-                    this.record.TotalSupply = parseFloat((this.record.Deposit / this.record.Price).toFixed(3))
+                    this.record.TotalSupply = parseFloat((this.record.Deposit / this.record.Price).toFixed(0))
                 }
 
                 if (this.record.Price < 0){
@@ -159,6 +159,60 @@
             uploadImage(imageRef) {
                 this.$refs[imageRef].click()
             },
+            payWithPaystack(){
+                const app = this;
+            
+                if (parseFloat(app.record.ProjectCost) <= 0){
+                    var error = {Code:500, Message:"Project Cost is required"}
+                    app.notifications.push(error)
+                    app.$parent.$parent.notifications.push(error)
+                    return
+                }
+
+                if (parseFloat(app.record.Price) <= 0){
+                    var error = {Code:500, Message:"Token Price is required"}
+                    app.notifications.push(error)
+                    app.$parent.$parent.notifications.push(error)
+                    return
+                }
+                
+                if (parseFloat(app.record.Deposit) <= 0){
+                    app.save()
+                    return
+                }
+
+                var paystackHandler = PaystackPop.setup({
+                    key: 'pk_test_9adf921cdad96888c8ad753dfc2c14e7cf1cf310',
+                    email: 'customer@email.com',
+                    amount: app.record.Deposit * 100,
+                    currency: "NGN",
+                    metadata: {
+                        custom_fields: [
+                            {
+                                display_name: "Mobile Number",
+                                variable_name: "mobile_number",
+                                value: "+2348012345678"
+                            }
+                        ]
+                    },
+                    callback: function(response){
+                        console.log(response)
+                        if (response.status == "success") {
+                            app.save()
+                        } else {
+                            var error = {Code:500, Message: response.message}
+                            app.notifications.push(error)
+                            app.$parent.$parent.notifications.push(error)    
+                        }
+                    },
+                    onClose: function(){
+                        var error = {Code:500, Message:"Payment Not Completed"}
+                        app.notifications.push(error)
+                        app.$parent.$parent.notifications.push(error)
+                    }
+                });
+                paystackHandler.openIframe();
+            },
             save() {
                 const app = this;
                 if (!app.isSave){
@@ -174,8 +228,72 @@
                     setTimeout(function(){ checkRedirect(response.data) },500)
                     if (response.data.Body !== null && response.data.Body !== undefined ) {
                         if(response.data.Code == 200){
-                            app.record = { Icon:"", Symbol:"-", Title:"-", ProjectCost:0, Deposit:0, Price:0, MaxTotalSupply:0, TotalSupply:0, Seed:0, Image:tokenIcon, }
-                            
+                            // app.record = { Icon:"", Symbol:"-", Title:"-", ProjectCost:0, Deposit:0, Price:0, MaxTotalSupply:0, TotalSupply:0, Seed:0, Image:tokenIcon, }
+
+                            //Before redirecting to Creator's Wallet - Create the Token and accompanying Transactions
+
+
+                            if (parseFloat(app.record.Deposit) <= 0){
+                                setTimeout(function(){app.$router.push({name:"marketplace-view", params:{id:response.data.Body}})},1500)
+                            } else {
+                                
+                                HTTP.get(app.url+'?id='+response.data.Body, {withCredentials: true}).then((responseToken) => {
+                                    app.notifications.push(responseToken.data)
+                                    app.$parent.$parent.notifications.push(responseToken.data)
+
+                                    setTimeout(function(){ checkRedirect(responseToken.data) },500)
+                                    if (responseToken.data.Body !== null && responseToken.data.Body !== undefined ) {
+                                        
+                                        var responseTokenRecord = responseToken.data.Body
+
+                                        //create a accounttoken save and make a transaction
+                                        //make a call to accounttokens
+                                        var accountToken = {
+                                            Title: app.record.Title,
+                                            TokenID: response.data.Body,
+                                        }
+
+                                        HTTP.post("/api/accounttokens", accountToken, {withCredentials: true})
+                                        .then((responseAccountTokens) => {
+                                            app.notifications.push(responseAccountTokens.data)
+                                            app.$parent.$parent.notifications.push(responseAccountTokens.data)
+
+                                            setTimeout(function(){ checkRedirect(responseAccountTokens.data) },500)
+                                            if (responseAccountTokens.data.Body !== null && responseAccountTokens.data.Body !== undefined ) {
+                                                if(responseAccountTokens.data.Code == 200){
+                                                    //create a transaction and save
+                                                    var transaction = {
+                                                        Title: "Token Purchase",
+                                                        TokenID: accountToken.TokenID,
+                                                        Amount: parseFloat(app.record.Seed),
+                                                        FromAddress: responseTokenRecord.Address,
+                                                        ToAddress: app.buy.Address,
+                                                    }
+                                                    HTTP.post("/api/transactions", transaction, {withCredentials: true})
+                                                    .then((responseTrans) => {
+                                                        app.notifications.push(responseTrans.data)
+                                                        app.$parent.$parent.notifications.push(responseTrans.data)
+
+                                                        setTimeout(function(){ checkRedirect(responseTrans.data) },500)
+                                                        if (responseTrans.data.Body !== null && responseTrans.data.Body !== undefined ) {
+                                                            if(responseTrans.data.Code == 200){
+                                                                setTimeout(function(){app.$router.push({name:"wallets-view", params:{id:responseAccountTokens.data.Body}})},1500)
+                                                            }
+                                                        }
+                                                        app.isSave = true;
+                                                    }).catch((e) => { app.isSave = true; })
+                                                    //create a transaction and save
+                                                }
+                                            }
+                                        }).catch((e) => {
+                                            app.isSave = true;
+                                        })
+                                        //create a accounttoken save and make a transaction
+                                            
+                                        
+                                    }
+                                }).catch((e) => { console.log(e) })    
+                            }
                         }
                     }
                     app.isSave = true;

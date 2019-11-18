@@ -8,13 +8,13 @@
         <div class="fl w-100 bg-white near-black  bt b--near-white " style="">
 
             <div class="f7 overflow-y-scroll scrollbar w-100 fl" style="height:calc(100% - 56px)"> 
-                <router-link class="bb b--near-white fl w-100 ph3 pv1 near-black" v-for="(record, index) in recordList" :key="index" :to="{name:'wallets-view',params:{id:record.ID}}">
-                    <div class="fl tl w-20 h3 inline-flex items-center ph1"> 
-                        <img class="w3" @error="record.Token.Icon = tokenIcon" :src="record.Token.Icon"/>
+                <router-link class="bb b--near-white fl w-100 ph3 pv2 near-black" v-for="(record, index) in recordList" :key="index" :to="{name:'wallets-view',params:{id:record.ID}}">
+                    <div class="fl tl w-20 h2 inline-flex items-center ph1"> 
+                        <img class="w2" @error="record.Token.Icon = tokenIcon" :src="record.Token.Icon"/>
                     </div>
-                    <div class="fl tr w-80 h3  ph1">
-                        <span class="fl w-100 f2 tr">{{humanNumber(record.Balance.toFixed(2))}}  <span class="fw6 f5">{{record.Token.Symbol}}</span></span>
-                        <span class="fl w-100 f6 itr"><span class="f7">₦</span> {{humanNumber(record.Balance.toFixed(2) * record.Token.Price)}}</span>
+                    <div class="fl tr w-80 h2  ph1">
+                        <span class="fl w-100 f4 tr">{{humanNumber(record.Balance.toFixed(3))}} <span class="fw6 f6">{{record.Token.Symbol}}</span></span>
+                        <span class="fl w-100 f7 itr"><span class="f8">₦</span> {{humanNumber(record.Balance.toFixed(2) * record.Token.Price)}}</span>
                     </div>
                 </router-link>
             </div>

@@ -2,32 +2,30 @@
     <div class="w-100 fl h-100 relative" style="">
 
         <div class="fl w-100 near-black ph3">
-            <div class="w-100 tl h2 pt3 pb2 bt b--black inline-flex items-center">
-                <img class="w2" @error="record.Token.Icon = tokenIcon" :src="record.Token.Icon"/>
-
+            <div class="w-100 tl h2 pv3 bt b--black inline-flex items-center">
                 <router-link class="fr w-100 link near-black br2 tr f6 pointer" :to="{name:'wallets-search'}"> 
                     <i class="pr1 fas fa-arrow-left black "></i>
                 </router-link>
             </div>
         </div>
 
-        <div class="ph3 fl w-100 dt overflow-y-scroll scrollbar" style="height:calc(100% - 48px)">
+        <div class="ph3 fl w-100 overflow-y-scroll scrollbar" style="height:calc(100% - 40px)">
 
-            <div class="fl w-100 ph3 near-black bg-white">
+            <div class="fl w-100 ph1 near-black bg-white">
                 <div class="fl w-100"></div>
 
-                <div class="fl w-90 ph3 relative mb3" style="height:10em">
-                    <div class="v-top fr w-100 br4 h4 absolute bg-dark-gray ba b--orange left-2 orange shadow-1" :style="{'xbackground': 'url('+splashscreen+')','background-repeat': 'no-repeat', 'background-size': 'cover',}">
-                        <div class="fl w-50 pa2 f3 tl pl3"> {{humanNumber(record.Balance.toFixed(3))}} <span class="f7">{{record.Token.Symbol}}</span> </div>
-                        <div class="fl w-50 pt3 f7 tr pr3">Crypto</div>
+                <div class="fl w-90 relative mb3" style="height:10em">
+                    <div class="v-top fr w-100 br4 h4 absolute bg-dark-gray ba b--orange left-2 orange shadow-1">
+                        <div class="fl w-50 pa2 f3 tl pl3"> <span class="f7">₦</span>{{humanNumber(record.Balance.toFixed(2) * record.Token.Price)}} </div>
+                        <div class="fl w-50 pt3 f7 tr pr3">Cash</div>
                     </div>
 
                     <div class="fl w-100 br4 h4 v-mid absolute white ba b--gray shadow-1" :style="{'top':'2.5em', 'background': 'url('+splashscreen+')','background-repeat': 'no-repeat', 'background-size': 'cover',}">
-                        <div class="fl w-50 pa2 f3">
-                            <div class="fl w-100 tl pl2"><span class="f7">₦</span>{{humanNumber(record.Balance.toFixed(3) * record.Token.Price)}} </div>
-                            <div class="fl w-100 f7 tl pl3">Balance</div>
+                        <div class="fl w-75 pa2 f3">
+                            <div class="fl w-100 tl pl1"> {{humanNumber(record.Balance.toFixed(3))}} </div>
+                            <div class="fl w-100 f7 tl pt1 pl1"> <span class="f7">{{record.Token.Symbol}}</span> Balance </div>
                         </div>
-                        <div class="fl w-50 pt3 f7 tr pr3">Cash</div>
+                        <div class="fl w-25 pt3 f7 tr pr3">Crypto</div>
                     </div>
                 </div>
             </div>
@@ -39,21 +37,20 @@
                 </router-link>
             </div>
 
-            <div class="fl w-100  near-black bg-white overflow-y-scroll scrollbar tl" style="height:calc(100% - 250px)">
+            <div class="fl w-100  near-black bg-white overflow-y-scroll scrollbar tl" style="height:calc(100% - 225px)">
                 <router-link class="f6 fl w-100 link near-black fl bb b--near-white pv2 f5 pointer" v-for="(transaction, index) in recordList" :key="index" to="{name:'transactions-view',params:{id:transaction.ID}}">
-                    <div class="fl w-100">
 
-                        <div class="fl w-10 tc">
-                            <span class="inline-flex items-center v-mid h2">
-                                <i class="fas f4" :class="transaction.Class"></i>
-                            </span> 
+                    <div class="fl tl w-100 inline-flex items-center"> 
+                        <img class="w2 fl" @error="transaction.Token.Icon = tokenIcon" :src="transaction.Token.Icon"/>
+
+                        <div class="fl w-100 ph2">
+                            <span class="w-100 fl tl"> {{transaction.Amount}} <span class="f8">{{transaction.Token.Symbol}}</span> <small class=""> - {{transaction.Title}} </small> </span>
+                            <span class="w-100 fl tl f8"> ₦{{humanNumber(transaction.Amount.toFixed(3) * transaction.Token.Price)}} @ {{humanTime(transaction.Createdate.substring(0,19))}} </span>    
                         </div>
 
-                        <div class="fl w-90 h2 ph2">
-                            <span class="w-100 fl tl"> ₦{{transaction.Amount}} <small class=""> {{transaction.Title}} </small> </span>
-                            <span class="w-100 fl tl f8"> {{humanTime(transaction.Createdate.substring(0,19))}} </span>    
-                        </div>
+                        <i class="fas f4 center" :class="transaction.Class"></i>                            
                     </div>
+
                 </router-link>
             </div>
         </div>
@@ -121,11 +118,11 @@
                         app.recordList = response.data.Body
                         for (var key = 0; key < app.recordList.length; key++) {
                             if(app.recordList[key].ToAddress == app.search.filter.ToAddress) {
-                                app.recordList[key]["Class"] = "fa-arrow-alt-down green"
+                                app.recordList[key]["Class"] = "fa-arrow-alt-down dark-green"
                             }
 
                             if(app.recordList[key].FromAddress == app.search.filter.FromAddress) {
-                                app.recordList[key]["Class"] = "fa-arrow-alt-up red"
+                                app.recordList[key]["Class"] = "fa-arrow-alt-up dark-red"
                             }
                         }
                     }

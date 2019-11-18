@@ -5,23 +5,20 @@
             <input type="text" v-model="search.text" placeholder="Search Transactions" class=" ba b--white-10 bg-near-white fw3 f6 tracked i fl near-black pa2 w-100 br2" @keyup="searchRecords">
         </div>
 
-        <div class="fl w-100 overflow-y-scroll scrollbar" style="height:calc(100% - 50px)">
+        <div class="ph3 fl w-100 overflow-y-scroll scrollbar" style="height:calc(100% - 50px)">
             <span class="f6 fl w-100 link near-black fl bb b--near-white pv2 f5 pointer" v-for="(transaction, index) in recordList" :key="index" to="{name:'transactions-view',params:{id:record.ID}}">
-                <div class="fl w-100 ph3">
+                
+                <div class="fl tl w-100 inline-flex items-center"> 
+                    <img class="w2 fl" @error="transaction.Token.Icon = tokenIcon" :src="transaction.Token.Icon"/>
 
-                    <div class="fl tr w-15 h2 inline-flex items-center ph1"> 
-                        <span class="inline-flex items-center v-mid h2">
-                            <i class="fas f4" :class="transaction.Class"></i>
-                        </span> 
-                        <img class="w2" @error="transaction.Token.Icon = tokenIcon" :src="transaction.Token.Icon"/>
+                    <div class="fl w-100 ph2">
+                        <span class="w-100 fl tl"> {{humanNumber(transaction.Amount.toFixed(3))}} <span class="f8">{{transaction.Token.Symbol}}</span> <small class=""> - {{transaction.Title}} </small> </span>
+                        <span class="w-100 fl tl f8"> ₦{{humanNumber(transaction.Amount.toFixed(3) * transaction.Token.Price)}} @ {{humanTime(transaction.Createdate.substring(0,19))}} </span>    
                     </div>
 
-                    <div class="fl w-80 h2 ph2">
-                        <span class="w-100 fl tl"> ₦{{transaction.Amount}} <small class=""> {{transaction.Title}} </small> </span>
-                        <span class="w-100 fl tl f8"> {{humanTime(transaction.Createdate.substring(0,19))}} </span>
-                    </div>
-
+                    <i class="fas f4 center" :class="transaction.Class"></i>                            
                 </div>
+                
             </span>
         </div>
     </div>
@@ -60,11 +57,11 @@
                         app.recordList = response.data.Body
                         for (var key = 0; key < app.recordList.length; key++) {
                             if(app.recordList[key].ToAddress == app.search.filter.ToAddress) {
-                                app.recordList[key]["Class"] = "fa-arrow-alt-down green"
+                                app.recordList[key]["Class"] = "fa-arrow-alt-down dark-green"
                             }
 
                             if(app.recordList[key].FromAddress == app.search.filter.FromAddress) {
-                                app.recordList[key]["Class"] = "fa-arrow-alt-up red"
+                                app.recordList[key]["Class"] = "fa-arrow-alt-up dark-red"
                             }
                         }
                     }
