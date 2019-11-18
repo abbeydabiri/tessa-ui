@@ -6,67 +6,67 @@
         </div>
 
         <div class="fl w-100 overflow-y-scroll scrollbar" style="height:calc(100% - 50px)">
-            <router-link class="f6 fl w-100 link near-black fl bb b--near-white pv2 f5 pointer" v-for="(record, index) in recordList" :key="index" to="{name:'transactions-view',params:{id:record.ID}}">
+            <span class="f6 fl w-100 link near-black fl bb b--near-white pv2 f5 pointer" v-for="(transaction, index) in recordList" :key="index" to="{name:'transactions-view',params:{id:record.ID}}">
                 <div class="fl w-100 ph3">
-                    <div class="fl w-10 tc">
+
+                    <div class="fl tr w-15 h2 inline-flex items-center ph1"> 
                         <span class="inline-flex items-center v-mid h2">
-                            <i class="fas f2" :class="record.Class"></i>
+                            <i class="fas f4" :class="transaction.Class"></i>
                         </span> 
+                        <img class="w2" @error="transaction.Token.Icon = tokenIcon" :src="transaction.Token.Icon"/>
                     </div>
 
-                    <div class="fl w-90 h2 ph2">
-                        <span class="w-100 fl tl"> <small class="fw6">₦{{record.Amount}} </small> {{record.Narration}} </span>
-                        <span class="w-100 fl tl f8"> 9/25/2019 at 10:53 </span>    
+                    <div class="fl w-80 h2 ph2">
+                        <span class="w-100 fl tl"> ₦{{transaction.Amount}} <small class=""> {{transaction.Title}} </small> </span>
+                        <span class="w-100 fl tl f8"> {{humanTime(transaction.Createdate.substring(0,19))}} </span>
                     </div>
+
                 </div>
-            </router-link>
+            </span>
         </div>
     </div>
 </template>
 
 <script type="text/javascript">
     import {HTTP} from "@/common"
+    import {humanTime} from "@/common"
+    import {humanNumber} from "@/common"
     import {checkRedirect} from "@/common"
     import tokenIcon from "@/assets/img/smartcontract.svg"
 
     export default {
         data() {return{
             url: "/api/transactions", 
-            search: {text: "", field: "Fullname", limit: 50, page:1, skip: 0, filter:{}},
-            recordList:[
-                {ID:0, Class:"fa-arrow-alt-square-right orange", Narration:"sent to Abbey", Symbol:"JJC", Amount:"0000"},
-                {ID:0, Class:"fa-arrow-alt-square-right orange", Narration:"sent to Fibi", Symbol:"JJC", Amount:"0000"},
-                {ID:0, Class:"fa-arrow-alt-square-left green", Narration:"received from Temi", Symbol:"JJC", Amount:"0000"},
-                {ID:0, Class:"fa-arrow-alt-square-right orange", Narration:"sent to Temi", Symbol:"JJC", Amount:"0000"},
-                {ID:0, Class:"fa-arrow-alt-square-left green", Narration:"received from Kemi", Symbol:"JJC", Amount:"0000"},
-                {ID:0, Class:"fa-arrow-alt-square-left green", Narration:"received from Ada", Symbol:"JJC", Amount:"0000"},
-                {ID:0, Class:"fa-arrow-alt-square-right orange", Narration:"sent to 08079623414", Symbol:"JJC", Amount:"0000"},
-                {ID:0, Class:"fa-arrow-alt-square-right orange", Narration:"sent to 08079723123", Symbol:"JJC", Amount:"0000"},
-                {ID:0, Class:"fa-arrow-alt-square-left green", Narration:"received from Ifeanyi", Symbol:"JJC", Amount:"0000"},
-                {ID:0, Class:"fa-arrow-alt-square-right orange", Narration:"sent to Davina", Symbol:"JJC", Amount:"0000"},
-                {ID:0, Class:"fa-arrow-alt-square-right orange", Narration:"sent to Ogo", Symbol:"JJC", Amount:"0000"},
-                {ID:0, Class:"fa-arrow-alt-square-left green", Narration:"recieved from Femi", Symbol:"JJC", Amount:"0000"},
-                {ID:0, Class:"fa-arrow-alt-square-right orange", Narration:"sent to Bayo", Symbol:"JJC", Amount:"0000"},
-                {ID:0, Class:"fa-arrow-alt-square-left green", Narration:"received from Damola", Symbol:"JJC", Amount:"0000"},
-                {ID:0, Class:"fa-arrow-alt-square-left green", Narration:"received from Nsikan", Symbol:"JJC", Amount:"0000"},
-                {ID:0, Class:"fa-arrow-alt-square-right orange", Narration:"sent to Dili", Symbol:"JJC", Amount:"0000"},
-                {ID:0, Class:"fa-arrow-alt-square-right orange", Narration:"sent to Aishat", Symbol:"JJC", Amount:"0000"},
-                {ID:0, Class:"fa-arrow-alt-square-left green", Narration:"received from Folake", Symbol:"JJC", Amount:"0000"},
-            ],
+            search: {text: "", field: "Title", limit: 50, page:1, skip: 0, filter:{ToAddress:"",FromAddress:""}},
+            recordList:[],
             tokenIcon
         }},
         components: {},
         created() {this.searchRecords()},
         methods: {
+            humanTime,
+            humanNumber,
             searchRecords(){
                 const app = this 
                 app.recordList = []
+
+                var profile = JSON.parse(window.localStorage.getItem('profile'));
                 app.search.skip = app.search.page-1;
-                app.search.filter.mobile = app.search.text;
+                app.search.filter.ToAddress = profile.Address;
+                app.search.filter.FromAddress = profile.Address;
 
                 HTTP.post(app.url+'/search', app.search,{withCredentials: true}).then((response) => {
                     if (response.data.Body !== null && response.data.Body !== undefined ) {
                         app.recordList = response.data.Body
+                        for (var key = 0; key < app.recordList.length; key++) {
+                            if(app.recordList[key].ToAddress == app.search.filter.ToAddress) {
+                                app.recordList[key]["Class"] = "fa-arrow-alt-down green"
+                            }
+
+                            if(app.recordList[key].FromAddress == app.search.filter.FromAddress) {
+                                app.recordList[key]["Class"] = "fa-arrow-alt-up red"
+                            }
+                        }
                     }
                     setTimeout(function(){ checkRedirect(response.data) },500)
                 }).catch((e) => { console.log(e) })
