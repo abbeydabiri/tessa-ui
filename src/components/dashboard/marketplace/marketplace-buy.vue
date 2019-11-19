@@ -189,6 +189,7 @@
                         if(response.data.Code == 200){
                             //create a transaction and save
                             var transaction = {
+                                Code: "mint",
                                 Title: "Token Purchase",
                                 TokenID: app.record.ID,
                                 Amount: parseFloat(app.buy.Token),

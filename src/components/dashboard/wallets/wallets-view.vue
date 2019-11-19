@@ -48,7 +48,7 @@
 
                         <div class="fl w-100 ph2">
                             <span class="w-100 fl tl"> {{transaction.Amount}} <span class="f8">{{transaction.Token.Symbol}}</span> <small class=""> - {{transaction.Title}} </small> </span>
-                            <span class="w-100 fl tl f8"> ₦{{humanNumber(transaction.Amount.toFixed(3) * transaction.Token.Price)}} @ {{humanTime(transaction.Createdate.substring(0,19))}} </span>    
+                            <span class="w-100 fl tl f8"> ₦{{humanNumber((transaction.Amount.toFixed(3) * transaction.Token.Price).toFixed(2))}} @ {{humanTime(transaction.Createdate.substring(0,19))}} </span>    
                         </div>
 
                         <i class="fas f4 center" :class="transaction.Class"></i>                            
