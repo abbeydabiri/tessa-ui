@@ -16,16 +16,19 @@
 
                 <div class="fl w-90 relative mb3" style="height:10em">
                     <div class="v-top fr w-100 br4 h4 absolute bg-dark-gray ba b--orange left-2 orange shadow-1">
-                        <div class="fl w-50 pa2 f3 tl pl3"> <span class="f7">₦</span>{{humanNumber(record.Balance.toFixed(2) * record.Token.Price)}} </div>
+                        <div class="fl w-50 pa2 f3 tl pl3"> <span class="f7">₦</span>{{humanNumber((record.Balance.toFixed(2) * record.Token.Price).toFixed(2))}} </div>
                         <div class="fl w-50 pt3 f7 tr pr3">Cash</div>
                     </div>
 
                     <div class="fl w-100 br4 h4 v-mid absolute white ba b--gray shadow-1" :style="{'top':'2.5em', 'background': 'url('+splashscreen+')','background-repeat': 'no-repeat', 'background-size': 'cover',}">
                         <div class="fl w-75 pa2 f3">
                             <div class="fl w-100 tl pl1"> {{humanNumber(record.Balance.toFixed(3))}} </div>
-                            <div class="fl w-100 f7 tl pt1 pl1"> <span class="f7">{{record.Token.Symbol}}</span> Balance </div>
+                            <div class="fl w-100 f7 tl pt2 pl1"> <span class="f7 fw6 br1 pa1 bg-white orange">{{record.Token.Symbol}}</span> Balance </div>
                         </div>
                         <div class="fl w-25 pt3 f7 tr pr3">Crypto</div>
+                        <div class="w-100 tr fr pt4 pr3">
+                            <router-link class="link pointer f7 fw6 br2 tracked pa1 bg-black white" :to="{name:'marketplace-buy',params:{id:record.TokenID}}">BUY TOKEN</router-link> 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -53,6 +56,14 @@
 
                 </router-link>
             </div>
+
+            <div class="dn absolute center w-100 mw6_mod tr cf left-0 right-0 inline-flex items-center"  style="bottom:3em">
+                <router-link class="absolute right-1 tc bg-black pa1 h3 w3 link white br-100 pointer" :to="{name:'marketplace-buy',params:{id:record.TokenID}}" > 
+                    <i class=" fal fa-coins white f3 pt2"></i>
+                    <div class="w-100 fl tc f7 ">Buy</div>
+                </router-link>
+            </div>
+
         </div>
     </div>
 </template>
@@ -98,6 +109,7 @@
                             if (response.data.Body.Token.ID !== null && response.data.Body.Token.ID !== undefined) {    
                                 app.search.filter.TokenID = response.data.Body.Token.ID.toString()
                                 app.searchRecords();
+                                console.log(app.record)
                             }
                         }
                     }

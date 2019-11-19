@@ -137,11 +137,11 @@
             humanNumber,
             calcMaxTotalSupply(){
                 if (this.record.ProjectCost > 0 && this.record.Price > 0){
-                    this.record.MaxTotalSupply = parseFloat((this.record.ProjectCost / this.record.Price).toFixed(0))
+                    this.record.MaxTotalSupply = parseInt(this.record.ProjectCost / this.record.Price)
                 }
 
-                if (this.record.Deposit > 0 && this.record.Price > 0){
-                    this.record.TotalSupply = parseFloat((this.record.Deposit / this.record.Price).toFixed(0))
+                if (this.record.Deposit > 0 && this.record.Deposit >= this.record.Price && this.record.Price > 0){
+                    this.record.TotalSupply = parseInt(this.record.Deposit / this.record.Price)
                 }
 
                 if (this.record.Price < 0){

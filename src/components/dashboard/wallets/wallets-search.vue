@@ -14,7 +14,7 @@
                     </div>
                     <div class="fl tr w-80 h2  ph1">
                         <span class="fl w-100 f4 tr">{{humanNumber(record.Balance.toFixed(3))}} <span class="fw6 f6">{{record.Token.Symbol}}</span></span>
-                        <span class="fl w-100 f7 itr"><span class="f8">₦</span> {{humanNumber(record.Balance.toFixed(2) * record.Token.Price)}}</span>
+                        <span class="fl w-100 f7 itr"><span class="f8">₦</span> {{humanNumber((record.Balance.toFixed(3) * record.Token.Price).toFixed(2))}}</span>
                     </div>
                 </router-link>
             </div>
