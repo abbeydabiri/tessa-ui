@@ -4,7 +4,7 @@
             <div class="fl w-10 pl2">
                 <i class="pr1 fas fa-phone black fl " style="transform: rotateY(180deg);"></i> 
             </div>
-            <input placeholder="ENTER YOUR MOBILE NUMBER" class="mobile bg-white tc fw3 f4 tracked bn fl black pv3 ph1 w-80" type="number" pattern="\d*" minlength="11" maxlength="11" v-model="localMobile" @keyup="keyUP">
+            <input placeholder="ENTER YOUR MOBILE NUMBER" class="mobile bg-transparent tc fw3 f4 tracked bn fl black pv3 ph1 w-80" type="number" pattern="\d*" minlength="11" maxlength="11" v-model="localMobile" @keyup="keyUP">
             <div class="fl w-10 pv3" @click="$parent.submitMobile">
                 <i class="pr1 fas fa-arrow-right black fl "></i> 
             </div>

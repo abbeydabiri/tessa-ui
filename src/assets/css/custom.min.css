@@ -570,7 +570,7 @@ input[type=number] {
 }
 
 
-input, textarea { color:white; background-color: rgba(0,0,0,0.1) ; }
+input, textarea { color: black ; }
 
 .pin::placeholder {
     font-size: 20px;
