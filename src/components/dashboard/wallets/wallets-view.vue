@@ -34,7 +34,9 @@
             </div>
             
             <div class="fl w-100 mt2">
-                <div class="pv2 fl w-50 b tl f5"> Transactions </div>
+                <div class="pv2 fl w-50 b tl f5"> Transactions 
+                    <i class="fr pl1 fas fa-cloud-download-alt black pointer" @click="backup"></i>    
+                </div>
                 <router-link class="link pointer no-underline" :to="{name:'transactions-search'}">
                     <div class="pv2 fl w-50 fw6 tr f7 near-black"> SEE ALL </div>
                 </router-link>
@@ -96,6 +98,17 @@
         methods: {
             humanTime,
             humanNumber,
+            backup() {
+                const app = this;
+                var profile = JSON.parse(window.localStorage.getItem('profile'));
+                HTTP.get('/api/wallets/backup?id='+profile.WalletID, {withCredentials: true}).then((response) => {
+                    app.record = response.data.Body
+                    app.notifications.push(response.data)
+                    setTimeout(checkRedirect(response.data),1500)
+                    console.log(app.record)
+                    
+                }).catch((e) => { console.log(e) })
+            },
             getRecord (id) {
                 const app = this;
                 HTTP.get(app.url+'?id='+id, {withCredentials: true}).then((response) => {
