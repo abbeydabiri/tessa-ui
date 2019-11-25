@@ -1,24 +1,41 @@
 <template>
-    <div class="w-100 fl pt2" style="">
+    <div class="w-100 fl h-100 relative" style="">
 
         <div class="fl w-100 inline-flex items-center pv2 ph3">
-            <input type="text" v-model="search.text" placeholder="Search  by token name or symbol" class=" ba b--white-10 bg-near-white fw3 f6 tracked i fl near-black pa2 w-100" @keyup="searchRecords">
+            <input type="text" v-model="search.text" placeholder="Search Tokens" class=" ba b--white-10 bg-near-white fw3 f6 tracked i fl near-black pa2 w-100 br2" @keyup="searchRecords">
         </div>
 
-        <div class="fl w-100 bg-white near-black  bt b--near-white " style="">
-
-            <div class="f7 overflow-y-scroll scrollbar w-100 fl" style="height:calc(100% - 56px)"> 
-                <router-link class="bb b--near-white fl w-100 ph3 pv2 near-black" v-for="(record, index) in recordList" :key="index" :to="{name:'wallets-view',params:{id:record.ID}}">
-                    <div class="fl tl w-20 h2 inline-flex items-center ph1"> 
-                        <img class="w2" @error="record.Token.Icon = tokenIcon" :src="record.Token.Icon"/>
-                    </div>
-                    <div class="fl tr w-80 h2  ph1">
-                        <span class="fl w-100 f4 tr">{{humanNumber(record.Balance.toFixed(3))}} <span class="fw6 f6">{{record.Token.Symbol}}</span></span>
-                        <span class="fl w-100 f7 itr"><span class="f8">₦</span> {{humanNumber((record.Balance.toFixed(3) * record.Token.Price).toFixed(2))}}</span>
-                    </div>
-                </router-link>
-            </div>
+        <div class=" fl w-100 overflow-y-scroll scrollbar" style="height:calc(100% - 50px)">
+            <router-link class="bb b--near-white fl w-100 ph3 pv2 near-black" v-for="(record, index) in recordList" :key="index" :to="{name:'wallets-view',params:{id:record.ID}}">
+                <div class="fl tl w-10 inline-flex items-center ph1" style="height:3.5em"> 
+                    <img class="w2" @error="record.Token.Icon = tokenIcon" :src="record.Token.Icon"/>
+                </div>
+                <div class="fl tl w-40 ph1 inline-flex items-center f7" style="height:3.5em">
+                    <span class="dt w-100 fl f8 f7-ns">
+                            {{record.Token.Company}}
+                    </span>
+                </div>
+                <div class="fl tr w-50 ph1 " style="height:3.5em">
+                    <span class="fl w-100 f4 tr">{{humanNumber(record.Balance.toFixed(3))}} <span class="fw6 f7 bg-near-black br2 pa1 white">{{record.Token.Symbol}}</span></span>
+                    <span class="fl w-100 f7 tr pt1"><span class="f8">₦</span> {{humanNumber((record.Balance.toFixed(3) * record.Token.Price).toFixed(2))}}</span>
+                </div>
+            </router-link>
+            <router-link class="bb b--near-white fl w-100 ph3 pv2 near-black" v-for="(record, index) in recordList" :key="index" :to="{name:'wallets-view',params:{id:record.ID}}">
+                <div class="fl tl w-10 inline-flex items-center ph1" style="height:3.5em"> 
+                    <img class="w2" @error="record.Token.Icon = tokenIcon" :src="record.Token.Icon"/>
+                </div>
+                <div class="fl tl w-40 ph1 inline-flex items-center f7" style="height:3.5em">
+                    <span class="dt w-100 fl f8 f7-ns">
+                            {{record.Token.Company}}
+                    </span>
+                </div>
+                <div class="fl tr w-50 ph1 " style="height:3.5em">
+                    <span class="fl w-100 f4 tr">{{humanNumber(record.Balance.toFixed(3))}} <span class="fw6 f7 bg-near-black br2 pa1 white">{{record.Token.Symbol}}</span></span>
+                    <span class="fl w-100 f7 tr pt1"><span class="f8">₦</span> {{humanNumber((record.Balance.toFixed(3) * record.Token.Price).toFixed(2))}}</span>
+                </div>
+            </router-link>
         </div>
+        
 
     </div>
 </template>
@@ -40,7 +57,7 @@
         created() {
             this.searchRecords()
             var profile = JSON.parse(window.localStorage.getItem('profile'));
-            this.search.filter.WalletID =  profile.WalletID.toString()
+            this.search.filter.WalletID = profile.WalletID.toString()
         },
         methods: {
             humanNumber,

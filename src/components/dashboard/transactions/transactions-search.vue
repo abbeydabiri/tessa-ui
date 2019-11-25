@@ -4,21 +4,24 @@
         <div class="fl w-100 inline-flex items-center pv2 ph3">
             <input type="text" v-model="search.text" placeholder="Search Transactions" class=" ba b--white-10 bg-near-white fw3 f6 tracked i fl near-black pa2 w-100 br2" @keyup="searchRecords">
         </div>
-
-        <div class="ph3 fl w-100 overflow-y-scroll scrollbar" style="height:calc(100% - 50px)">
-            <span class="f6 fl w-100 link near-black fl bb b--near-white pv2 f5 pointer" v-for="(transaction, index) in recordList" :key="index" to="{name:'transactions-view',params:{id:record.ID}}">
+        
+        <div class=" fl w-100 overflow-y-scroll scrollbar" style="height:calc(100% - 50px)">
+            <span class="f6 fl w-100 link near-black fl bb b--near-white pv2 f5 pointer" :class="{'bg-near-white ': index%2==1}" v-for="(transaction, index) in recordList" :key="index" to="{name:'transactions-details',params:{id:transaction.ID}}">
                 
-                <div class="fl tl w-100 inline-flex items-center"> 
+                <div class="fl tl w-100 inline-flex items-center ph3"> 
                     <img class="w2 fl" @error="transaction.Token.Icon = tokenIcon" :src="transaction.Token.Icon"/>
-
-                    <div class="fl w-100 ph2">
-                        <span class="w-100 fl tl"> {{humanNumber(transaction.Amount.toFixed(3))}} <span class="f8">{{transaction.Token.Symbol}}</span> <small class=""> - {{transaction.Title}} </small> </span>
-                        <span class="w-100 fl tl f8"> ₦{{humanNumber((transaction.Amount.toFixed(3) * transaction.Token.Price).toFixed(2))}} @ {{humanTime(transaction.Createdate.substring(0,19))}} </span>    
+                    <div class="fl w-100 pl2">
+                        <span class="w-100 fl tl f5"> {{transaction.Amount}} <span class="f8 bg-near-black pa1 br1 white">{{transaction.Token.Symbol}}</span> <small class=""> - {{transaction.Title}} </small> </span>
+                        <span class="w-100 fl tl f8 inline-flex items-center"> 
+                            <span class="w-100 fl">  Hash: {{transaction.Reference.substring(0, 10)}}...........{{transaction.Reference.substring(transaction.Reference.length-10,transaction.Reference.length)}} </span>
+                            <span class="fr inline-flex items-center">
+                                <a class="link pointer no-underline center f8 bg-orange br1 white pa1" target="_blank" :href="'https://rinkeby.etherscan.io/tx/'+transaction.Reference" :class="transaction.WFClass"> {{transaction.Workflow}} </a>
+                                <i class="pl1 fas f5 center" :class="transaction.Class"></i> 
+                            </span>
+                        </span>    
+                        <span class="w-100 fl tl f7">  ₦{{humanNumber((transaction.Amount.toFixed(3) * transaction.Token.Price).toFixed(2))}} <span class="f8"> @ {{dateTimeConvert(transaction.Createdate)}} </span></span>
                     </div>
-
-                    <i class="fas f4 center" :class="transaction.Class"></i>                            
                 </div>
-                
             </span>
         </div>
     </div>
@@ -26,7 +29,7 @@
 
 <script type="text/javascript">
     import {HTTP} from "@/common"
-    import {humanTime} from "@/common"
+    import {dateTimeConvert} from "@/common"
     import {humanNumber} from "@/common"
     import {checkRedirect} from "@/common"
     import tokenIcon from "@/assets/img/smartcontract.svg"
@@ -41,7 +44,7 @@
         components: {},
         created() {this.searchRecords()},
         methods: {
-            humanTime,
+            dateTimeConvert,
             humanNumber,
             searchRecords(){
                 const app = this 
@@ -56,12 +59,36 @@
                     if (response.data.Body !== null && response.data.Body !== undefined ) {
                         app.recordList = response.data.Body
                         for (var key = 0; key < app.recordList.length; key++) {
+                            var transactionArrow = ""
                             if(app.recordList[key].ToAddress == app.search.filter.ToAddress) {
-                                app.recordList[key]["Class"] = "fa-arrow-alt-down dark-green"
+                                transactionArrow = "fa-arrow-alt-down"
                             }
 
                             if(app.recordList[key].FromAddress == app.search.filter.FromAddress) {
-                                app.recordList[key]["Class"] = "fa-arrow-alt-up dark-red"
+                                transactionArrow = "fa-arrow-alt-up"
+                            }
+
+                            switch(app.recordList[key].Workflow)  {
+                                case 'fail':
+                                    app.recordList[key]["Class"] = transactionArrow+" near-black"
+                                    app.recordList[key]["WFClass"] = "bg-red"
+                                    break;
+
+                                case 'pending':
+                                    app.recordList[key]["Class"] = transactionArrow+" near-black"
+                                    app.recordList[key]["WFClass"] = "bg-orange"
+                                    break;
+
+                                case 'success':
+                                    app.recordList[key]["Class"] = transactionArrow+" near-black"
+                                    app.recordList[key]["WFClass"] = "bg-dark-green"
+                                    break;
+
+                                default:
+                                    app.recordList[key]["Class"] = transactionArrow+" near-black"
+                                    app.recordList[key]["WFClass"] = "bg-near-black"
+                                    break;
+
                             }
                         }
                     }

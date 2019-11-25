@@ -46,10 +46,10 @@
     export default {
         children: [
             { path: 'settings', component: settingsComponent, children:settingsComponent.children},
-            { path: 'transactions', component: transactionsComponent, children:transactionsComponent.children},
+            { path: 'wallets', component: walletsComponent, children:walletsComponent.children},
             { path: 'contacts', component: contactsComponent, children:contactsComponent.children},
             { path: 'marketplace', component: marketplaceComponent, children:marketplaceComponent.children},
-            { alias:'', path: 'wallets', component: walletsComponent, children:walletsComponent.children},
+            { alias:'', path: 'transactions', component: transactionsComponent, children:transactionsComponent.children},
         ],
 
         data() {return{

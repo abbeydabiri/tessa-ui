@@ -141,7 +141,6 @@
                         ]
                     },
                     callback: function(response){
-                        console.log(response)
                         if (response.status == "success") {
                             app.save()
                         } else {

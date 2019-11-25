@@ -3,7 +3,7 @@
 
 
 
-div::-webkit-scrollbar {
+ul, div ::-webkit-scrollbar {
     width: 0em;
 }
 
@@ -618,6 +618,9 @@ input, textarea { color: black ; }
 
 .green {color: #8ecc60}
 .bg-green {background-color: #8ecc60}
+.bg-orange-light {
+    background-color: #dd6a0199
+}
 
 input:focus,
 select:focus,

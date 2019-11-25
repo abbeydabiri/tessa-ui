@@ -1,14 +1,14 @@
 <template>
     <section class=" fl w-100 ">
-        <div style="" class="w-100 z-max center mw6_mod fixed ph4 left-0 right-0 w-100">
+        <div class="w-100 z-max center mw6_mod fixed ph4 left-0 right-0 w-100" style="">
 
-            <div class="w-100 inline-flex items-center">
+            <div class="w-100 inline-flex items-center bg-white br3 br--top" style="margin-top:2px;">
                 
                     <span class="fl pr3 pointer" >
                         <i class="fa fa-bars f4 tr near-black" @click="toggleMenu"></i>
                     </span>
 
-                    <span class="center b bg-white">
+                    <span class="center b">
                         <h1 class="f4 tracked near-black">{{title}}</h1>
                     </span>
 
