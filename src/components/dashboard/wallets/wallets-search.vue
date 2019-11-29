@@ -20,20 +20,6 @@
                     <span class="fl w-100 f7 tr pt1"><span class="f8">₦</span> {{humanNumber((record.Balance.toFixed(3) * record.Token.Price).toFixed(2))}}</span>
                 </div>
             </router-link>
-            <router-link class="bb b--near-white fl w-100 ph3 pv2 near-black" v-for="(record, index) in recordList" :key="index" :to="{name:'wallets-view',params:{id:record.ID}}">
-                <div class="fl tl w-10 inline-flex items-center ph1" style="height:3.5em"> 
-                    <img class="w2" @error="record.Token.Icon = tokenIcon" :src="record.Token.Icon"/>
-                </div>
-                <div class="fl tl w-40 ph1 inline-flex items-center f7" style="height:3.5em">
-                    <span class="dt w-100 fl f8 f7-ns">
-                            {{record.Token.Company}}
-                    </span>
-                </div>
-                <div class="fl tr w-50 ph1 " style="height:3.5em">
-                    <span class="fl w-100 f4 tr">{{humanNumber(record.Balance.toFixed(3))}} <span class="fw6 f7 bg-near-black br2 pa1 white">{{record.Token.Symbol}}</span></span>
-                    <span class="fl w-100 f7 tr pt1"><span class="f8">₦</span> {{humanNumber((record.Balance.toFixed(3) * record.Token.Price).toFixed(2))}}</span>
-                </div>
-            </router-link>
         </div>
         
 

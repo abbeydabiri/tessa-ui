@@ -3,7 +3,7 @@
         
             <img src="@/assets/img/logo.png" class="db center h2" />
             <div class="mv2 w-100 fl"></div>
-            <div class="fl w-100 pt5" >
+            <div class="fl w-100 pt5-l pt3" >
                 <img :src="infoList[curSlide].icon" class="db center w-100" />
             </div>
 

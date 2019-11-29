@@ -3,10 +3,10 @@
         <div class="fl w-100 tc absolute left-0 right-0" style="top:-10px">
             <label class="bg-white ph3 f6"> {{title}} </label>
         </div>
-        <input ref="a" class="pin inline-flex items-center bg-white bn tc fw3 f4 pa3 dib fl w-25 near-black " placeholder="-" type="password" maxlength="1" v-model="a" @click="nextBox" @keyup="nextBox" />
-        <input ref="b" class="pin inline-flex items-center bg-white bn tc fw3 f4 pa3 dib fl w-25 near-black " placeholder="-" type="password" maxlength="1" v-model="b" @click="nextBox" @keyup="nextBox" />
-        <input ref="c" class="pin inline-flex items-center bg-white bn tc fw3 f4 pa3 dib fl w-25 near-black " placeholder="-" type="password" maxlength="1" v-model="c" @click="nextBox" @keyup="nextBox" />
-        <input ref="d" class="pin inline-flex items-center bg-white bn tc fw3 f4 pa3 dib fl w-25 near-black " placeholder="-" type="password" maxlength="1" v-model="d" @click="nextBox" @keyup="nextBox" />
+        <input ref="a" class="pin inline-flex items-center bg-white bn tc fw3 f4 pa2 pa3-ns dib fl w-25 near-black " placeholder="-" type="password" maxlength="1" v-model="a" @click="nextBox" @keyup="nextBox" />
+        <input ref="b" class="pin inline-flex items-center bg-white bn tc fw3 f4 pa2 pa3-ns dib fl w-25 near-black " placeholder="-" type="password" maxlength="1" v-model="b" @click="nextBox" @keyup="nextBox" />
+        <input ref="c" class="pin inline-flex items-center bg-white bn tc fw3 f4 pa2 pa3-ns dib fl w-25 near-black " placeholder="-" type="password" maxlength="1" v-model="c" @click="nextBox" @keyup="nextBox" />
+        <input ref="d" class="pin inline-flex items-center bg-white bn tc fw3 f4 pa2 pa3-ns dib fl w-25 near-black " placeholder="-" type="password" maxlength="1" v-model="d" @click="nextBox" @keyup="nextBox" />
     </div>
 </template>
 <script type="text/javascript">

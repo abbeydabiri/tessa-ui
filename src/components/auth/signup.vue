@@ -10,7 +10,7 @@
             </div>
 
             <div class="fl w-100 dn bg-white" :class="{'db':curView=='identity'}">
-                <div class="fl w-100" style="min-height:14em;">
+                <div class="fl w-100" style="min-height:12em;">
                     <img src="@/assets/img/icon-signup.png" class="db center w-90" />
                 </div>
 
