@@ -39,7 +39,7 @@
                             </div>
                             
                             <div class="cf tr pa3 pl2 bg-black-10 white f3 center w-100 fw6">
-                                <span class="f7">-</span> 0.00
+                                <span class="f7">₦</span> {{humanNumber(profile.Balance.toFixed(2))}}
                             </div>
 
 
@@ -91,12 +91,13 @@
 <script type="text/javascript">
   import notify from "@/components/generics/notify"
   import splashscreen from "@/assets/img/splashscreen.png";
+  import {humanNumber} from "@/common"
 
   export default {
     props:["title", "notifications"],
     data() {return{
         splashscreen,
-        profile:{Fullname:"x",Mobile:"x"}, 
+        profile:{Fullname:"x",Mobile:"x",Balance:0}, 
         lMenu:false, lNotification:false,
         sidemenu: [
             //   {to:"/dashboard", title:"Dashboard", icon:"fa-home"},
@@ -110,6 +111,7 @@
     }},
     components: { notify },
     methods: {
+        humanNumber,
         toggleMenu() { 
             this.lMenu = !this.lMenu
             if (window.localStorage.getItem('profile') === null) {

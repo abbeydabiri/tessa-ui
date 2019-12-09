@@ -14,7 +14,7 @@
     "@babel/core": "^7.1.0",
     "axios": "^0.18.0",
     "cross-env": "^5.2.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.0",
     "sass": "^1.19.0",
     "sass-loader": "^7.1.0",
     "vue": "^2.5.17",

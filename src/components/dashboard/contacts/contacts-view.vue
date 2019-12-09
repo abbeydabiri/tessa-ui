@@ -21,10 +21,10 @@
                     <img src="@/assets/icon-header-profile.png" class="center h3 dn" /> 
 
                     <div class="relative h4 h5-l inline-flex items-center tc">
-                        <i class="z-2 fas fa-times white bg-black pa1 f6 f5-l br2"></i>
-                        <img src="https://www.pwc.com/ng/en/people/photos/femi-osinubi.jpg.pwcimage.200.252.jpg" class="center br-100 w4 h4 w5-l h5-l ba b--light-gray bw2" /> 
+                        <i class=" z-2 fas fa-times black pa1 f6 f5-l br2"></i>
+                        <img src="@/assets/icon-header-profile.png" class="center br-100 w4 h4 w5-l h5-l ba b--black-10 bw2 bg-near-black" /> 
                         <router-link class="link pointer" :to="{name:'contacts-edit'}">
-                            <i class="z-2 fas fa-pen white bg-black pa1 f7 f6-l br2"></i>
+                            <i class=" z-2 fas fa-pen black pa1 f7 f6-l br2"></i>
                         </router-link>
                     </div>
 

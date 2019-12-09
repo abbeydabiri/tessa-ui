@@ -1,10 +1,10 @@
 <template>
     <section class="dt w-100 bg-near-black">
-        <div class="dtc v-mid w-100 vh-100 ">
+        <div class="dtc v-mid w-100 h-100 ">
             
-            <div class="center mw6_mod w-100 relative bg-white tessa-height overflow-hidden">
+            <div class="center cf mw6_mod w-100 relative bg-white tessa-height overflow-hidden">
 
-                <div class="w-100 top-0 tessa-height absolute" >
+                <div class="w-100 top-0 tessa-height " >
                     <div class="w-100 h-50 fl" style="background:#DD6A01">
                         <div class="fl w-30">&nbsp;</div>
                         <div class="fl w-70 tc">
@@ -46,7 +46,7 @@
         font-family: "Quicksand", sans-serif;
     } */
 
-    .mw6_mod{max-width:26em}
+    .mw6_mod{max-width:30em}
 
     .br5 {
         border-radius: 2rem; 
@@ -94,6 +94,10 @@
         .tessa-app-body{max-height:calc(95vh - 140px)}
         .tessa-inner-height{max-height:calc(95vh - 30px);}
         .tessa-height{max-height:calc(95vh)}
+    }
+    
+    @media screen and (min-width:1200px){
+        .mw6_mod{max-width:26em}
     }
 
     

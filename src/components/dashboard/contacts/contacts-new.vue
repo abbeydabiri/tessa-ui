@@ -40,8 +40,8 @@
                         <input type="text" v-model="record.Email" placeholder="" class="pa2 ba b--orange bg-white fw3 f6  fl near-black pa2 w-100 br2">
                     </div>
 
-                    <div class="pv2 fl w-100">
-                        <small class="tl fl w-100 pv1"> Contact Address: </small>
+                    <div class="pv2 fl w-100 dn">
+                        <small class="tl fl w-100 pv1"> Wallet Address: </small>
                         <input type="text" v-model="record.Address" placeholder="" class="pa2 ba b--orange bg-white fw3 f6  fl near-black pa2 w-100 br2">
                     </div>
 
