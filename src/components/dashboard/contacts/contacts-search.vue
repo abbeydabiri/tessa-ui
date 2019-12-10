@@ -11,8 +11,8 @@
                 <span class="w-40 fl tr"> {{contact.Mobile}} </span>
 
                 <div class="w-100 fl tl"> 
-                    <small class="w-60 fl tl"> {{contact.Address}} </small>
-                    <small class="w-40 fl tr"> {{contact.Email}} </small>
+                    <small class="w-60 fl tl overflow-hidden"> {{contact.Address}} </small>
+                    <small class="w-40 fl tr overflow-hidden"> {{contact.Email}} </small>
                 </div>
                 
             </router-link>
