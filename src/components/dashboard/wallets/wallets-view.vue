@@ -39,8 +39,11 @@
                             <div class="fl w-100 f7 tl pt2 pl1"> <span class="f7 fw6 br2 pa1 bg-near-black white">{{record.Token.Symbol}}</span> Balance </div>
                         </div>
                         <div class="fl w-25 pt3 f7 tr pr3">Crypto</div>
-                        <div class="w-100 tr fr pt4 pr3">
-                            <router-link class="link pointer f8 avenir br2 pa1 bg-black white tracked" :to="{name:'marketplace-buy',params:{id:record.TokenID}}">BUY TOKEN</router-link> 
+                        <div class="w-50 tl fl pt4 pl2">
+                            <router-link class="link pointer f8 avenir br2 pa1 bg-black white tracked" :to="{name:'wallets-send',params:{id:record.ID}}">SEND</router-link> 
+                        </div>
+                        <div class="w-50 tr fl pt4 pr3">
+                            <router-link class="link pointer f8 avenir br2 pa1 bg-black white tracked" :to="{name:'marketplace-buy',params:{id:record.TokenID}}">BUY</router-link> 
                         </div>
                     </div>
                 </div>

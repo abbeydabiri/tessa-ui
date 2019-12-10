@@ -13,8 +13,8 @@
         children: [
             { path: '', component: walletsSearch, name:"wallets-search"},
             { path: ':id', component: walletsView, name:"wallets-view"},
-            { path: 'send/:id', component: walletsSend, name:"wallets-send"},
-            { path: 'request/:id', component: walletsRequest, name:"wallets-request"},
+            { path: ':id/send', component: walletsSend, name:"wallets-send"},
+            { path: ':id/request', component: walletsRequest, name:"wallets-request"},
         ],
     }
 </script>
