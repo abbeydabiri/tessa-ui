@@ -48,6 +48,10 @@
             
             
             <div class="fl w-100 near-black overflow-y-scroll scrollbar tl" style="height:calc(50vh - 30px)">
+
+                <div class="ph3 cf w-100 center relative">
+                    <notify :notifications="notifications" />
+                </div>
               
                 <div class="pv2 ph3 fl w-50 f6">
                     <small class="tl fl w-100 pv1"> NAIRA AMOUNT TO BE SENT: </small>
@@ -107,7 +111,7 @@
                     </div>
 
                     <div class="fl w-100 tc">
-                        <span v-if="isSave" class="center pv1 ph2 white bg-orange br1 f6 inline-flex items-center">
+                        <span v-if="isSave" class="center pv1 ph2 white bg-orange br1 f6 inline-flex items-center pointer" @click="sendTokens">
                             <span class="pr1">SEND</span>
                             <i class="fal fa-paper-plane f5"></i>
                         </span>
@@ -147,7 +151,7 @@
             isSave: true,
             contactSearch: {text: "", field: "Fullname", limit: 50, page:1, skip: 0, filter:{}},
             contact:{ID:0, Fullname:"",Mobile:"",Address:""},
-            contactMobileList:[], contactNameList:[],
+            contactMobileList:[], contactNameList:[], profile:{},
         }},
         components: {
             notify,
@@ -162,8 +166,8 @@
         },
         created () { 
             this.getRecord();
-            var profile = JSON.parse(window.localStorage.getItem('profile'));
-            this.searchTokens.filter.WalletID = profile.WalletID.toString()
+            this.profile = JSON.parse(window.localStorage.getItem('profile'));
+            this.searchTokens.filter.WalletID = this.profile.WalletID.toString()
          },
         methods: {
             dateTimeConvert,
@@ -259,6 +263,69 @@
                     app[fieldName] = response.data.Body
                 }).catch((e) => { console.log(e) })
             },
+            sendTokens(){
+                const app = this;
+
+                if (app.contact.Address == "") {
+                    var error = {Code:500, Message:"Wallet Address is required"}
+                    app.notifications.push(error)
+                    app.$parent.$parent.notifications.push(error)
+                    return
+                }
+
+
+                if (app.record.Balance < app.send.Token) {
+                    var error = {Code:500, Message:"Insufficient Funds"}
+                    app.notifications.push(error)
+                    app.$parent.$parent.notifications.push(error)
+                    return
+                }
+
+
+                //make a call to accounttokens
+                var accountToken = {
+                    Code: app.contact.Address,
+                    Title: app.record.Token.Title,
+                    TokenID: app.record.Token.ID,
+                }
+
+                HTTP.post("/api/accounttokens/send", accountToken, {withCredentials: true})
+                .then((response) => {
+                    app.notifications.push(response.data)
+                    app.$parent.$parent.notifications.push(response.data)
+                    setTimeout(function(){ checkRedirect(response.data) },500)
+
+                    if (response.data.Body !== null && response.data.Body !== undefined ) {
+                        if(response.data.Code == 200){
+                            //create a transaction and save
+                            var transaction = {
+                                Code: "transfer",
+                                Title: "Token Transfer",
+                                TokenID: app.record.Token.ID,
+                                Amount: parseFloat(app.send.Token),
+                                FromAddress: app.profile.Address,
+                                ToAddress: app.contact.Address,
+                            }
+
+                            console.log(transaction)
+                            HTTP.post("/api/transactions", transaction, {withCredentials: true})
+                            .then((responseTrans) => {
+                                app.notifications.push(responseTrans.data)
+                                app.$parent.$parent.notifications.push(responseTrans.data)
+
+                                setTimeout(function(){ checkRedirect(responseTrans.data) },500)
+                                if (responseTrans.data.Body !== null && responseTrans.data.Body !== undefined ) {
+                                    if(responseTrans.data.Code == 200){
+                                        setTimeout(function(){app.$router.push({name:"transactions-search"})},1500)
+                                    }
+                                }
+                                app.isSave = true;
+                            }).catch((e) => { app.isSave = true; })
+                        }
+                    }
+                }).catch((e) => { app.isSave = true; })
+                //create a transaction and save
+            }
         }
     }
 </script>

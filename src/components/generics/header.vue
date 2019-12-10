@@ -80,8 +80,10 @@
                     </span>
                 </nav>
                 <div class="h3"></div>
-
-                <notify class="mv2" :notifications="notifications"></notify>
+                
+                <div class="ph3 cf w-100 center relative">
+                    <notify class="mv2" :notifications="notifications"></notify>
+                </div>
                 
             </div>
         </div>
