@@ -30,6 +30,8 @@
                 }
                 
                 if(event.code.includes("Arrow")) { return }
+                 if(event.code.includes("Control")) { return }
+                 if(event.code.includes("Key")) { return }
 
                 this.localMobile = this.localMobile.replace(/[^0-9\.]+/g, '');
                 if(this.localMobile.length>11){
@@ -37,6 +39,9 @@
                 }
 
                 if(event.code == "Backspace") { return }
+                if(event.code == "Escape") { return }
+
+                // console.log(event.code)
 
                 if(event.keyCode < 48 || event.keyCode > 57) {
                     if(this.localMobile.length>0) {

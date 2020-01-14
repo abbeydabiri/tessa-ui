@@ -35,7 +35,7 @@
 
                         <div class="fl w-50 pt3" @click="mobileToggle">  <buttonsmall class="fl" icon="fa-arrow-left" title="Back" />  </div>
                         <div class="fl w-50 pt3" @click="signin">  <buttonsmall class="fr" icon="fa-check" title="Verify"/>  </div>
-                        <div class="fl w-100 pt3 tc">  <span class="bg-dark-red white br1 b tracked f8 tc pa1">Reset Pin?</span>  </div>
+                        <div class="fl w-100 pt3 tc">  <router-link to="restore" class="pointer no-underline bg-orange white br1 b tracked f8 tc pa1">Reset My Pin</router-link>  </div>
                     </div>
                 </div>
 
