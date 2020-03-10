@@ -51,21 +51,22 @@ module.exports = {
             test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
             loader: 'file-loader',
             options: {
-            name: './img/[hash:5].[ext]'
+                name: './img/[hash:5].[ext]',
+                esModule: false,
             }
         },
         {
             test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
             loader: 'file-loader',
             options: {
-            name: './media/[hash:5].[ext]'
+                name: './media/[hash:5].[ext]'
             }
         },
         {
             test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
             loader: 'file-loader',
             options: {
-            name: './fonts/[hash:5].[ext]'
+                name: './fonts/[hash:5].[ext]'
             }
         }
         ]
